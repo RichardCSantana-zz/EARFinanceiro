@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.financemanager.dados;
+package br.com.financemanager.entidades;
 
 import java.util.Calendar;
 

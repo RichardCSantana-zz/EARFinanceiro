@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.financemanager.dados;
+package br.com.financemanager.entidades;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,8 @@ import java.util.Calendar;
 
 import org.junit.Test;
 
+import br.com.financemanager.entidades.AbstractConta;
+import br.com.financemanager.entidades.Entrada;
 import br.com.financemanager.exceptions.ErroCadastroException;
 
 /**
@@ -19,7 +21,7 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.dados.AbstractConta#efetiva(java.util.Calendar)}
+	 * {@link br.com.financemanager.entidades.AbstractConta#efetiva(java.util.Calendar)}
 	 * .
 	 * 
 	 * @throws ErroCadastroException
@@ -39,7 +41,7 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.dados.AbstractConta#efetiva(java.util.Calendar)}
+	 * {@link br.com.financemanager.entidades.AbstractConta#efetiva(java.util.Calendar)}
 	 * .
 	 * 
 	 * @throws ErroCadastroException
@@ -59,7 +61,7 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.dados.AbstractConta#efetiva(java.util.Calendar)}
+	 * {@link br.com.financemanager.entidades.AbstractConta#efetiva(java.util.Calendar)}
 	 * .
 	 * 
 	 * @throws ErroCadastroException
@@ -89,7 +91,7 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.dados.Entrada#contabilizaValor()}.
+	 * {@link br.com.financemanager.entidades.Entrada#contabilizaValor()}.
 	 * 
 	 * @throws ErroCadastroException
 	 */
@@ -106,7 +108,7 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.dados.AbstractConta#setValor()}.
+	 * {@link br.com.financemanager.entidades.AbstractConta#setValor()}.
 	 * 
 	 * @throws ErroCadastroException
 	 */
@@ -120,7 +122,7 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.dados.AbstractConta#setValor()}.
+	 * {@link br.com.financemanager.entidades.AbstractConta#setValor()}.
 	 * 
 	 * @throws ErroCadastroException
 	 */
@@ -134,7 +136,7 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.dados.AbstractConta#setValor()}.
+	 * {@link br.com.financemanager.entidades.AbstractConta#setValor()}.
 	 * 
 	 * @throws ErroCadastroException
 	 */
