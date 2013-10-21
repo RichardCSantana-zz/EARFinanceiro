@@ -11,5 +11,13 @@
 		<artifactId>EARFinanceiro</artifactId>
 		<version>1.0</version>
 	</parent>
-	
+
+	<dependencies>
+		<dependency>
+			<artifactId>entidades</artifactId>
+			<groupId>br.com.earfinanceiro</groupId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+
 </project>

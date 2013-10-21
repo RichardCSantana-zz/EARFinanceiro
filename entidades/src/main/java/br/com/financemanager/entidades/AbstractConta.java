@@ -17,6 +17,7 @@ public abstract class AbstractConta implements IConta {
 	protected String descricao;
 	protected Calendar dataCadastro;
 	protected Calendar dataEfetivacao;
+	protected Grupo subGrupo;
 	protected boolean efetiva;
 	protected double valor;
 
@@ -107,6 +108,14 @@ public abstract class AbstractConta implements IConta {
 
 	public Boolean getEfetiva() {
 		return efetiva;
+	}
+
+	public Grupo getSubGrupo() {
+		return subGrupo;
+	}
+
+	public void setSubGrupo(Grupo subGrupo) {
+		this.subGrupo = subGrupo;
 	}
 
 }
