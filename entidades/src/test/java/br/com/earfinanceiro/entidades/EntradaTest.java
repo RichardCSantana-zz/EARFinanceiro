@@ -75,18 +75,71 @@ public class EntradaTest {
 		Calendar instance = Calendar.getInstance();
 		instance.set(2013, 10, 20);
 		entrada.efetiva(instance);
-		Boolean expectedEfetiva = true;
-		Boolean actualEfetiva = entrada.efetiva;
-		assertEquals(expectedEfetiva, actualEfetiva);
+		Boolean actualEfetiva = entrada.isEfetiva();
 		Calendar expectedDataEfetivacao = Calendar.getInstance();
 		expectedDataEfetivacao.set(2013, 10, 20);
 		Calendar actualDataEfetivacao = entrada.getDataEfetivacao();
+		assertTrue(actualEfetiva);
 		assertEquals(expectedDataEfetivacao.get(Calendar.DAY_OF_MONTH),
 				actualDataEfetivacao.get(Calendar.DAY_OF_MONTH));
 		assertEquals(expectedDataEfetivacao.get(Calendar.MONTH),
 				actualDataEfetivacao.get(Calendar.MONTH));
 		assertEquals(expectedDataEfetivacao.get(Calendar.YEAR),
 				actualDataEfetivacao.get(Calendar.YEAR));
+	}
+
+	/**
+	 * Test method for
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#reincide(java.util.Calendar)}
+	 * .
+	 * 
+	 * @throws ErroCadastroException
+	 */
+	@Test(expected = ErroCadastroException.class)
+	public void testaReincidenciaComMenosDeUmDia() throws ErroCadastroException {
+		AbstractConta entrada = new Entrada();
+		entrada.setDataCadastro(Calendar.getInstance());
+		entrada.setDescricao("teste");
+		entrada.setValor(1.0);
+		entrada.reincide(0);
+	}
+
+	/**
+	 * Test method for
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#reincide(java.util.Calendar)}
+	 * .
+	 * 
+	 * @throws ErroCadastroException
+	 */
+	@Test(expected = ErroCadastroException.class)
+	public void testaReincideJahReincidida() throws ErroCadastroException {
+		AbstractConta entrada = new Entrada();
+		entrada.setDataCadastro(Calendar.getInstance());
+		entrada.setDescricao("teste");
+		entrada.setValor(1.0);
+		entrada.reincide(1);
+		entrada.reincide(1);
+	}
+
+	/**
+	 * Test method for
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#reincide(java.util.Calendar)}
+	 * .
+	 * 
+	 * @throws ErroCadastroException
+	 */
+	@Test
+	public void testaReincidencia() throws ErroCadastroException {
+		AbstractConta entrada = new Entrada();
+		entrada.setDataCadastro(Calendar.getInstance());
+		entrada.setDescricao("teste");
+		entrada.setValor(1.0);
+		entrada.reincide(1);
+		Boolean actualReincidente = entrada.isReincidente();
+		Integer actualReincidencia = entrada.getReincidencia();
+		Integer expectedReincidencia = 1;
+		assertTrue(actualReincidente);
+		assertEquals(expectedReincidencia, actualReincidencia);
 	}
 
 	/**

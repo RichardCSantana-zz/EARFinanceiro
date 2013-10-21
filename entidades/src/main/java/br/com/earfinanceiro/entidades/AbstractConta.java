@@ -20,6 +20,8 @@ public abstract class AbstractConta implements IConta {
 	protected Grupo subGrupo;
 	protected boolean efetiva;
 	protected double valor;
+	protected int reincidencia;
+	protected boolean reincidente;
 
 	/**
 	 * 
@@ -40,6 +42,20 @@ public abstract class AbstractConta implements IConta {
 		}
 		this.efetiva = true;
 		this.dataEfetivacao = dataEfetivacao;
+	}
+
+	@Override
+	public void reincide(int reincidencia) throws ErroCadastroException {
+		if (reincidencia < 1) {
+			throw new ErroCadastroException(
+					"O prazo de reincidencia deve ser no minimo 1 dia");
+		}
+		if (reincidente) {
+			throw new ErroCadastroException(
+					"A conta em questão já foi marcada como reincidente");
+		}
+		this.reincidente = true;
+		this.reincidencia = reincidencia;
 	}
 
 	@Override
@@ -106,7 +122,7 @@ public abstract class AbstractConta implements IConta {
 		return dataEfetivacao;
 	}
 
-	public Boolean getEfetiva() {
+	public Boolean isEfetiva() {
 		return efetiva;
 	}
 
@@ -116,6 +132,14 @@ public abstract class AbstractConta implements IConta {
 
 	public void setSubGrupo(Grupo subGrupo) {
 		this.subGrupo = subGrupo;
+	}
+
+	public int getReincidencia() {
+		return reincidencia;
+	}
+
+	public boolean isReincidente() {
+		return reincidente;
 	}
 
 }
