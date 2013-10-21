@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.financemanager.entidades;
+package br.com.earfinanceiro.entidades;
 
 
 

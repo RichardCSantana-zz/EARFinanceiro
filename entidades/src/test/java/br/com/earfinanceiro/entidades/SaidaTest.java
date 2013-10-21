@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.financemanager.entidades;
+package br.com.earfinanceiro.entidades;
 
 import static org.junit.Assert.*;
 
@@ -9,19 +9,20 @@ import java.util.Calendar;
 
 import org.junit.Test;
 
-import br.com.financemanager.entidades.AbstractConta;
-import br.com.financemanager.entidades.Entrada;
-import br.com.financemanager.exceptions.ErroCadastroException;
+import br.com.earfinanceiro.entidades.AbstractConta;
+import br.com.earfinanceiro.entidades.Entrada;
+import br.com.earfinanceiro.entidades.Saida;
+import br.com.earfinanceiro.exceptions.ErroCadastroException;
 
 /**
  * @author Richard
  * 
  */
-public class EntradaTest {
+public class SaidaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.entidades.AbstractConta#efetiva(java.util.Calendar)}
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#efetiva(java.util.Calendar)}
 	 * .
 	 * 
 	 * @throws ErroCadastroException
@@ -29,39 +30,39 @@ public class EntradaTest {
 	@Test(expected = ErroCadastroException.class)
 	public void testaEfetivaComEfetivacaoInferiorAoCadastro()
 			throws ErroCadastroException {
-		AbstractConta entrada = new Entrada();
-		entrada.setDataCadastro(Calendar.getInstance());
-		entrada.setDescricao("teste");
-		entrada.setValor(1.0);
+		AbstractConta saida = new Saida();
+		saida.setDataCadastro(Calendar.getInstance());
+		saida.setDescricao("teste");
+		saida.setValor(1.0);
 		Calendar instance = Calendar.getInstance();
 		instance.set(Calendar.DAY_OF_YEAR,
 				Calendar.getInstance().get(Calendar.DAY_OF_YEAR - 1));
-		entrada.efetiva(instance);
+		saida.efetiva(instance);
 	}
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.entidades.AbstractConta#efetiva(java.util.Calendar)}
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#efetiva(java.util.Calendar)}
 	 * .
 	 * 
 	 * @throws ErroCadastroException
 	 */
 	@Test(expected = ErroCadastroException.class)
 	public void testaEfetivaJahEfetivada() throws ErroCadastroException {
-		AbstractConta entrada = new Entrada();
-		entrada.setDataCadastro(Calendar.getInstance());
-		entrada.setDescricao("teste");
-		entrada.setValor(1.0);
+		AbstractConta saida = new Saida();
+		saida.setDataCadastro(Calendar.getInstance());
+		saida.setDescricao("teste");
+		saida.setValor(1.0);
 		Calendar instance = Calendar.getInstance();
 		instance.set(Calendar.DAY_OF_YEAR,
 				Calendar.getInstance().get(Calendar.DAY_OF_YEAR + 1));
-		entrada.efetiva(instance);
-		entrada.efetiva(instance);
+		saida.efetiva(instance);
+		saida.efetiva(instance);
 	}
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.entidades.AbstractConta#efetiva(java.util.Calendar)}
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#efetiva(java.util.Calendar)}
 	 * .
 	 * 
 	 * @throws ErroCadastroException
@@ -91,52 +92,52 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.entidades.Entrada#contabilizaValor()}.
+	 * {@link br.com.earfinanceiro.entidades.Saida#contabilizaValor()}.
 	 * 
 	 * @throws ErroCadastroException
 	 */
 	@Test
 	public void testaContabilizaValor() throws ErroCadastroException {
-		AbstractConta entrada = new Entrada();
-		entrada.setDataCadastro(Calendar.getInstance());
-		entrada.setDescricao("teste");
-		entrada.setValor(20.0);
-		Double expected = 20.0;
-		Double actual = entrada.contabilizaValor();
+		AbstractConta saida = new Saida();
+		saida.setDataCadastro(Calendar.getInstance());
+		saida.setDescricao("teste");
+		saida.setValor(20.0);
+		Double expected = -20.0;
+		Double actual = saida.contabilizaValor();
 		assertEquals(expected, actual);
 	}
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.entidades.AbstractConta#setValor()}.
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setValor()}.
 	 * 
 	 * @throws ErroCadastroException
 	 */
 	@Test(expected = ErroCadastroException.class)
 	public void testaCadastroValorZerado() throws ErroCadastroException {
-		AbstractConta entrada = new Entrada();
-		entrada.setDataCadastro(Calendar.getInstance());
-		entrada.setDescricao("teste");
-		entrada.setValor(0.0);
+		AbstractConta saida = new Saida();
+		saida.setDataCadastro(Calendar.getInstance());
+		saida.setDescricao("teste");
+		saida.setValor(0.0);
 	}
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.entidades.AbstractConta#setValor()}.
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setValor()}.
 	 * 
 	 * @throws ErroCadastroException
 	 */
 	@Test(expected = ErroCadastroException.class)
 	public void testaCadastroValorNegativo() throws ErroCadastroException {
-		AbstractConta entrada = new Entrada();
-		entrada.setDataCadastro(Calendar.getInstance());
-		entrada.setDescricao("teste");
-		entrada.setValor(-10.0);
+		AbstractConta saida = new Saida();
+		saida.setDataCadastro(Calendar.getInstance());
+		saida.setDescricao("teste");
+		saida.setValor(-10.0);
 	}
 
 	/**
 	 * Test method for
-	 * {@link br.com.financemanager.entidades.AbstractConta#setValor()}.
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setValor()}.
 	 * 
 	 * @throws ErroCadastroException
 	 */

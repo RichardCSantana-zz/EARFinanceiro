@@ -1,11 +1,11 @@
 /**
  * 
  */
-package br.com.financemanager.entidades;
+package br.com.earfinanceiro.entidades;
 
 import java.util.Calendar;
 
-import br.com.financemanager.exceptions.ErroCadastroException;
+import br.com.earfinanceiro.exceptions.ErroCadastroException;
 
 /**
  * @author Richard

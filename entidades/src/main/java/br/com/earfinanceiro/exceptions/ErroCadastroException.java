@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.financemanager.exceptions;
+package br.com.earfinanceiro.exceptions;
 
 /**
  * @author Richard

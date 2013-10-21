@@ -1,17 +1,17 @@
 /**
  * 
  */
-package br.com.financemanager.entidades;
+package br.com.earfinanceiro.entidades;
 
 /**
  * @author Richard
  * 
  */
-public class Grupo {
+public class SubGrupo {
 
 	public Long id;
 	public String descricao;
-	public TipoEnum tipo;
+	public Grupo grupo;
 
 	@Override
 	public int hashCode() {
@@ -29,7 +29,7 @@ public class Grupo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Grupo other = (Grupo) obj;
+		SubGrupo other = (SubGrupo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -54,12 +54,12 @@ public class Grupo {
 		this.descricao = descricao;
 	}
 
-	public TipoEnum getTipo() {
-		return tipo;
+	public Grupo getGrupo() {
+		return grupo;
 	}
 
-	public void setTipo(TipoEnum tipo) {
-		this.tipo = tipo;
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 }

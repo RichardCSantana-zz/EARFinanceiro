@@ -1,12 +1,12 @@
 /**
  * 
  */
-package br.com.earfinanceiro;
+package br.com.earfinanceiro.negocio.balanco;
 
 import java.util.Collections;
 import java.util.List;
 
-import br.com.financemanager.entidades.IConta;
+import br.com.earfinanceiro.entidades.IConta;
 
 /**
  * @author richard.santana
