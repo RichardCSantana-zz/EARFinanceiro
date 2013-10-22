@@ -36,6 +36,7 @@
 			<artifactId>negocio</artifactId>
 			<groupId>br.com.earfinanceiro</groupId>
 			<version>1.0</version>
+			<type>ejb</type>
 		</dependency>
 	</dependencies>
 
@@ -52,6 +53,10 @@
 							<artifactId>webapp</artifactId>
 							<contextRoot>/earfinanceiro</contextRoot>
 						</webModule>
+						<ejbModule>
+							<groupId>br.com.earfinanceiro</groupId>
+							<artifactId>negocio</artifactId>
+						</ejbModule>
 					</modules>
 				</configuration>
 			</plugin>
