@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>ear</artifactId>
 	<packaging>ear</packaging>
-	<name>Projeto de gestão financeira</name>
+	<name>Projeto integracao</name>
 
 	<parent>
 		<groupId>br.com.earfinanceiro</groupId>
@@ -17,12 +17,14 @@
 			<artifactId>entidades</artifactId>
 			<groupId>br.com.earfinanceiro</groupId>
 			<version>1.0</version>
+			<type>jar</type>
 		</dependency>
 
 		<dependency>
 			<artifactId>dados</artifactId>
 			<groupId>br.com.earfinanceiro</groupId>
 			<version>1.0</version>
+			<type>ejb</type>
 		</dependency>
 
 		<dependency>
@@ -47,6 +49,7 @@
 				<artifactId>maven-ear-plugin</artifactId>
 				<configuration>
 					<displayName>EARFinanceiro</displayName>
+					<defaultLibBundleDir>APP-INF/lib</defaultLibBundleDir>
 					<modules>
 						<webModule>
 							<groupId>br.com.earfinanceiro</groupId>
@@ -57,6 +60,14 @@
 							<groupId>br.com.earfinanceiro</groupId>
 							<artifactId>negocio</artifactId>
 						</ejbModule>
+						<ejbModule>
+							<groupId>br.com.earfinanceiro</groupId>
+							<artifactId>dados</artifactId>
+						</ejbModule>
+						<jarModule>
+							<groupId>br.com.earfinanceiro</groupId>
+							<artifactId>entidades</artifactId>
+						</jarModule>
 					</modules>
 				</configuration>
 			</plugin>

@@ -5,19 +5,41 @@ package br.com.earfinanceiro.entidades;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import br.com.earfinanceiro.exceptions.ErroCadastroException;
 
 /**
  * @author Richard
  * 
  */
+@Entity
+@Table(name = "conta")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
+@SequenceGenerator(name = AbstractConta.CONTA_SEQUENCE, sequenceName = AbstractConta.CONTA_SEQUENCE, initialValue = 1, allocationSize = 10)
 public abstract class AbstractConta implements IConta {
+
+	public static final String CONTA_SEQUENCE = "conta_sequence";
 
 	protected Long id;
 	protected String descricao;
 	protected Calendar dataCadastro;
 	protected Calendar dataEfetivacao;
-	protected Grupo subGrupo;
+	protected SubGrupo subGrupo;
 	protected boolean efetiva;
 	protected double valor;
 	protected int reincidencia;
@@ -38,7 +60,7 @@ public abstract class AbstractConta implements IConta {
 		}
 		if (efetiva) {
 			throw new ErroCadastroException(
-					"A conta que estão tentando efetivar já foi efetivada");
+					"A conta que estï¿½o tentando efetivar jï¿½ foi efetivada");
 		}
 		this.efetiva = true;
 		this.dataEfetivacao = dataEfetivacao;
@@ -52,7 +74,7 @@ public abstract class AbstractConta implements IConta {
 		}
 		if (reincidente) {
 			throw new ErroCadastroException(
-					"A conta em questão já foi marcada como reincidente");
+					"A conta em questï¿½o jï¿½ foi marcada como reincidente");
 		}
 		this.reincidente = true;
 		this.reincidencia = reincidencia;
@@ -90,6 +112,9 @@ public abstract class AbstractConta implements IConta {
 		this.valor = valor;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CONTA_SEQUENCE)
+	@Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -98,6 +123,9 @@ public abstract class AbstractConta implements IConta {
 		this.id = id;
 	}
 
+	@Column(name = "descricao")
+	@NotNull(message = "O campo descriÃ§Ã£o deve ser preenchido")
+	@Size(min = 3, max = 40, message = "O campo descricao deve possuir entre 3 e 40 caracteres")
 	public String getDescricao() {
 		return descricao;
 	}
@@ -106,6 +134,8 @@ public abstract class AbstractConta implements IConta {
 		this.descricao = descricao;
 	}
 
+	@Column(name = "data_cadastro")
+	@NotNull(message = "O campo data cadastro deve ser preenchido")
 	public Calendar getDataCadastro() {
 		return dataCadastro;
 	}
@@ -114,30 +144,37 @@ public abstract class AbstractConta implements IConta {
 		this.dataCadastro = dataCadastro;
 	}
 
+	@Column(name = "valor")
+	@NotNull(message = "O campo valor deve ser preenchido")
 	public Double getValor() {
 		return valor;
 	}
 
+	@Column(name = "data_efetivacao")
 	public Calendar getDataEfetivacao() {
 		return dataEfetivacao;
 	}
 
+	@Column(name = "efetiva")
 	public Boolean isEfetiva() {
 		return efetiva;
 	}
 
-	public Grupo getSubGrupo() {
+	@ManyToOne(targetEntity = SubGrupo.class, fetch = FetchType.EAGER)
+	public SubGrupo getSubGrupo() {
 		return subGrupo;
 	}
 
-	public void setSubGrupo(Grupo subGrupo) {
+	public void setSubGrupo(SubGrupo subGrupo) {
 		this.subGrupo = subGrupo;
 	}
 
+	@Column(name = "reincidencia")
 	public int getReincidencia() {
 		return reincidencia;
 	}
 
+	@Column(name = "eh_reincidente")
 	public boolean isReincidente() {
 		return reincidente;
 	}

@@ -4,14 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>dados</artifactId>
 	<packaging>jar</packaging>
-	<name>Projeto de gestão financeira</name>
+	<name>Projeto persistencia</name>
 
 	<parent>
 		<groupId>br.com.earfinanceiro</groupId>
 		<artifactId>EARFinanceiro</artifactId>
 		<version>1.0</version>
 	</parent>
-	
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -37,5 +37,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	
+
 </project>
