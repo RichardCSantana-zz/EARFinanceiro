@@ -47,6 +47,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.8</version>
 				<configuration>
 					<displayName>EARFinanceiro</displayName>
 					<defaultLibBundleDir>APP-INF/lib</defaultLibBundleDir>
@@ -67,6 +68,7 @@
 						<jarModule>
 							<groupId>br.com.earfinanceiro</groupId>
 							<artifactId>entidades</artifactId>
+							<bundleDir>/</bundleDir>
 						</jarModule>
 					</modules>
 				</configuration>
