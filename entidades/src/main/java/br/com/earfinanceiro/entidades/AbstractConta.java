@@ -147,7 +147,6 @@ public abstract class AbstractConta implements IConta {
 		this.dataCadastro = dataCadastro;
 	}
 
-
 	@Override
 	@Column(name = "valor")
 	@NotNull(message = "O campo valor deve ser preenchido")
@@ -166,7 +165,6 @@ public abstract class AbstractConta implements IConta {
 	public Boolean isEfetiva() {
 		return efetiva;
 	}
-
 
 	@Override
 	@ManyToOne(targetEntity = SubGrupo.class, fetch = FetchType.EAGER)
@@ -187,6 +185,26 @@ public abstract class AbstractConta implements IConta {
 	@Column(name = "eh_reincidente")
 	public boolean isReincidente() {
 		return reincidente;
+	}
+
+	private void setDataEfetivacao(Calendar dataEfetivacao) {
+		this.dataEfetivacao = dataEfetivacao;
+	}
+
+	private void setEfetiva(boolean efetiva) {
+		this.efetiva = efetiva;
+	}
+
+	private void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	private void setReincidencia(int reincidencia) {
+		this.reincidencia = reincidencia;
+	}
+
+	private void setReincidente(boolean reincidente) {
+		this.reincidente = reincidente;
 	}
 
 }
