@@ -3,10 +3,15 @@
  */
 package br.com.earfinanceiro.entidades;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 /**
  * @author Richard
  * 
  */
+@Entity
+@DiscriminatorValue("entrada")
 public class Entrada extends AbstractConta implements IConta {
 
 	/*

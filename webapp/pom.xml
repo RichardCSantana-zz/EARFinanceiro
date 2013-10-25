@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>webapp</artifactId>
 	<packaging>war</packaging>
-	<name>Projeto de gestão financeira</name>
+	<name>Projeto web</name>
 
 	<parent>
 		<groupId>br.com.earfinanceiro</groupId>

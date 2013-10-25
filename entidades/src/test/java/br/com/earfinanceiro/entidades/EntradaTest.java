@@ -165,6 +165,7 @@ public class EntradaTest {
 	 * 
 	 * @throws ErroCadastroException
 	 */
+
 	@Test(expected = ErroCadastroException.class)
 	public void testaCadastroValorZerado() throws ErroCadastroException {
 		AbstractConta entrada = new Entrada();
@@ -179,6 +180,7 @@ public class EntradaTest {
 	 * 
 	 * @throws ErroCadastroException
 	 */
+
 	@Test(expected = ErroCadastroException.class)
 	public void testaCadastroValorNegativo() throws ErroCadastroException {
 		AbstractConta entrada = new Entrada();
