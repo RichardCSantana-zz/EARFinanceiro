@@ -13,12 +13,26 @@ import br.com.earfinanceiro.exceptions.ErroCadastroException;
  */
 public interface IConta {
 
-	public abstract void efetiva(Calendar dataEfetivacao)
-			throws ErroCadastroException;
+	void efetiva(Calendar dataEfetivacao) throws ErroCadastroException;
 
-	public abstract void reincide(int reincidencia)
-			throws ErroCadastroException;
+	void reincide(Integer reincidencia) throws ErroCadastroException;
 
-	public abstract Double contabilizaValor();
+	Double contabilizaValor();
+
+	Integer getReincidencia();
+
+	SubGrupo getSubGrupo();
+
+	Boolean isEfetiva();
+
+	Calendar getDataEfetivacao();
+
+	Double getValor();
+
+	Calendar getDataCadastro();
+
+	String getDescricao();
+
+	Long getId();
 
 }

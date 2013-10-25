@@ -17,7 +17,7 @@ public abstract class AbstractConta implements IConta {
 	protected String descricao;
 	protected Calendar dataCadastro;
 	protected Calendar dataEfetivacao;
-	protected Grupo subGrupo;
+	protected SubGrupo subGrupo;
 	protected boolean efetiva;
 	protected double valor;
 	protected int reincidencia;
@@ -45,7 +45,7 @@ public abstract class AbstractConta implements IConta {
 	}
 
 	@Override
-	public void reincide(int reincidencia) throws ErroCadastroException {
+	public void reincide(Integer reincidencia) throws ErroCadastroException {
 		if (reincidencia < 1) {
 			throw new ErroCadastroException(
 					"O prazo de reincidencia deve ser no minimo 1 dia");
@@ -90,6 +90,7 @@ public abstract class AbstractConta implements IConta {
 		this.valor = valor;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -98,6 +99,7 @@ public abstract class AbstractConta implements IConta {
 		this.id = id;
 	}
 
+	@Override
 	public String getDescricao() {
 		return descricao;
 	}
@@ -106,6 +108,7 @@ public abstract class AbstractConta implements IConta {
 		this.descricao = descricao;
 	}
 
+	@Override
 	public Calendar getDataCadastro() {
 		return dataCadastro;
 	}
@@ -114,27 +117,32 @@ public abstract class AbstractConta implements IConta {
 		this.dataCadastro = dataCadastro;
 	}
 
+	@Override
 	public Double getValor() {
 		return valor;
 	}
 
+	@Override
 	public Calendar getDataEfetivacao() {
 		return dataEfetivacao;
 	}
 
+	@Override
 	public Boolean isEfetiva() {
 		return efetiva;
 	}
 
-	public Grupo getSubGrupo() {
+	@Override
+	public SubGrupo getSubGrupo() {
 		return subGrupo;
 	}
 
-	public void setSubGrupo(Grupo subGrupo) {
+	public void setSubGrupo(SubGrupo subGrupo) {
 		this.subGrupo = subGrupo;
 	}
 
-	public int getReincidencia() {
+	@Override
+	public Integer getReincidencia() {
 		return reincidencia;
 	}
 
