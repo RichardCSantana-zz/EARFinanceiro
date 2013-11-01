@@ -43,7 +43,7 @@
 			<artifactId>entidades</artifactId>
 			<groupId>br.com.earfinanceiro</groupId>
 			<version>1.0</version>
-			<type>jar</type>
+			<type>ejb</type>
 		</dependency>
 
 		<dependency>
@@ -204,11 +204,10 @@
 							<groupId>br.com.earfinanceiro</groupId>
 							<artifactId>dados</artifactId>
 						</ejbModule>
-						<jarModule>
+						<ejbModule>
 							<groupId>br.com.earfinanceiro</groupId>
 							<artifactId>entidades</artifactId>
-							<bundleDir>/</bundleDir>
-						</jarModule>
+						</ejbModule>
 					</modules>
 				</configuration>
 			</plugin>
