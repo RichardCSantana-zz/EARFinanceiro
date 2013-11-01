@@ -5,6 +5,7 @@ package br.com.earfinanceiro.dao;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -25,6 +26,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	private Class<T> classe;
 
 	protected CriteriaBuilder cb;
+	protected CriteriaQuery<T> criteria;
 	protected Root<T> root;
 
 	/**
@@ -32,6 +34,13 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	 */
 	protected AbstractDAO(Class<T> classe) {
 		this.classe = classe;
+	}
+
+	@PostConstruct
+	void init() {
+		cb = em.getCriteriaBuilder();
+		criteria = cb.createQuery(classe);
+		root = criteria.from(classe);
 	}
 
 	/*
@@ -71,9 +80,6 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	 */
 	@Override
 	public List<T> listaTodos() {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<T> criteria = cb.createQuery(classe);
-		criteria.select(root);
 		List<T> resultados;
 		try {
 			resultados = em.createQuery(criteria).getResultList();
@@ -84,8 +90,6 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	}
 
 	protected List<T> listaCondicoes(Predicate predicate) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<T> criteria = cb.createQuery(classe);
 		criteria.select(root);
 		criteria.where(predicate);
 		List<T> resultados;
