@@ -187,22 +187,27 @@ public abstract class AbstractConta implements IConta {
 		return reincidente;
 	}
 
+	@SuppressWarnings("unused")
 	private void setDataEfetivacao(Calendar dataEfetivacao) {
 		this.dataEfetivacao = dataEfetivacao;
 	}
 
+	@SuppressWarnings("unused")
 	private void setEfetiva(boolean efetiva) {
 		this.efetiva = efetiva;
 	}
 
+	@SuppressWarnings("unused")
 	private void setValor(double valor) {
 		this.valor = valor;
 	}
 
+	@SuppressWarnings("unused")
 	private void setReincidencia(int reincidencia) {
 		this.reincidencia = reincidencia;
 	}
 
+	@SuppressWarnings("unused")
 	private void setReincidente(boolean reincidente) {
 		this.reincidente = reincidente;
 	}

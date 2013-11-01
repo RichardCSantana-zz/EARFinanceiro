@@ -5,12 +5,17 @@ package br.com.earfinanceiro.negocio.balanco;
 
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.ejb.Stateless;
+
 import br.com.earfinanceiro.entidades.IConta;
 
 /**
  * @author richard.santana
  * 
  */
+@Stateless
+@Local
 public class BalancoBuilder {
 
 	public static Balanco geraBalanco(List<IConta> contas) {
