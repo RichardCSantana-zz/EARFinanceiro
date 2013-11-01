@@ -18,7 +18,7 @@ import br.com.earfinanceiro.entidades.IConta;
 @Local
 public class BalancoBuilder implements IBalancoBuilder {
 
-	public static Balanco geraBalanco(List<IConta> contas) {
+	public Balanco geraBalanco(List<IConta> contas) {
 		Balanco balanco = new Balanco();
 		balanco.setContas(contas);
 		return balanco;
