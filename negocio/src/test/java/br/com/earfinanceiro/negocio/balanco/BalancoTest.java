@@ -34,7 +34,8 @@ public class BalancoTest {
 		entrada2.setValor(5.0);
 		contas.add(entrada1);
 		contas.add(entrada2);
-		Balanco balanco = BalancoBuilder.geraBalanco(contas);
+		Balanco balanco = new Balanco();
+		balanco.setContas(contas);
 		Double actual = balanco.getTotal();
 		Double expected = 15.0;
 		assertEquals(expected, actual);
@@ -51,7 +52,8 @@ public class BalancoTest {
 		saida2.setValor(5.0);
 		contas.add(saida1);
 		contas.add(saida2);
-		Balanco balanco = BalancoBuilder.geraBalanco(contas);
+		Balanco balanco = new Balanco();
+		balanco.setContas(contas);
 		Double actual = balanco.getTotal();
 		Double expected = -15.0;
 		assertEquals(expected, actual);
@@ -68,7 +70,8 @@ public class BalancoTest {
 		saida2.setValor(5.0);
 		contas.add(entrada1);
 		contas.add(saida2);
-		Balanco balanco = BalancoBuilder.geraBalanco(contas);
+		Balanco balanco = new Balanco();
+		balanco.setContas(contas);
 		Double actual = balanco.getTotal();
 		Double expected = 5.0;
 		assertEquals(expected, actual);

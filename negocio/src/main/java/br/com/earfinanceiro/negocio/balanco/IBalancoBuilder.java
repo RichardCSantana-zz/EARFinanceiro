@@ -1,11 +1,9 @@
 package br.com.earfinanceiro.negocio.balanco;
 
-import java.util.List;
-
-import br.com.earfinanceiro.entidades.IConta;
+import java.util.Calendar;
 
 public interface IBalancoBuilder {
 
-	public Balanco geraBalanco(List<IConta> contas);
+	public Balanco geraBalanco(Calendar dataInicial, Calendar dataFinal);
 
 }
