@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<rich:messages globalOnly="true" />
+			<rich:dataTable id="dtbGrupos" value="#{grupoController.grupos}"
+				var="atual" noDataLabel="Nao existem grupos cadastrados">
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Descricao" />
+					</f:facet>
+					<h:outputText value="#{atual.descricao}" />
+				</rich:column>
+			</rich:dataTable>
+		</h:form>
+		<h:form>
+			<h:outputText id="lblDescricao" value="Descricao" />
+			<h:inputText id="txtDescricao"
+				value="#{grupoController.grupo.descricao}" />
+			<rich:message for="txtDescricao" />
+			<h:commandButton value="Salvar"
+				action="#{grupoController.salvarGrupo}" />
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -5,13 +5,12 @@
         http://java.sun.com/xml/ns/javaee
         http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
-	<!-- 
-		<navigation-rule> 
-			<navigation-case> 
-				<from-outcome>INDEX</from-outcome>
-				<to-view-id>/index.xhtml</to-view-id> 
-			</navigation-case> 
-		</navigation-rule> 
-	-->
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>grupos</from-outcome>
+			<to-view-id>/grupos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 
 </faces-config>

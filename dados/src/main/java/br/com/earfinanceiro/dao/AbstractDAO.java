@@ -20,7 +20,7 @@ import javax.persistence.criteria.Root;
  */
 public abstract class AbstractDAO<T> implements IDAO<T> {
 
-	@PersistenceContext
+	@PersistenceContext(unitName = "primary")
 	protected EntityManager em;
 
 	private Class<T> classe;

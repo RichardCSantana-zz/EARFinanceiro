@@ -6,6 +6,9 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<h:outputText value="Hello World" />
+		<h:form>
+			<h:outputText value="Hello World" />
+			<h:commandLink value="Grupos" action="#{grupoController.criarGrupo}" />
+		</h:form>
 	</ui:define>
 </ui:composition>

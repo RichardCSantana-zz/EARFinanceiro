@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.earfinanceiro.interfaces;
+package br.com.earfinanceiro.dao;
 
 import br.com.earfinanceiro.entidades.AbstractConta;
 

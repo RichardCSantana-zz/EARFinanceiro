@@ -47,6 +47,12 @@
 		</dependency>
 
 		<dependency>
+			<artifactId>entidades</artifactId>
+			<groupId>br.com.earfinanceiro</groupId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>6.0</version>

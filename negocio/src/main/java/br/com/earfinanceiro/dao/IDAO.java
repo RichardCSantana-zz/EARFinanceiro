@@ -1,4 +1,4 @@
-package br.com.earfinanceiro.interfaces;
+package br.com.earfinanceiro.dao;
 
 import java.util.List;
 

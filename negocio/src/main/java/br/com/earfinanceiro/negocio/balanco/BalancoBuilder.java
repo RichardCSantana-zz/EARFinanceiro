@@ -11,8 +11,8 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
+import br.com.earfinanceiro.dao.IContaDAO;
 import br.com.earfinanceiro.entidades.IConta;
-import br.com.earfinanceiro.interfaces.IContaDAO;
 
 /**
  * @author richard.santana
