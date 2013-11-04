@@ -7,7 +7,7 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<h:form>
-			<rich:messages globalOnly="true" />
+			<rich:messages />
 			<rich:dataTable id="dtbGrupos" value="#{grupoController.grupos}"
 				var="atual" noDataLabel="Nao existem grupos cadastrados">
 				<rich:column>
@@ -16,6 +16,26 @@
 					</f:facet>
 					<h:outputText value="#{atual.descricao}" />
 				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo" />
+					</f:facet>
+					<h:outputText value="#{atual.tipo}" />
+				</rich:column>
+				<rich:column>
+					<h:commandLink action="#{grupoController.editarGrupo}"
+						value="Editar">
+						<f:setPropertyActionListener target="#{grupoController.grupo}"
+							value="#{atual}" />
+					</h:commandLink>
+				</rich:column>
+				<rich:column>
+					<h:commandLink action="#{grupoController.excluiGrupo}"
+						value="Excluir">
+						<f:setPropertyActionListener target="#{grupoController.grupo}"
+							value="#{atual}" />
+					</h:commandLink>
+				</rich:column>
 			</rich:dataTable>
 		</h:form>
 		<h:form>
@@ -23,6 +43,11 @@
 			<h:inputText id="txtDescricao"
 				value="#{grupoController.grupo.descricao}" />
 			<rich:message for="txtDescricao" />
+			<h:outputText id="lblTipo" value="Tipo" />
+			<h:selectOneMenu id="smTipo" value="#{grupoController.grupo.tipo}">
+				<f:selectItems value="#{grupoController.tipos}" />
+			</h:selectOneMenu>
+			<rich:message for="smTipo" />
 			<h:commandButton value="Salvar"
 				action="#{grupoController.salvarGrupo}" />
 		</h:form>
