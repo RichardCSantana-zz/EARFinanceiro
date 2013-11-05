@@ -37,4 +37,20 @@
 		</navigation-case>
 	</navigation-rule>
 
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>balancos</from-outcome>
+			<to-view-id>/balancos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>listaContas</from-outcome>
+			<to-view-id>/listacontas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
 </faces-config>

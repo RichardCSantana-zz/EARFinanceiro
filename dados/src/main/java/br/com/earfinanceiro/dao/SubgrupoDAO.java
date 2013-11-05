@@ -44,8 +44,8 @@ public class SubgrupoDAO extends AbstractDAO<Subgrupo> implements ISubgrupoDAO {
 	 */
 	@Override
 	public List<Subgrupo> listaSubgruposEntrada() {
-		Predicate predicate = cb
-				.equal(root.get("grupo.tipo"), TipoEnum.ENTRADA);
+		Predicate predicate = cb.equal(root.get("grupo").get("tipo"),
+				TipoEnum.ENTRADA);
 		return super.listaCondicoes(predicate);
 	}
 
@@ -56,7 +56,8 @@ public class SubgrupoDAO extends AbstractDAO<Subgrupo> implements ISubgrupoDAO {
 	 */
 	@Override
 	public List<Subgrupo> listaSubgruposSaida() {
-		Predicate predicate = cb.equal(root.get("grupo.tipo"), TipoEnum.SAIDA);
+		Predicate predicate = cb.equal(root.get("grupo").get("tipo"),
+				TipoEnum.SAIDA);
 		return super.listaCondicoes(predicate);
 	}
 

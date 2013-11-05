@@ -7,10 +7,10 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<h:form>
-			<rich:messages />
+			<rich:messages globalOnly="true" />
 			<rich:dataTable id="dtbSubgrupos"
 				value="#{subgrupoController.subgrupos}" var="atual"
-				noDataLabel="Nao existem grupos cadastrados">
+				noDataLabel="Nao existem subgrupos cadastrados">
 				<rich:column>
 					<f:facet name="header">
 						<h:outputText value="Descricao" />

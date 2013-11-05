@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<rich:messages globalOnly="true" />
+			<h:outputText id="lblDataInicial" value="Data inicial" />
+			<rich:calendar id="clnDataInicial" datePattern="dd/MM/yyyy"
+				value="#{balancoController.dataInicial.time}"
+				enableManualInput="true" showWeeksBar="false"></rich:calendar>
+			<rich:message for="clnDataInicial" />
+			<h:outputText id="lblDataFinal" value="Data inicial" />
+			<rich:calendar id="clnDataFinal" datePattern="dd/MM/yyyy"
+				value="#{balancoController.dataFinal.time}" enableManualInput="true"
+				showWeeksBar="false"></rich:calendar>
+			<rich:message for="clnDataFinal" />
+			<h:commandButton value="Gerar Balanco"
+				action="#{balancoController.geraBalanco}" />
+		</h:form>
+		<h:form>
+			<rich:dataTable id="dtbGrupos"
+				value="#{balancoController.balanco.contas}" var="atual"
+				noDataLabel="Nao existem contas cadastradas">
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Descricao" />
+					</f:facet>
+					<h:outputText value="#{atual.descricao}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Valor" />
+					</f:facet>
+					<h:outputText value="#{atual.valor}">
+						<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+							type="currency" />
+					</h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="SubGrupo" />
+					</f:facet>
+					<h:outputText value="#{atual.subgrupo.descricao}">
+					</h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Grupo" />
+					</f:facet>
+					<h:outputText value="#{atual.subgrupo.grupo.descricao}">
+					</h:outputText>
+				</rich:column>
+			</rich:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

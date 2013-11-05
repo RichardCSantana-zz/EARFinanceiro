@@ -16,7 +16,7 @@ public class Balanco {
 
 	private List<IConta> contas;
 
-	protected Balanco() {
+	public Balanco() {
 
 	}
 
