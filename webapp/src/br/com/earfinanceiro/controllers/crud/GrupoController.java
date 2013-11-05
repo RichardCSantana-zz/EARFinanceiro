@@ -18,7 +18,7 @@ import br.com.earfinanceiro.entidades.Grupo;
  * @author Richard
  * 
  */
-@Named(value = "grupoController")
+@Named
 @SessionScoped
 public class GrupoController implements Serializable {
 
