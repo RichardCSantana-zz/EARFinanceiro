@@ -7,8 +7,12 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<h:form>
-			<h:outputText value="Hello World" />
 			<h:commandLink value="Grupos" action="#{grupoController.criarGrupo}" />
+			<h:commandLink value="Subgrupos"
+				action="#{subgrupoController.criarSubgrupo}" />
+			<h:commandLink value="Entrada"
+				action="#{entradaController.criarEntrada}" />
+			<h:commandLink value="Saida" action="#{saidaController.criarSaida}" />
 		</h:form>
 	</ui:define>
 </ui:composition>

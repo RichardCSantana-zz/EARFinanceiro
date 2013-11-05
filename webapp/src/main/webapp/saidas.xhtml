@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<rich:messages />
+			<h1>
+				<h:outputLabel value="Saida" />
+			</h1>
+			<h:outputText id="lblDescricao" value="Descricao" />
+			<h:inputText id="txtDescricao"
+				value="#{saidaController.saida.descricao}" />
+			<rich:message for="txtDescricao" />
+			<h:outputText id="lblValor" value="Valor" />
+			<h:inputText id="txtValor" value="#{saidaController.saida.valor}">
+				<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+					type="currency" />
+			</h:inputText>
+			<rich:message for="txtDescricao" />
+			<h:outputText id="lblSubgrupo" value="Subgrupo" />
+			<h:selectOneMenu id="smSubgrupo"
+				value="#{saidaController.saida.subGrupo}">
+				<f:selectItems value="#{saidaController.subgrupos}" />
+			</h:selectOneMenu>
+			<rich:message for="smSubgrupo" />
+			<h:commandButton value="Salvar" action="#{saidaController.salvar}" />
+		</h:form>
+	</ui:define>
+</ui:composition>

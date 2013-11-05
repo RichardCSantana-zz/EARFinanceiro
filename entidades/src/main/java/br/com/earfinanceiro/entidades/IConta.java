@@ -21,7 +21,7 @@ public interface IConta {
 
 	Integer getReincidencia();
 
-	SubGrupo getSubGrupo();
+	Subgrupo getSubGrupo();
 
 	Boolean isEfetiva();
 

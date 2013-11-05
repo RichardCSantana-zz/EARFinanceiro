@@ -23,9 +23,9 @@ import javax.validation.constraints.NotNull;
 public class Grupo {
 
 	static final String GRUPO_SEQUENCE = "grupo_sequence";
-	public Long id;
-	public String descricao;
-	public TipoEnum tipo;
+	private Long id;
+	private String descricao;
+	private TipoEnum tipo;
 
 	@Override
 	public int hashCode() {
@@ -50,6 +50,11 @@ public class Grupo {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "" + id;
 	}
 
 	@Id

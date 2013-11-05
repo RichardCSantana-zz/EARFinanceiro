@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:form>
+			<rich:messages />
+			<rich:dataTable id="dtbSubgrupos"
+				value="#{subgrupoController.subgrupos}" var="atual"
+				noDataLabel="Nao existem grupos cadastrados">
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Descricao" />
+					</f:facet>
+					<h:outputText value="#{atual.descricao}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Grupo" />
+					</f:facet>
+					<h:outputText value="#{atual.grupo.descricao}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo do grupo" />
+					</f:facet>
+					<h:outputText value="#{atual.grupo.tipo}" />
+				</rich:column>
+				<rich:column>
+					<h:commandLink action="#{subgrupoController.editarSubgrupo}"
+						value="Editar">
+						<f:setPropertyActionListener
+							target="#{subgrupoController.subgrupo}" value="#{atual}" />
+					</h:commandLink>
+				</rich:column>
+				<rich:column>
+					<h:commandLink action="#{subgrupoController.excluiSubgrupo}"
+						value="Excluir">
+						<f:setPropertyActionListener
+							target="#{subgrupoController.subgrupo}" value="#{atual}" />
+					</h:commandLink>
+				</rich:column>
+			</rich:dataTable>
+		</h:form>
+		<h:form>
+			<h:outputText id="lblDescricao" value="Descricao" />
+			<h:inputText id="txtDescricao"
+				value="#{subgrupoController.subgrupo.descricao}" />
+			<rich:message for="txtDescricao" />
+			<h:outputText id="lblGrupo" value="Grupo" />
+			<h:selectOneMenu id="smGrupo"
+				value="#{subgrupoController.subgrupo.grupo}">
+				<f:selectItems value="#{subgrupoController.grupos}" />
+			</h:selectOneMenu>
+			<rich:message for="smGrupo" />
+			<h:commandButton value="Salvar"
+				action="#{subgrupoController.salvarSubgrupo}" />
+		</h:form>
+	</ui:define>
+</ui:composition>

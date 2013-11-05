@@ -13,4 +13,28 @@
 		</navigation-case>
 	</navigation-rule>
 
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>subgrupos</from-outcome>
+			<to-view-id>/subgrupos.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>entradas</from-outcome>
+			<to-view-id>/entradas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
+			<from-outcome>saidas</from-outcome>
+			<to-view-id>/saidas.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
 </faces-config>

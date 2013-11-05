@@ -39,7 +39,7 @@ public abstract class AbstractConta implements IConta {
 	protected String descricao;
 	protected Calendar dataCadastro;
 	protected Calendar dataEfetivacao;
-	protected SubGrupo subGrupo;
+	protected Subgrupo subGrupo;
 	protected boolean efetiva;
 	protected double valor;
 	protected int reincidencia;
@@ -167,12 +167,12 @@ public abstract class AbstractConta implements IConta {
 	}
 
 	@Override
-	@ManyToOne(targetEntity = SubGrupo.class, fetch = FetchType.EAGER)
-	public SubGrupo getSubGrupo() {
+	@ManyToOne(targetEntity = Subgrupo.class, fetch = FetchType.EAGER)
+	public Subgrupo getSubGrupo() {
 		return subGrupo;
 	}
 
-	public void setSubGrupo(SubGrupo subGrupo) {
+	public void setSubGrupo(Subgrupo subGrupo) {
 		this.subGrupo = subGrupo;
 	}
 

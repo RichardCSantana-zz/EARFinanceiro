@@ -101,4 +101,16 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 		return resultados;
 	}
 
+	protected T unicoCondicoes(Predicate predicate) {
+		criteria.select(root);
+		criteria.where(predicate);
+		T resultado;
+		try {
+			resultado = em.createQuery(criteria).getSingleResult();
+		} catch (NoResultException e) {
+			throw new NoResultException("Não foram encontrados resultados.");
+		}
+		return resultado;
+	}
+
 }

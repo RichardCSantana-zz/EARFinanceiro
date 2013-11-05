@@ -21,13 +21,13 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "subgrupo")
-@SequenceGenerator(name = SubGrupo.SUBGRUPO_SEQUENCE, sequenceName = SubGrupo.SUBGRUPO_SEQUENCE, initialValue = 1, allocationSize = 10)
-public class SubGrupo {
+@SequenceGenerator(name = Subgrupo.SUBGRUPO_SEQUENCE, sequenceName = Subgrupo.SUBGRUPO_SEQUENCE, initialValue = 1, allocationSize = 10)
+public class Subgrupo {
 
 	static final String SUBGRUPO_SEQUENCE = "subgrupo_sequence";
-	public Long id;
-	public String descricao;
-	public Grupo grupo;
+	private Long id;
+	private String descricao;
+	private Grupo grupo;
 
 	@Override
 	public int hashCode() {
@@ -45,13 +45,18 @@ public class SubGrupo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SubGrupo other = (SubGrupo) obj;
+		Subgrupo other = (Subgrupo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "" + id;
 	}
 
 	@Id
