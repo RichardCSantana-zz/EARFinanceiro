@@ -61,12 +61,10 @@ public class GrupoNegocio implements IGrupoNegocio {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * br.com.earfinanceiro.cadastro.IGrupoNegocio#listarGrupos(br.com.earfinanceiro
-	 * .entidades.Grupo)
+	 * @see br.com.earfinanceiro.cadastro.IGrupoNegocio#listarGrupos()
 	 */
 	@Override
-	public List<Grupo> listarGrupos(Grupo grupo) {
+	public List<Grupo> listarGrupos() {
 		return dao.listaTodos();
 	}
 

@@ -4,15 +4,18 @@
 package br.com.earfinanceiro.controllers.crud;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
 import br.com.earfinanceiro.cadastro.IGrupoNegocio;
 import br.com.earfinanceiro.entidades.Grupo;
+import br.com.earfinanceiro.entidades.TipoEnum;
 
 /**
  * @author Richard
@@ -31,7 +34,6 @@ public class GrupoController implements Serializable {
 	private IGrupoNegocio grupoNegocio;
 
 	private Grupo grupo;
-	private List<Grupo> grupos;
 
 	@PostConstruct
 	public void init() {
@@ -51,10 +53,16 @@ public class GrupoController implements Serializable {
 		} else {
 			grupoNegocio.atualizaGrupo(grupo);
 		}
+		grupo = null;
+		init();
 	}
 
 	public void excluiGrupo() {
 		grupoNegocio.excluirGrupo(grupo);
+	}
+
+	public String editarGrupo() {
+		return "grupos";
 	}
 
 	public Grupo getGrupo() {
@@ -66,7 +74,16 @@ public class GrupoController implements Serializable {
 	}
 
 	public List<Grupo> getGrupos() {
-		return grupos;
+		return grupoNegocio.listarGrupos();
+	}
+
+	public List<SelectItem> getTipos() {
+		List<SelectItem> itens = new ArrayList<>();
+		for (TipoEnum tipo : TipoEnum.values()) {
+			SelectItem item = new SelectItem(tipo, tipo.toString());
+			itens.add(item);
+		}
+		return itens;
 	}
 
 }

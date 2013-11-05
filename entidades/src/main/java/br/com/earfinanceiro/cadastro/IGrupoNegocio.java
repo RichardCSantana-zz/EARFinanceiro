@@ -9,7 +9,7 @@ import br.com.earfinanceiro.entidades.Grupo;
 
 /**
  * @author Richard
- *
+ * 
  */
 public interface IGrupoNegocio {
 
@@ -19,6 +19,6 @@ public interface IGrupoNegocio {
 
 	public abstract void excluirGrupo(Grupo grupo);
 
-	public abstract List<Grupo> listarGrupos(Grupo grupo);
+	public abstract List<Grupo> listarGrupos();
 
 }
