@@ -33,6 +33,9 @@ import br.com.earfinanceiro.exceptions.ErroCadastroException;
 @SequenceGenerator(name = AbstractConta.CONTA_SEQUENCE, sequenceName = AbstractConta.CONTA_SEQUENCE, initialValue = 1, allocationSize = 10)
 public abstract class AbstractConta implements IConta {
 
+	/**
+	 * String que define a sequencia dessa entidade
+	 */
 	public static final String CONTA_SEQUENCE = "conta_sequence";
 
 	protected Long id;
@@ -45,20 +48,18 @@ public abstract class AbstractConta implements IConta {
 	protected int reincidencia;
 	protected boolean reincidente;
 
-	/**
+	/*
+	 * (non-Javadoc)
 	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#efetiva(java.util.Calendar)
 	 */
-	public AbstractConta() {
-		super();
-	}
-
 	@Override
 	public void efetiva(Calendar dataEfetivacao) throws ErroCadastroException {
-		if (dataEfetivacao.before(dataCadastro)) {
+		if (dataEfetivacao.before(this.dataCadastro)) {
 			throw new ErroCadastroException(
 					"Data de efetivacao deve ser posterior a data de cadastro");
 		}
-		if (efetiva) {
+		if (this.efetiva) {
 			throw new ErroCadastroException(
 					"A conta que est�o tentando efetivar j� foi efetivada");
 		}
@@ -66,13 +67,18 @@ public abstract class AbstractConta implements IConta {
 		this.dataEfetivacao = dataEfetivacao;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#reincide(java.lang.Integer)
+	 */
 	@Override
 	public void reincide(Integer reincidencia) throws ErroCadastroException {
 		if (reincidencia < 1) {
 			throw new ErroCadastroException(
 					"O prazo de reincidencia deve ser no minimo 1 dia");
 		}
-		if (reincidente) {
+		if (this.reincidente) {
 			throw new ErroCadastroException(
 					"A conta em quest�o j� foi marcada como reincidente");
 		}
@@ -84,27 +90,42 @@ public abstract class AbstractConta implements IConta {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = (prime * result)
+				+ ((this.id == null) ? 0 : this.id.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (this.getClass() != obj.getClass()) {
 			return false;
+		}
 		Entrada other = (Entrada) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (this.id == null) {
+			if (other.id != null) {
 				return false;
-		} else if (!id.equals(other.id))
+			}
+		} else if (!this.id.equals(other.id)) {
 			return false;
+		}
 		return true;
 	}
 
+	/**
+	 * 
+	 * Insere um valor
+	 * 
+	 * @param valor
+	 *            - Double a ser inserida na conta
+	 * @throws ErroCadastroException
+	 *             - Quando o valor do Double for menor ou igual a 0
+	 */
 	public void setValor(Double valor) throws ErroCadastroException {
 		if (valor.compareTo(0.0) < 1) {
 			throw new ErroCadastroException("Valor deve ser maior que 0");
@@ -112,104 +133,153 @@ public abstract class AbstractConta implements IConta {
 		this.valor = valor;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#getId()
+	 */
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CONTA_SEQUENCE)
 	@Column(name = "id")
 	public Long getId() {
-		return id;
+		return this.id;
 	}
 
+	/**
+	 * 
+	 * Insere um id
+	 * 
+	 * @param id
+	 *            - Long identificador da conta
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#getDescricao()
+	 */
 	@Override
 	@Column(name = "descricao")
 	@NotNull(message = "O campo descrição deve ser preenchido")
 	@Size(min = 3, max = 40, message = "O campo descricao deve possuir entre 3 e 40 caracteres")
 	public String getDescricao() {
-		return descricao;
+		return this.descricao;
 	}
 
+	/**
+	 * 
+	 * Insere uma descrição
+	 * 
+	 * @param descricao
+	 *            - String que servirá de descrição da conta
+	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#getDataCadastro()
+	 */
 	@Override
 	@Column(name = "data_cadastro")
 	@NotNull(message = "O campo data cadastro deve ser preenchido")
 	public Calendar getDataCadastro() {
-		return dataCadastro;
+		return this.dataCadastro;
 	}
 
+	/**
+	 * 
+	 * Insere a data de cadastro
+	 * 
+	 * @param dataCadastro
+	 *            - Calendar que define a data de cadastro da conta
+	 */
 	public void setDataCadastro(Calendar dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#getValor()
+	 */
 	@Override
 	@Column(name = "valor")
 	@NotNull(message = "O campo valor deve ser preenchido")
 	public Double getValor() {
-		return valor;
+		return this.valor;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#getDataEfetivacao()
+	 */
 	@Override
 	@Column(name = "data_efetivacao")
 	public Calendar getDataEfetivacao() {
-		return dataEfetivacao;
+		return this.dataEfetivacao;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#isEfetiva()
+	 */
 	@Override
 	@Column(name = "efetiva")
 	public Boolean isEfetiva() {
-		return efetiva;
+		return this.efetiva;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#getSubGrupo()
+	 */
 	@Override
 	@ManyToOne(targetEntity = Subgrupo.class, fetch = FetchType.EAGER)
 	public Subgrupo getSubGrupo() {
-		return subGrupo;
+		return this.subGrupo;
 	}
 
+	/**
+	 * 
+	 * Insere um subgrupo
+	 * 
+	 * @param subGrupo
+	 *            - {@link Subgrupo} da conta
+	 */
 	public void setSubGrupo(Subgrupo subGrupo) {
 		this.subGrupo = subGrupo;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#getReincidencia()
+	 */
 	@Override
 	@Column(name = "reincidencia")
 	public Integer getReincidencia() {
-		return reincidencia;
+		return this.reincidencia;
 	}
 
+	/**
+	 * 
+	 * Retorna se a conta é reincidente
+	 * 
+	 * @return boolean que define se a conta é reincidente
+	 */
 	@Column(name = "eh_reincidente")
 	public boolean isReincidente() {
-		return reincidente;
-	}
-
-	@SuppressWarnings("unused")
-	private void setDataEfetivacao(Calendar dataEfetivacao) {
-		this.dataEfetivacao = dataEfetivacao;
-	}
-
-	@SuppressWarnings("unused")
-	private void setEfetiva(boolean efetiva) {
-		this.efetiva = efetiva;
-	}
-
-	@SuppressWarnings("unused")
-	private void setValor(double valor) {
-		this.valor = valor;
-	}
-
-	@SuppressWarnings("unused")
-	private void setReincidencia(int reincidencia) {
-		this.reincidencia = reincidencia;
-	}
-
-	@SuppressWarnings("unused")
-	private void setReincidente(boolean reincidente) {
-		this.reincidente = reincidente;
+		return this.reincidente;
 	}
 
 }

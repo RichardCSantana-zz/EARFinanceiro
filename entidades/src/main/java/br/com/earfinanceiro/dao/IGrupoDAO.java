@@ -12,14 +12,22 @@ import br.com.earfinanceiro.entidades.Grupo;
 public interface IGrupoDAO extends IDAO<Grupo> {
 
 	/**
-	 * @param arg2
-	 * @return
+	 * 
+	 * Retorna um grupo de acordo com uma descrição
+	 * 
+	 * @param descricao
+	 *            - String para busca por descrição
+	 * @return {@link Grupo} - grupo referente a descrição
 	 */
-	public Grupo getPorNome(String nome);
+	public Grupo getPorNome(String descricao);
 
 	/**
-	 * @param arg2
-	 * @return
+	 * 
+	 * Retorna um grupo de acordo com um id
+	 * 
+	 * @param id
+	 *            - Long para busca por id
+	 * @return {@link Grupo} - grupo referente ao id
 	 */
 	public Grupo getPorId(Long id);
 

@@ -14,6 +14,12 @@ import br.com.earfinanceiro.entidades.IConta;
  */
 public interface IContaDAO extends IAbstractContaDAO<AbstractConta> {
 
+	/**
+	 * 
+	 * Retorna lista de contas não efetivas
+	 * 
+	 * @return {@link IConta} que não estão efetivas
+	 */
 	List<IConta> getContasNaoEfetivas();
 
 }

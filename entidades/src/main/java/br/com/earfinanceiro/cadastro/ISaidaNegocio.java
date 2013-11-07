@@ -14,12 +14,39 @@ import br.com.earfinanceiro.entidades.Subgrupo;
  */
 public interface ISaidaNegocio {
 
-	public abstract void salva(Saida entrada);
+	/**
+	 * 
+	 * Persiste uma saída
+	 * 
+	 * @param saida
+	 *            - {@link Saida} a ser persistida
+	 */
+	public abstract void salva(Saida saida);
 
-	public abstract void atualiza(Saida entrada);
+	/**
+	 * 
+	 * Atualiza os dados de uma saida já persistida
+	 * 
+	 * @param saida
+	 *            - {@link Saida} a ser atualizada
+	 */
+	public abstract void atualiza(Saida saida);
 
-	public abstract void excluir(Saida entrada);
+	/**
+	 * 
+	 * Exclui uma saída
+	 * 
+	 * @param saida
+	 *            - {@link Saida} a ser excluída
+	 */
+	public abstract void excluir(Saida saida);
 
+	/**
+	 * 
+	 * Retorna lista de subgrupos elegíveis para a saída
+	 * 
+	 * @return {@link List} de {@link Subgrupo}- lista de subgrupos de saida
+	 */
 	public abstract List<Subgrupo> getSubgrupos();
 
 }

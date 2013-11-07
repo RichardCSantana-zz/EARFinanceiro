@@ -5,8 +5,21 @@ import java.util.List;
 
 import br.com.earfinanceiro.entidades.AbstractConta;
 
+/**
+ * @author Richard
+ * 
+ * @param <T>
+ *            - Subclasse de {@link AbstractConta}
+ */
 public interface IAbstractContaDAO<T extends AbstractConta> extends IDAO<T> {
 
+	/**
+	 * @param inicio
+	 *            - {@link Calendar} que define a data inicial da pesquisa
+	 * @param fim
+	 *            - {@link Calendar} que define a data final da pesquisa
+	 * @return {@link List} de <T> correspondente ao resultado da pesquisa
+	 */
 	public abstract List<T> geraListaPorDataEfetivacao(Calendar inicio,
 			Calendar fim);
 
