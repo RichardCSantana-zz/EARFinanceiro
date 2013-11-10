@@ -17,6 +17,9 @@ import br.com.earfinanceiro.entidades.Entrada;
 public class EntradaDAO extends ContaAbstractDAO<Entrada> implements
 		IEntradaDAO {
 
+	/**
+	 * 
+	 */
 	public EntradaDAO() {
 		super(Entrada.class);
 	}

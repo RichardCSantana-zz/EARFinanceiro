@@ -16,6 +16,8 @@ import javax.persistence.criteria.Root;
 
 /**
  * @author richard.santana
+ * @param <T>
+ *            Class base para os procedimentos de persistência
  * 
  */
 public abstract class AbstractDAO<T> implements IDAO<T> {
@@ -31,6 +33,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 
 	/**
 	 * @param classe
+	 *            - Class que determina o tipo de classe do objeto
 	 */
 	protected AbstractDAO(Class<T> classe) {
 		this.classe = classe;
@@ -38,9 +41,9 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 
 	@PostConstruct
 	void init() {
-		cb = em.getCriteriaBuilder();
-		criteria = cb.createQuery(classe);
-		root = criteria.from(classe);
+		this.cb = this.em.getCriteriaBuilder();
+		this.criteria = this.cb.createQuery(this.classe);
+		this.root = this.criteria.from(this.classe);
 	}
 
 	/*
@@ -50,7 +53,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	 */
 	@Override
 	public void salvar(T valor) {
-		em.persist(valor);
+		this.em.persist(valor);
 	}
 
 	/*
@@ -60,7 +63,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	 */
 	@Override
 	public void atualizar(T valor) {
-		em.merge(valor);
+		this.em.merge(valor);
 	}
 
 	/*
@@ -70,7 +73,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	 */
 	@Override
 	public void excluir(T valor) {
-		em.remove(valor);
+		this.em.remove(valor);
 	}
 
 	/*
@@ -82,7 +85,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	public List<T> listaTodos() {
 		List<T> resultados;
 		try {
-			resultados = em.createQuery(criteria).getResultList();
+			resultados = this.em.createQuery(this.criteria).getResultList();
 		} catch (NoResultException e) {
 			throw new NoResultException("Não foram encontrados resultados.");
 		}
@@ -90,11 +93,11 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	}
 
 	protected List<T> listaCondicoes(Predicate predicate) {
-		criteria.select(root);
-		criteria.where(predicate);
+		this.criteria.select(this.root);
+		this.criteria.where(predicate);
 		List<T> resultados;
 		try {
-			resultados = em.createQuery(criteria).getResultList();
+			resultados = this.em.createQuery(this.criteria).getResultList();
 		} catch (NoResultException e) {
 			throw new NoResultException("Não foram encontrados resultados.");
 		}
@@ -102,11 +105,11 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	}
 
 	protected T unicoCondicoes(Predicate predicate) {
-		criteria.select(root);
-		criteria.where(predicate);
+		this.criteria.select(this.root);
+		this.criteria.where(predicate);
 		T resultado;
 		try {
-			resultado = em.createQuery(criteria).getSingleResult();
+			resultado = this.em.createQuery(this.criteria).getSingleResult();
 		} catch (NoResultException e) {
 			throw new NoResultException("Não foram encontrados resultados.");
 		}

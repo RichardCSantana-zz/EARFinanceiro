@@ -22,15 +22,18 @@ import br.com.earfinanceiro.entidades.IConta;
 public class ContaDAO extends ContaAbstractDAO<AbstractConta> implements
 		IContaDAO {
 
+	/**
+	 * 
+	 */
 	public ContaDAO() {
 		super(AbstractConta.class);
 	}
 
 	@Override
 	public List<IConta> getContasNaoEfetivas() {
-		Predicate pred1 = cb.equal(root.get("efetiva"), false);
+		Predicate pred1 = this.cb.equal(this.root.get("efetiva"), false);
 		List<IConta> contas = new ArrayList<>();
-		for (IConta conta : listaCondicoes(pred1)) {
+		for (IConta conta : this.listaCondicoes(pred1)) {
 			contas.add(conta);
 		}
 		return contas;

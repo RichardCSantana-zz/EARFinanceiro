@@ -5,11 +5,21 @@ import java.util.List;
 
 import br.com.earfinanceiro.entidades.AbstractConta;
 
+/**
+ * @author Richard
+ * 
+ * @param <T>
+ *            - Class base para os procedimentos de persistência
+ */
 public abstract class ContaAbstractDAO<T extends AbstractConta> extends
 		AbstractDAO<T> implements IAbstractContaDAO<T> {
 
 	private GeradorCriteriaData<T> gcd;
 
+	/**
+	 * @param classe
+	 *            - Class que determina o tipo de classe do objeto
+	 */
 	public ContaAbstractDAO(Class<T> classe) {
 		super(classe);
 
@@ -24,8 +34,8 @@ public abstract class ContaAbstractDAO<T extends AbstractConta> extends
 	 */
 	@Override
 	public List<T> geraListaPorDataEfetivacao(Calendar inicio, Calendar fim) {
-		gcd = new GeradorCriteriaData<>(cb, root);
-		return listaCondicoes(gcd.geraCriteria(inicio, fim));
+		this.gcd = new GeradorCriteriaData<>(this.cb, this.root);
+		return this.listaCondicoes(this.gcd.geraCriteria(inicio, fim));
 	}
 
 }

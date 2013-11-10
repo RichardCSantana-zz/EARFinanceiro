@@ -31,9 +31,12 @@ public class GrupoConverter implements Serializable, Converter {
 
 	private IGrupoDAO dao;
 
+	/**
+	 * 
+	 */
 	public GrupoConverter() {
 		try {
-			dao = InitialContext
+			this.dao = InitialContext
 					.doLookup("java:global/ear-1.0/dados-1.0/GrupoDAO!br.com.earfinanceiro.dao.IGrupoDAO");
 		} catch (NamingException e) {
 			e.printStackTrace();
@@ -49,7 +52,7 @@ public class GrupoConverter implements Serializable, Converter {
 	 */
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		return dao.getPorId(new Long(arg2));
+		return this.dao.getPorId(new Long(arg2));
 	}
 
 	/*

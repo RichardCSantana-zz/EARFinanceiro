@@ -15,8 +15,26 @@ import br.com.earfinanceiro.exceptions.ErroCadastroException;
  */
 public interface IContaNegocio {
 
+	/**
+	 * 
+	 * Retorna contas que não estão com o status de efetivas
+	 * 
+	 * @return {@link List} de {@link IConta} que não estão com o status de
+	 *         efetivas
+	 */
 	List<IConta> getContasNaoEfetivas();
 
+	/**
+	 * 
+	 * Efetiva uma conta
+	 * 
+	 * @param conta
+	 *            - {@link IConta} a ser efetivada
+	 * @param dataEfetivacao
+	 *            - {@link Calendar} que representa a data de efetivação
+	 * @throws ErroCadastroException
+	 *             - Quando a data de efetivação é inferior a data de cadastro
+	 */
 	void efetiva(IConta conta, Calendar dataEfetivacao)
 			throws ErroCadastroException;
 

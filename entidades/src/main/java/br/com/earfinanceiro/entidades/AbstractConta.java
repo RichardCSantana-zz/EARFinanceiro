@@ -40,7 +40,7 @@ public abstract class AbstractConta implements IConta {
 
 	protected Long id;
 	protected String descricao;
-	protected Calendar dataCadastro;
+	protected Calendar dataPrevisao;
 	protected Calendar dataEfetivacao;
 	protected Subgrupo subGrupo;
 	protected boolean efetiva;
@@ -55,7 +55,7 @@ public abstract class AbstractConta implements IConta {
 	 */
 	@Override
 	public void efetiva(Calendar dataEfetivacao) throws ErroCadastroException {
-		if (dataEfetivacao.before(this.dataCadastro)) {
+		if (dataEfetivacao.before(this.dataPrevisao)) {
 			throw new ErroCadastroException(
 					"Data de efetivacao deve ser posterior a data de cadastro");
 		}
@@ -189,19 +189,20 @@ public abstract class AbstractConta implements IConta {
 	@Override
 	@Column(name = "data_cadastro")
 	@NotNull(message = "O campo data cadastro deve ser preenchido")
-	public Calendar getDataCadastro() {
-		return this.dataCadastro;
+	public Calendar getDataPrevisao() {
+		return this.dataPrevisao;
 	}
 
 	/**
 	 * 
-	 * Insere a data de cadastro
+	 * Insere a data de previsão para pagamento da conta
 	 * 
-	 * @param dataCadastro
-	 *            - Calendar que define a data de cadastro da conta
+	 * @param dataPrevisao
+	 *            - Calendar que define a data de previsão para o pagamento da
+	 *            conta
 	 */
-	public void setDataCadastro(Calendar dataCadastro) {
-		this.dataCadastro = dataCadastro;
+	public void setDataPrevisao(Calendar dataPrevisao) {
+		this.dataPrevisao = dataPrevisao;
 	}
 
 	/*

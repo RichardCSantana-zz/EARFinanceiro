@@ -25,10 +25,17 @@ public class BalancoBuilder implements IBalancoBuilder {
 	@EJB
 	private IContaDAO dao;
 
-	public Balanco geraBalanco(Calendar dataInicial, Calendar dataFinal) {
+	@Override
+	public Balanco geraBalanco(Calendar dataInicial, Calendar dataFinal)
+			throws IllegalArgumentException {
+		if (dataFinal.compareTo(dataInicial) < 0) {
+			throw new IllegalArgumentException(
+					"A data inicial deve ser maior ou igual a data final");
+		}
 		Balanco balanco = new Balanco();
 		List<IConta> contas = new ArrayList<>();
-		contas.addAll(dao.geraListaPorDataEfetivacao(dataInicial, dataFinal));
+		contas.addAll(this.dao.geraListaPorDataEfetivacao(dataInicial,
+				dataFinal));
 		balanco.setContas(contas);
 		return balanco;
 	}

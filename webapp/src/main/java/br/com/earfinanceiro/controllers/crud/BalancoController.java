@@ -34,41 +34,90 @@ public class BalancoController implements Serializable {
 	 * 
 	 */
 	protected BalancoController() {
-		dataInicial = Calendar.getInstance();
-		dataFinal = Calendar.getInstance();
+		this.dataInicial = Calendar.getInstance();
+		this.dataFinal = Calendar.getInstance();
 	}
 
 	@EJB
 	private IBalancoBuilder builder;
 
+	/**
+	 * 
+	 * Encaminha para a tela de balanço
+	 * 
+	 * @return String de mapeamento da página de balanço
+	 */
 	public String iniciaBalanco() {
 		return "balancos";
 	}
 
+	/**
+	 * Gera o balanço
+	 */
 	public void geraBalanco() {
-		balanco = builder.geraBalanco(dataInicial, dataFinal);
+		this.balanco = this.builder.geraBalanco(this.dataInicial,
+				this.dataFinal);
 	}
 
+	/**
+	 * 
+	 * Retorna o valor do atributo data inicial
+	 * 
+	 * @return Calendar que representa a data inicial
+	 */
 	public Calendar getDataInicial() {
-		return dataInicial;
+		return this.dataInicial;
 	}
 
+	/**
+	 * 
+	 * Preenche o atributo data inicial
+	 * 
+	 * @param dataInicial
+	 *            - Calendar que representa a data inicial
+	 */
 	public void setDataInicial(Calendar dataInicial) {
 		this.dataInicial = dataInicial;
 	}
 
+	/**
+	 * 
+	 * Retorna o valor do atributo data final
+	 * 
+	 * @return Calendar que representa a data final
+	 */
 	public Calendar getDataFinal() {
-		return dataFinal;
+		return this.dataFinal;
 	}
 
+	/**
+	 * 
+	 * Preenche o atributo data final
+	 * 
+	 * @param dataFinal
+	 *            - Calendar que representa a data final
+	 */
 	public void setDataFinal(Calendar dataFinal) {
 		this.dataFinal = dataFinal;
 	}
 
+	/**
+	 * 
+	 * Retorna o valor do atributo data final
+	 * 
+	 * @return Calendar que representa a data final
+	 */
 	public Balanco getBalanco() {
-		return balanco;
+		return this.balanco;
 	}
 
+	/**
+	 * 
+	 * Preenche o atributo data inicial
+	 * 
+	 * @param balanco
+	 *            - {@link Balanco} que representa o balanco
+	 */
 	public void setBalanco(Balanco balanco) {
 		this.balanco = balanco;
 	}

@@ -40,7 +40,7 @@ public class SaidaController implements Serializable {
 	public void init() {
 		if (saida == null) {
 			saida = new Saida();
-			saida.setDataCadastro(Calendar.getInstance());
+			saida.setDataPrevisao(Calendar.getInstance());
 		}
 	}
 

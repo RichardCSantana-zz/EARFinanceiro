@@ -16,6 +16,9 @@ import br.com.earfinanceiro.entidades.Saida;
 @Local
 public class SaidaDAO extends ContaAbstractDAO<Saida> implements ISaidaDAO {
 
+	/**
+	 * 
+	 */
 	public SaidaDAO() {
 		super(Saida.class);
 	}

@@ -16,24 +16,39 @@ public class Balanco {
 
 	private List<IConta> contas;
 
-	public Balanco() {
-
-	}
-
+	/**
+	 * 
+	 * Retorna o total contabilizado pelo balanço
+	 * 
+	 * @return Double que indica o total do balanço
+	 */
 	public Double getTotal() {
 		Double total = 0.0;
-		for (IConta conta : contas) {
+		for (IConta conta : this.contas) {
 			total += conta.contabilizaValor();
 		}
 		return total;
 	}
 
+	/**
+	 * 
+	 * Adiciona ao balanco uma lista de contas
+	 * 
+	 * @param contas
+	 *            - {@link List} de {@link IConta} pertencentes ao balanço
+	 */
 	public void setContas(List<IConta> contas) {
 		this.contas = contas;
 	}
 
+	/**
+	 * 
+	 * Retorna lista de contas pertencentes ao balanço
+	 * 
+	 * @return {@link List} de {@link IConta} pertencentes ao balanço
+	 */
 	public List<IConta> getContas() {
-		return Collections.unmodifiableList(contas);
+		return Collections.unmodifiableList(this.contas);
 	}
 
 }

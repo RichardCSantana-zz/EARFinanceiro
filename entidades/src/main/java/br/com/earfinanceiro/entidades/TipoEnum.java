@@ -9,6 +9,13 @@ package br.com.earfinanceiro.entidades;
  */
 public enum TipoEnum {
 
-	ENTRADA, SAIDA
+	/**
+	 * Define que um grupo é de entrada
+	 */
+	ENTRADA,
+	/**
+	 * Define que um grupo é de saída
+	 */
+	SAIDA
 
 }

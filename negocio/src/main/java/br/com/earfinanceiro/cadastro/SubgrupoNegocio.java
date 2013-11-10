@@ -11,6 +11,10 @@ import br.com.earfinanceiro.dao.ISubgrupoDAO;
 import br.com.earfinanceiro.entidades.Grupo;
 import br.com.earfinanceiro.entidades.Subgrupo;
 
+/**
+ * @author Richard
+ * 
+ */
 @Stateless
 @Local
 public class SubgrupoNegocio implements ISubgrupoNegocio {
@@ -29,7 +33,7 @@ public class SubgrupoNegocio implements ISubgrupoNegocio {
 	 */
 	@Override
 	public void salvaSubgrupo(Subgrupo subgrupo) {
-		dao.salvar(subgrupo);
+		this.dao.salvar(subgrupo);
 	}
 
 	/*
@@ -41,7 +45,7 @@ public class SubgrupoNegocio implements ISubgrupoNegocio {
 	 */
 	@Override
 	public void atualizaSubgrupo(Subgrupo subgrupo) {
-		dao.atualizar(subgrupo);
+		this.dao.atualizar(subgrupo);
 	}
 
 	/*
@@ -53,7 +57,7 @@ public class SubgrupoNegocio implements ISubgrupoNegocio {
 	 */
 	@Override
 	public void excluirsubSubgrupo(Subgrupo subgrupo) {
-		dao.excluir(subgrupo);
+		this.dao.excluir(subgrupo);
 	}
 
 	/*
@@ -63,7 +67,7 @@ public class SubgrupoNegocio implements ISubgrupoNegocio {
 	 */
 	@Override
 	public List<Subgrupo> listarSubgrupos() {
-		return dao.listaTodos();
+		return this.dao.listaTodos();
 	}
 
 	/*
@@ -73,7 +77,7 @@ public class SubgrupoNegocio implements ISubgrupoNegocio {
 	 */
 	@Override
 	public List<Grupo> getGrupos() {
-		return grupoDAO.listaTodos();
+		return this.grupoDAO.listaTodos();
 	}
 
 }

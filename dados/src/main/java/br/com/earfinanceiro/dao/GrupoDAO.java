@@ -18,7 +18,7 @@ import br.com.earfinanceiro.entidades.Grupo;
 public class GrupoDAO extends AbstractDAO<Grupo> implements IGrupoDAO {
 
 	/**
-	 * @param classe
+	 * 
 	 */
 	public GrupoDAO() {
 		super(Grupo.class);
@@ -31,8 +31,8 @@ public class GrupoDAO extends AbstractDAO<Grupo> implements IGrupoDAO {
 	 */
 	@Override
 	public Grupo getPorNome(String nome) {
-		Predicate pred1 = cb.equal(root.get("descricao"), nome);
-		return unicoCondicoes(pred1);
+		Predicate pred1 = this.cb.equal(this.root.get("descricao"), nome);
+		return this.unicoCondicoes(pred1);
 	}
 
 	/*
@@ -42,7 +42,7 @@ public class GrupoDAO extends AbstractDAO<Grupo> implements IGrupoDAO {
 	 */
 	@Override
 	public Grupo getPorId(Long id) {
-		return em.find(Grupo.class, id);
+		return this.em.find(Grupo.class, id);
 	}
 
 }

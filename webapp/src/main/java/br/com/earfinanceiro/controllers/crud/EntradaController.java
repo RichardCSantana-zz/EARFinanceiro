@@ -41,7 +41,7 @@ public class EntradaController implements Serializable {
 	public void init() {
 		if (entrada == null) {
 			entrada = new Entrada();
-			entrada.setDataCadastro(Calendar.getInstance());
+			entrada.setDataPrevisao(Calendar.getInstance());
 		}
 	}
 

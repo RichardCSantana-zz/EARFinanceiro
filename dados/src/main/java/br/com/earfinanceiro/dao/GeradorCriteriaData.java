@@ -11,6 +11,8 @@ import javax.persistence.criteria.Root;
 
 /**
  * @author richard.santana
+ * @param <T>
+ *            - Class base para os procedimentos de persistência
  * 
  */
 public class GeradorCriteriaData<T> {
@@ -26,14 +28,24 @@ public class GeradorCriteriaData<T> {
 		this.root = root;
 	}
 
+	/**
+	 * 
+	 * Método que gera um predicate de BETWEEN com duas datas para limite
+	 * 
+	 * @param inicio
+	 *            - {@link Calendar} que representa a data de inicio da Criteria
+	 * @param fim
+	 *            - {@link Calendar} que representa a data de final da Criteria
+	 * @return Predicate com determinação de datas
+	 */
 	public Predicate geraCriteria(Calendar inicio, Calendar fim) {
-		Predicate cond1 = cb.greaterThanOrEqualTo(root.get("dataEfetivacao")
-				.as(Calendar.class), inicio);
+		Predicate cond1 = this.cb.greaterThanOrEqualTo(
+				this.root.get("dataEfetivacao").as(Calendar.class), inicio);
 		Calendar dataFinal = (Calendar) fim.clone();
 		dataFinal.add(Calendar.DAY_OF_MONTH, 1);
-		Predicate cond2 = cb.lessThanOrEqualTo(
-				root.get("dataEfetivacao").as(Calendar.class), dataFinal);
-		return cb.and(cond1, cond2);
+		Predicate cond2 = this.cb.lessThanOrEqualTo(
+				this.root.get("dataEfetivacao").as(Calendar.class), dataFinal);
+		return this.cb.and(cond1, cond2);
 	}
 
 }
