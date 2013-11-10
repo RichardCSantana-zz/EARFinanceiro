@@ -3,6 +3,7 @@
  */
 package br.com.earfinanceiro.controllers.crud;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -16,8 +17,6 @@ import javax.inject.Named;
 import br.com.earfinanceiro.cadastro.IEntradaNegocio;
 import br.com.earfinanceiro.entidades.Entrada;
 import br.com.earfinanceiro.entidades.Subgrupo;
-
-import java.io.Serializable;
 
 /**
  * @author Richard
@@ -37,48 +36,92 @@ public class EntradaController implements Serializable {
 
 	private Entrada entrada;
 
+	/**
+	 * Prepara o controller para uma nova ação
+	 */
 	@PostConstruct
 	public void init() {
-		if (entrada == null) {
-			entrada = new Entrada();
-			entrada.setDataPrevisao(Calendar.getInstance());
+		if (this.entrada == null) {
+			this.entrada = new Entrada();
+			this.entrada.setDataPrevisao(Calendar.getInstance());
 		}
 	}
 
+	/**
+	 * Encaminha para a tela de entrada
+	 * 
+	 * @return String de mapeamento da página de entradas
+	 */
 	public String criarEntrada() {
-		init();
+		this.init();
 		return "entradas";
 	}
 
+	/**
+	 * 
+	 * Persiste a entrada atual
+	 * 
+	 */
 	public void salvar() {
-		if (entrada.getId() == null) {
-			negocio.salva(entrada);
+		if (this.entrada.getId() == null) {
+			this.negocio.salva(this.entrada);
 		} else {
-			negocio.atualiza(entrada);
+			this.negocio.atualiza(this.entrada);
 		}
-		entrada = null;
-		init();
+		this.entrada = null;
+		this.init();
 	}
 
+	/**
+	 * 
+	 * Exclui a entrada atual
+	 * 
+	 */
 	public void excluir() {
-		negocio.excluir(entrada);
+		this.negocio.excluir(this.entrada);
 	}
 
+	/**
+	 * 
+	 * Encaminha para a tela de edição
+	 * 
+	 * @return String de mapeamento da página de entradas
+	 */
 	public String editar() {
 		return "entradas";
 	}
 
+	/**
+	 * 
+	 * Retorna entrada atual
+	 * 
+	 * @return {@link Entrada} que representa a entrada
+	 */
 	public Entrada getEntrada() {
-		return entrada;
+		return this.entrada;
 	}
 
+	/**
+	 * 
+	 * Preenche a entrada
+	 * 
+	 * @param entrada
+	 *            - {@link Entrada} que representa a entrada
+	 */
 	public void setEntrada(Entrada entrada) {
 		this.entrada = entrada;
 	}
 
+	/**
+	 * 
+	 * Retorna subgrupos para aquela entrada
+	 * 
+	 * @return {@link List} de {@link Subgrupo} para a entrada
+	 * 
+	 */
 	public List<SelectItem> getSubgrupos() {
 		List<SelectItem> itens = new ArrayList<>();
-		for (Subgrupo subgrupo : negocio.getSubgrupos()) {
+		for (Subgrupo subgrupo : this.negocio.getSubgrupos()) {
 			SelectItem item = new SelectItem(subgrupo, subgrupo.getDescricao());
 			itens.add(item);
 		}

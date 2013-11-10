@@ -35,48 +35,96 @@ public class GrupoController implements Serializable {
 
 	private Grupo grupo;
 
+	/**
+	 * Prepara o controller para uma nova ação
+	 */
 	@PostConstruct
 	public void init() {
-		if (grupo == null) {
-			grupo = new Grupo();
+		if (this.grupo == null) {
+			this.grupo = new Grupo();
 		}
 	}
 
+	/**
+	 * Encaminha para a tela de grupos
+	 * 
+	 * @return String de mapeamento da página de grupos
+	 */
 	public String criarGrupo() {
-		init();
+		this.init();
 		return "grupos";
 	}
 
+	/**
+	 * 
+	 * Persiste o grupo atual
+	 * 
+	 */
 	public void salvarGrupo() {
-		if (grupo.getId() == null) {
-			grupoNegocio.salvaGrupo(grupo);
+		if (this.grupo.getId() == null) {
+			this.grupoNegocio.salvaGrupo(this.grupo);
 		} else {
-			grupoNegocio.atualizaGrupo(grupo);
+			this.grupoNegocio.atualizaGrupo(this.grupo);
 		}
-		grupo = null;
-		init();
+		this.grupo = null;
+		this.init();
 	}
 
+	/**
+	 * 
+	 * Exclui o grupo atual
+	 * 
+	 */
 	public void excluiGrupo() {
-		grupoNegocio.excluirGrupo(grupo);
+		this.grupoNegocio.excluirGrupo(this.grupo);
 	}
 
+	/**
+	 * 
+	 * Encaminha para a tela de edição
+	 * 
+	 * @return String de mapeamento da página de grupos
+	 */
 	public String editarGrupo() {
 		return "grupos";
 	}
 
+	/**
+	 * Retorna o grupo
+	 * 
+	 * @return {@link Grupo} que representa o grupo
+	 */
 	public Grupo getGrupo() {
-		return grupo;
+		return this.grupo;
 	}
 
+	/**
+	 * 
+	 * Preenche o grupo
+	 * 
+	 * @param grupo
+	 *            - {@link Grupo} que representa o grupo
+	 */
 	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
 
+	/**
+	 * 
+	 * Retorna grupos disponíveis
+	 * 
+	 * @return {@link List} de {@link Grupo} para o subgrupo
+	 */
 	public List<Grupo> getGrupos() {
-		return grupoNegocio.listarGrupos();
+		return this.grupoNegocio.listarGrupos();
 	}
 
+	/**
+	 * 
+	 * Retorna tipos disponíveis para aquele grupo
+	 * 
+	 * @return {@link List} de {@link TipoEnum}
+	 */
 	public List<SelectItem> getTipos() {
 		List<SelectItem> itens = new ArrayList<>();
 		for (TipoEnum tipo : TipoEnum.values()) {

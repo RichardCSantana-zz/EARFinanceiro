@@ -35,51 +35,102 @@ public class SubgrupoController implements Serializable {
 
 	private Subgrupo subgrupo;
 
+	/**
+	 * Prepara o controller para uma nova ação
+	 */
 	@PostConstruct
 	public void init() {
-		if (subgrupo == null) {
-			subgrupo = new Subgrupo();
+		if (this.subgrupo == null) {
+			this.subgrupo = new Subgrupo();
 		}
 	}
 
+	/**
+	 * Encaminha para a tela de subgrupo
+	 * 
+	 * @return String de mapeamento da página de subgrupos
+	 */
 	public String criarSubgrupo() {
-		init();
+		this.init();
 		return "subgrupos";
 	}
 
+	/**
+	 * 
+	 * Persiste a o subgrupo atual
+	 * 
+	 */
 	public void salvarSubgrupo() {
-		if (subgrupo.getId() == null) {
-			negocio.salvaSubgrupo(subgrupo);
+		if (this.subgrupo.getId() == null) {
+			this.negocio.salvaSubgrupo(this.subgrupo);
 		} else {
-			negocio.atualizaSubgrupo(subgrupo);
+			this.negocio.atualizaSubgrupo(this.subgrupo);
 		}
-		subgrupo = null;
-		init();
+		this.subgrupo = null;
+		this.init();
 	}
 
+	/**
+	 * 
+	 * Exclui o subgrupo atual
+	 * 
+	 */
 	public void excluiSubgrupo() {
-		negocio.excluirsubSubgrupo(subgrupo);
+		this.negocio.excluirsubSubgrupo(this.subgrupo);
 	}
 
+	/**
+	 * 
+	 * Encaminha para a tela de edição
+	 * 
+	 * @return String de mapeamento da página de subgrupos
+	 */
 	public String editarSubgrupo() {
 		return "subgrupos";
 	}
 
+	/**
+	 * 
+	 * Retorna subgrupo atual
+	 * 
+	 * @return {@link Subgrupo} que representa o subgrupo
+	 */
 	public Subgrupo getSubgrupo() {
-		return subgrupo;
+		return this.subgrupo;
 	}
 
+	/**
+	 * 
+	 * Preenche o subgrupo
+	 * 
+	 * @param subgrupo
+	 *            - {@link Subgrupo} que representa o subgrupo
+	 */
 	public void setSubgrupo(Subgrupo subgrupo) {
 		this.subgrupo = subgrupo;
 	}
 
+	/**
+	 * 
+	 * Retorna subgrupos
+	 * 
+	 * @return {@link List} de {@link Subgrupo}
+	 * 
+	 */
 	public List<Subgrupo> getSubgrupos() {
-		return negocio.listarSubgrupos();
+		return this.negocio.listarSubgrupos();
 	}
 
+	/**
+	 * 
+	 * Retorna grupos para aquele subgrupo
+	 * 
+	 * @return {@link List} de {@link Grupo} para o subgrupo
+	 * 
+	 */
 	public List<SelectItem> getGrupos() {
 		List<SelectItem> itens = new ArrayList<>();
-		for (Grupo grupo : negocio.getGrupos()) {
+		for (Grupo grupo : this.negocio.getGrupos()) {
 			SelectItem item = new SelectItem(grupo, grupo.getDescricao());
 			itens.add(item);
 		}

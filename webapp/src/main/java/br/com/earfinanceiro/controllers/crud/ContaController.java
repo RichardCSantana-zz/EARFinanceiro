@@ -83,7 +83,7 @@ public class ContaController implements Serializable {
 
 	/**
 	 * 
-	 * Retorna conta que está atualmente no controller
+	 * Retorna o atributo conta
 	 * 
 	 * @return IConta que está no controller
 	 */
@@ -92,16 +92,33 @@ public class ContaController implements Serializable {
 	}
 
 	/**
+	 * 
+	 * Preenche o atributo conta
+	 * 
 	 * @param conta
+	 *            - {@link IConta} que representa a conta
 	 */
 	public void setConta(IConta conta) {
 		this.conta = conta;
 	}
 
+	/**
+	 * 
+	 * Preenche o atributo data de efetivação
+	 * 
+	 * @return {@link Calendar} que representa a data de efetivação
+	 */
 	public Calendar getDataEfetivacao() {
 		return this.dataEfetivacao;
 	}
 
+	/**
+	 * 
+	 * Retorna o atributo data de efetivação
+	 * 
+	 * @param dataEfetivacao
+	 *            - {@link Calendar} que representa a data de efetivação
+	 */
 	public void setDataEfetivacao(Calendar dataEfetivacao) {
 		this.dataEfetivacao = dataEfetivacao;
 	}
