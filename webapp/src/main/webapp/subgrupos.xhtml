@@ -5,59 +5,91 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
-	<ui:define name="content">
+	<ui:define name="conteudo">
 		<h:form>
+			<div class="page-header">
+				<h1>
+					<h:outputLabel value="Subgrupos" />
+				</h1>
+			</div>
 			<rich:messages globalOnly="true" />
-			<rich:dataTable id="dtbSubgrupos"
-				value="#{subgrupoController.subgrupos}" var="atual"
-				noDataLabel="Nao existem subgrupos cadastrados">
-				<rich:column>
-					<f:facet name="header">
-						<h:outputText value="Descricao" />
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h:outputLabel value="Tabela de subgrupos" />
+				</div>
+				<rich:dataTable id="dtbSubgrupos"
+					value="#{subgrupoController.subgrupos}" var="atual"
+					noDataLabel="Nao existem subgrupos cadastrados" styleClass="table">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Descricao" />
+						</f:facet>
+						<h:outputText value="#{atual.descricao}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Grupo" />
+						</f:facet>
+						<h:outputText value="#{atual.grupo.descricao}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Tipo do grupo" />
+						</f:facet>
+						<h:outputText value="#{atual.grupo.tipo}" />
+					</rich:column>
+					<rich:column>
+						<div class="btn-group">
+							<h:commandButton action="#{subgrupoController.editarSubgrupo}"
+								value="Editar" class="btn btn-default">
+								<f:setPropertyActionListener
+									target="#{subgrupoController.subgrupo}" value="#{atual}" />
+							</h:commandButton>
+							<h:commandButton action="#{subgrupoController.excluiSubgrupo}"
+								value="Excluir" class="btn btn-default">
+								<f:setPropertyActionListener
+									target="#{subgrupoController.subgrupo}" value="#{atual}" />
+							</h:commandButton>
+						</div>
+					</rich:column>
+					<f:facet name="footer">
+						<rich:column colspan="3">
+						</rich:column>
 					</f:facet>
-					<h:outputText value="#{atual.descricao}" />
-				</rich:column>
-				<rich:column>
-					<f:facet name="header">
-						<h:outputText value="Grupo" />
-					</f:facet>
-					<h:outputText value="#{atual.grupo.descricao}" />
-				</rich:column>
-				<rich:column>
-					<f:facet name="header">
-						<h:outputText value="Tipo do grupo" />
-					</f:facet>
-					<h:outputText value="#{atual.grupo.tipo}" />
-				</rich:column>
-				<rich:column>
-					<h:commandLink action="#{subgrupoController.editarSubgrupo}"
-						value="Editar">
-						<f:setPropertyActionListener
-							target="#{subgrupoController.subgrupo}" value="#{atual}" />
-					</h:commandLink>
-				</rich:column>
-				<rich:column>
-					<h:commandLink action="#{subgrupoController.excluiSubgrupo}"
-						value="Excluir">
-						<f:setPropertyActionListener
-							target="#{subgrupoController.subgrupo}" value="#{atual}" />
-					</h:commandLink>
-				</rich:column>
-			</rich:dataTable>
+				</rich:dataTable>
+			</div>
 		</h:form>
+
 		<h:form>
-			<h:outputText id="lblDescricao" value="Descricao" />
-			<h:inputText id="txtDescricao"
-				value="#{subgrupoController.subgrupo.descricao}" />
-			<rich:message for="txtDescricao" />
-			<h:outputText id="lblGrupo" value="Grupo" />
-			<h:selectOneMenu id="smGrupo"
-				value="#{subgrupoController.subgrupo.grupo}">
-				<f:selectItems value="#{subgrupoController.grupos}" />
-			</h:selectOneMenu>
-			<rich:message for="smGrupo" />
-			<h:commandButton value="Salvar"
-				action="#{subgrupoController.salvarSubgrupo}" />
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="panel-title">
+						<h:outputLabel value="Cadastro de subgrupo" />
+					</p>
+				</div>
+				<div class="panel-body">
+					<h:panelGrid columns="2">
+						<h:outputText id="lblDescricao" value="Descricao" />
+						<h:panelGroup>
+							<h:inputText id="txtDescricao"
+								value="#{subgrupoController.subgrupo.descricao}"
+								class="form-control" />
+							<rich:message for="txtDescricao" />
+						</h:panelGroup>
+						<h:outputText id="lblGrupo" value="Grupo" />
+						<h:panelGroup>
+							<h:selectOneMenu id="smGrupo"
+								value="#{subgrupoController.subgrupo.grupo}"
+								class="form-control">
+								<f:selectItems value="#{subgrupoController.grupos}" />
+							</h:selectOneMenu>
+							<rich:message for="smGrupo" />
+						</h:panelGroup>
+						<h:commandButton value="Salvar" class="btn btn-default"
+							action="#{subgrupoController.salvarSubgrupo}" />
+					</h:panelGrid>
+				</div>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>
