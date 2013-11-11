@@ -5,7 +5,6 @@ package br.com.earfinanceiro.controllers.crud;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -43,7 +42,6 @@ public class EntradaController implements Serializable {
 	public void init() {
 		if (this.entrada == null) {
 			this.entrada = new Entrada();
-			this.entrada.setDataPrevisao(Calendar.getInstance());
 		}
 	}
 

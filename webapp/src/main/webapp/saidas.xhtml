@@ -34,6 +34,13 @@
 							</h:inputText>
 							<rich:message for="txtValor" />
 						</h:panelGroup>
+						<h:outputText id="lblParcelas" value="Parcelas" />
+						<h:panelGroup>
+							<h:inputText id="txtParcelas"
+								value="#{saidaController.saida.parcelamento}"
+								class="form-control" />
+							<rich:message for="txtParcelas" />
+						</h:panelGroup>
 						<h:outputText id="lblSubgrupo" value="Subgrupo" />
 						<h:panelGroup>
 							<h:selectOneMenu id="smSubgrupo" class="form-control"

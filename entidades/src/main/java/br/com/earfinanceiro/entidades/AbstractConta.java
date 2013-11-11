@@ -17,6 +17,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -34,6 +35,13 @@ import br.com.earfinanceiro.exceptions.ErroCadastroException;
 public abstract class AbstractConta implements IConta {
 
 	/**
+	 * 
+	 */
+	public AbstractConta() {
+		this.dataPrevisao = Calendar.getInstance();
+	}
+
+	/**
 	 * String que define a sequencia dessa entidade
 	 */
 	public static final String CONTA_SEQUENCE = "conta_sequence";
@@ -43,29 +51,8 @@ public abstract class AbstractConta implements IConta {
 	protected Calendar dataPrevisao;
 	protected Calendar dataEfetivacao;
 	protected Subgrupo subgrupo;
-	protected boolean efetiva;
 	protected double valor;
-	protected int reincidencia;
-	protected boolean reincidente;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.earfinanceiro.entidades.IConta#efetiva(java.util.Calendar)
-	 */
-	@Override
-	public void efetiva(Calendar dataEfetivacao) throws ErroCadastroException {
-		if (dataEfetivacao.before(this.dataPrevisao)) {
-			throw new ErroCadastroException(
-					"Data de efetivacao deve ser posterior a data de cadastro");
-		}
-		if (this.efetiva) {
-			throw new ErroCadastroException(
-					"A conta que est�o tentando efetivar j� foi efetivada");
-		}
-		this.efetiva = true;
-		this.dataEfetivacao = dataEfetivacao;
-	}
+	protected int parcelamento;
 
 	/*
 	 * (non-Javadoc)
@@ -73,17 +60,13 @@ public abstract class AbstractConta implements IConta {
 	 * @see br.com.earfinanceiro.entidades.IConta#reincide(java.lang.Integer)
 	 */
 	@Override
-	public void reincide(Integer reincidencia) throws ErroCadastroException {
-		if (reincidencia < 1) {
+	public void setParcelamento(Integer parcelamento)
+			throws ErroCadastroException {
+		if (parcelamento < 1) {
 			throw new ErroCadastroException(
-					"O prazo de reincidencia deve ser no minimo 1 dia");
+					"O número de parcelas deve ser no minimo 1");
 		}
-		if (this.reincidente) {
-			throw new ErroCadastroException(
-					"A conta em quest�o j� foi marcada como reincidente");
-		}
-		this.reincidente = true;
-		this.reincidencia = reincidencia;
+		this.parcelamento = parcelamento;
 	}
 
 	/*
@@ -244,9 +227,13 @@ public abstract class AbstractConta implements IConta {
 	 * @see br.com.earfinanceiro.entidades.IConta#isEfetiva()
 	 */
 	@Override
-	@Column(name = "efetiva")
+	@Transient
 	public Boolean isEfetiva() {
-		return this.efetiva;
+		if (this.dataEfetivacao == null) {
+			return false;
+		}
+		Calendar instance = Calendar.getInstance();
+		return instance.after(this.dataEfetivacao);
 	}
 
 	/*
@@ -277,45 +264,24 @@ public abstract class AbstractConta implements IConta {
 	 * @see br.com.earfinanceiro.entidades.IConta#getReincidencia()
 	 */
 	@Override
-	@Column(name = "reincidencia")
-	public Integer getReincidencia() {
-		return this.reincidencia;
+	@Column(name = "parcelas")
+	public Integer getParcelamento() {
+		return this.parcelamento;
 	}
 
 	/**
 	 * 
-	 * Retorna se a conta é reincidente
+	 * Retorna se a conta foi parcelada
 	 * 
-	 * @return boolean que define se a conta é reincidente
+	 * @return boolean que define se a conta foi parcelada
 	 */
-	@Column(name = "eh_reincidente")
-	public boolean isReincidente() {
-		return this.reincidente;
+	@Transient
+	public boolean isParcelada() {
+		return (this.parcelamento > 1);
 	}
 
-	@SuppressWarnings("unused")
-	private void setDataEfetivacao(Calendar dataEfetivacao) {
+	public void setDataEfetivacao(Calendar dataEfetivacao) {
 		this.dataEfetivacao = dataEfetivacao;
-	}
-
-	@SuppressWarnings("unused")
-	private void setEfetiva(boolean efetiva) {
-		this.efetiva = efetiva;
-	}
-
-	@SuppressWarnings("unused")
-	private void setValor(double valor) {
-		this.valor = valor;
-	}
-
-	@SuppressWarnings("unused")
-	private void setReincidencia(int reincidencia) {
-		this.reincidencia = reincidencia;
-	}
-
-	@SuppressWarnings("unused")
-	private void setReincidente(boolean reincidente) {
-		this.reincidente = reincidente;
 	}
 
 }

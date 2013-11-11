@@ -46,7 +46,7 @@ public class ContaNegocio implements IContaNegocio {
 	@Override
 	public void efetiva(IConta conta, Calendar dataEfetivacao)
 			throws ErroCadastroException {
-		conta.efetiva(dataEfetivacao);
+		conta.setDataEfetivacao(dataEfetivacao);
 		dao.atualizar((AbstractConta) conta);
 	}
 

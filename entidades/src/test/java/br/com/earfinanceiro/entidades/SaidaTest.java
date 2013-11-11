@@ -24,49 +24,6 @@ public class SaidaTest {
 	 * .
 	 * 
 	 * @throws ErroCadastroException
-	 *             - Ocorre por salvar uma data efetivação inferior a data
-	 *             prevista
-	 */
-	@Test(expected = ErroCadastroException.class)
-	public void testaEfetivaComEfetivacaoInferiorAPrevisão()
-			throws ErroCadastroException {
-		AbstractConta saida = new Saida();
-		saida.setDataPrevisao(Calendar.getInstance());
-		saida.setDescricao("teste");
-		saida.setValor(1.0);
-		Calendar instance = Calendar.getInstance();
-		instance.set(Calendar.DAY_OF_YEAR,
-				Calendar.getInstance().get(Calendar.DAY_OF_YEAR - 1));
-		saida.efetiva(instance);
-	}
-
-	/**
-	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#efetiva(java.util.Calendar)}
-	 * .
-	 * 
-	 * @throws ErroCadastroException
-	 *             - Ocorre por efetivar uma conta já efetiva
-	 */
-	@Test(expected = ErroCadastroException.class)
-	public void testaEfetivaJahEfetivada() throws ErroCadastroException {
-		AbstractConta saida = new Saida();
-		saida.setDataPrevisao(Calendar.getInstance());
-		saida.setDescricao("teste");
-		saida.setValor(1.0);
-		Calendar instance = Calendar.getInstance();
-		instance.set(Calendar.DAY_OF_YEAR,
-				Calendar.getInstance().get(Calendar.DAY_OF_YEAR + 1));
-		saida.efetiva(instance);
-		saida.efetiva(instance);
-	}
-
-	/**
-	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#efetiva(java.util.Calendar)}
-	 * .
-	 * 
-	 * @throws ErroCadastroException
 	 *             -não deve lançar
 	 */
 	@Test
@@ -76,13 +33,13 @@ public class SaidaTest {
 		saida.setDescricao("teste");
 		saida.setValor(1.0);
 		Calendar instance = Calendar.getInstance();
-		instance.set(2013, 10, 20);
-		saida.efetiva(instance);
+		instance.set(2013, 9, 20);
+		saida.setDataEfetivacao(instance);
 		Boolean expectedEfetiva = true;
 		Boolean actualEfetiva = saida.isEfetiva();
 		assertEquals(expectedEfetiva, actualEfetiva);
 		Calendar expectedDataEfetivacao = Calendar.getInstance();
-		expectedDataEfetivacao.set(2013, 10, 20);
+		expectedDataEfetivacao.set(2013, 9, 20);
 		Calendar actualDataEfetivacao = saida.getDataEfetivacao();
 		assertEquals(expectedDataEfetivacao.get(Calendar.DAY_OF_MONTH),
 				actualDataEfetivacao.get(Calendar.DAY_OF_MONTH));
@@ -94,55 +51,40 @@ public class SaidaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#reincide(Integer)} .
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setParcelamento(Integer)}
+	 * .
 	 * 
 	 * @throws ErroCadastroException
-	 *             - quando a reincidencia é 0
+	 *             - quando o parcelamento é 0
 	 */
 	@Test(expected = ErroCadastroException.class)
-	public void testaReincidenciaComMenosDeUmDia() throws ErroCadastroException {
+	public void testaParcelamentoComMenosDeUmaParcela()
+			throws ErroCadastroException {
 		AbstractConta saida = new Saida();
 		saida.setDataPrevisao(Calendar.getInstance());
 		saida.setDescricao("teste");
 		saida.setValor(1.0);
-		saida.reincide(0);
+		saida.setParcelamento(0);
 	}
 
 	/**
 	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#reincide(Integer)} .
-	 * 
-	 * @throws ErroCadastroException
-	 *             - Quando tenta aplicar reincidência em uma conta que já
-	 *             possui
-	 */
-	@Test(expected = ErroCadastroException.class)
-	public void testaReincideJahReincidida() throws ErroCadastroException {
-		AbstractConta saida = new Saida();
-		saida.setDataPrevisao(Calendar.getInstance());
-		saida.setDescricao("teste");
-		saida.setValor(1.0);
-		saida.reincide(1);
-		saida.reincide(1);
-	}
-
-	/**
-	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#reincide(Integer)} .
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setParcelamento(Integer)}
+	 * .
 	 * 
 	 * @throws ErroCadastroException
 	 *             - Quando tenta reaplicar reincidência
 	 */
 	@Test
-	public void testaReincidencia() throws ErroCadastroException {
+	public void testaParcelamento() throws ErroCadastroException {
 		AbstractConta saida = new Saida();
 		saida.setDataPrevisao(Calendar.getInstance());
 		saida.setDescricao("teste");
 		saida.setValor(1.0);
-		saida.reincide(1);
-		Boolean actualReincidente = saida.isReincidente();
-		Integer actualReincidencia = saida.getReincidencia();
-		Integer expectedReincidencia = 1;
+		saida.setParcelamento(2);
+		Boolean actualReincidente = saida.isParcelada();
+		Integer actualReincidencia = saida.getParcelamento();
+		Integer expectedReincidencia = 2;
 		assertTrue(actualReincidente);
 		assertEquals(expectedReincidencia, actualReincidencia);
 	}

@@ -24,48 +24,6 @@ public class EntradaTest {
 	 * .
 	 * 
 	 * @throws ErroCadastroException
-	 *             - Erro de cadastro quando efetivado antes da data de previsão
-	 */
-	@Test(expected = ErroCadastroException.class)
-	public void testaEfetivaComEfetivacaoInferiorAoCadastro()
-			throws ErroCadastroException {
-		AbstractConta entrada = new Entrada();
-		entrada.setDataPrevisao(Calendar.getInstance());
-		entrada.setDescricao("teste");
-		entrada.setValor(1.0);
-		Calendar instance = Calendar.getInstance();
-		instance.set(Calendar.DAY_OF_YEAR,
-				Calendar.getInstance().get(Calendar.DAY_OF_YEAR - 1));
-		entrada.efetiva(instance);
-	}
-
-	/**
-	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#efetiva(java.util.Calendar)}
-	 * .
-	 * 
-	 * @throws ErroCadastroException
-	 *             - Quando a conta já estiver efetivada
-	 */
-	@Test(expected = ErroCadastroException.class)
-	public void testaEfetivaJahEfetivada() throws ErroCadastroException {
-		AbstractConta entrada = new Entrada();
-		entrada.setDataPrevisao(Calendar.getInstance());
-		entrada.setDescricao("teste");
-		entrada.setValor(1.0);
-		Calendar instance = Calendar.getInstance();
-		instance.set(Calendar.DAY_OF_YEAR,
-				Calendar.getInstance().get(Calendar.DAY_OF_YEAR + 1));
-		entrada.efetiva(instance);
-		entrada.efetiva(instance);
-	}
-
-	/**
-	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#efetiva(java.util.Calendar)}
-	 * .
-	 * 
-	 * @throws ErroCadastroException
 	 *             -não deve lançar
 	 */
 	@Test
@@ -75,11 +33,11 @@ public class EntradaTest {
 		entrada.setDescricao("teste");
 		entrada.setValor(1.0);
 		Calendar instance = Calendar.getInstance();
-		instance.set(2013, 10, 20);
-		entrada.efetiva(instance);
+		instance.set(2013, 9, 20);
+		entrada.setDataEfetivacao(instance);
 		Boolean actualEfetiva = entrada.isEfetiva();
 		Calendar expectedDataEfetivacao = Calendar.getInstance();
-		expectedDataEfetivacao.set(2013, 10, 20);
+		expectedDataEfetivacao.set(2013, 9, 20);
 		Calendar actualDataEfetivacao = entrada.getDataEfetivacao();
 		assertTrue(actualEfetiva);
 		assertEquals(expectedDataEfetivacao.get(Calendar.DAY_OF_MONTH),
@@ -92,35 +50,20 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#reincide(Integer)} .
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setParcelamento(Integer)}
+	 * .
 	 * 
 	 * @throws ErroCadastroException
 	 *             - quando a reincidencia é 0
 	 */
 	@Test(expected = ErroCadastroException.class)
-	public void testaReincidenciaComMenosDeUmDia() throws ErroCadastroException {
+	public void testaParcelamentoComMenosDeUmaParcela()
+			throws ErroCadastroException {
 		AbstractConta entrada = new Entrada();
 		entrada.setDataPrevisao(Calendar.getInstance());
 		entrada.setDescricao("teste");
 		entrada.setValor(1.0);
-		entrada.reincide(0);
-	}
-
-	/**
-	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#reincide(Integer)} .
-	 * 
-	 * @throws ErroCadastroException
-	 *             - Quando tenta reaplicar reincidência
-	 */
-	@Test(expected = ErroCadastroException.class)
-	public void testaReincideJahReincidida() throws ErroCadastroException {
-		AbstractConta entrada = new Entrada();
-		entrada.setDataPrevisao(Calendar.getInstance());
-		entrada.setDescricao("teste");
-		entrada.setValor(1.0);
-		entrada.reincide(1);
-		entrada.reincide(1);
+		entrada.setParcelamento(0);
 	}
 
 	/**
@@ -131,15 +74,15 @@ public class EntradaTest {
 	 *             - não deve lançar
 	 */
 	@Test
-	public void testaReincidencia() throws ErroCadastroException {
+	public void testaParcelamento() throws ErroCadastroException {
 		AbstractConta entrada = new Entrada();
 		entrada.setDataPrevisao(Calendar.getInstance());
 		entrada.setDescricao("teste");
 		entrada.setValor(1.0);
-		entrada.reincide(1);
-		Boolean actualReincidente = entrada.isReincidente();
-		Integer actualReincidencia = entrada.getReincidencia();
-		Integer expectedReincidencia = 1;
+		entrada.setParcelamento(2);
+		Boolean actualReincidente = entrada.isParcelada();
+		Integer actualReincidencia = entrada.getParcelamento();
+		Integer expectedReincidencia = 2;
 		assertTrue(actualReincidente);
 		assertEquals(expectedReincidencia, actualReincidencia);
 	}

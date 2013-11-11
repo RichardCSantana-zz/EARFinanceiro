@@ -15,28 +15,6 @@ public interface IConta {
 
 	/**
 	 * 
-	 * Efetiva a conta
-	 * 
-	 * @param dataEfetivacao
-	 *            - Calendar que define a data de efetivação
-	 * @throws ErroCadastroException
-	 *             - Quando a data de efetivação é inferior a data de cadastro
-	 */
-	void efetiva(Calendar dataEfetivacao) throws ErroCadastroException;
-
-	/**
-	 * 
-	 * Gera uma reincidencia para a conta
-	 * 
-	 * @param reincidencia
-	 *            - Integer que define a reincidência da conta
-	 * @throws ErroCadastroException
-	 *             - Quando a reincidência é menor ou igual a 0
-	 */
-	void reincide(Integer reincidencia) throws ErroCadastroException;
-
-	/**
-	 * 
 	 * Retorna valor significativo(caso saida número negativo) da conta
 	 * 
 	 * @return Double significativo da conta
@@ -50,7 +28,7 @@ public interface IConta {
 	 * @return Integer que define a frequência(em dias) em que a conta vai
 	 *         ocorrer
 	 */
-	Integer getReincidencia();
+	Integer getParcelamento();
 
 	/**
 	 * 
@@ -108,5 +86,9 @@ public interface IConta {
 	 * @return Long que define o identificador da conta
 	 */
 	Long getId();
+
+	void setParcelamento(Integer reincidencia) throws ErroCadastroException;
+
+	void setDataEfetivacao(Calendar dataEfetivacao);
 
 }

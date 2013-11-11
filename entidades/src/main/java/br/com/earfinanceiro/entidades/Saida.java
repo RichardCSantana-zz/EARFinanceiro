@@ -14,6 +14,13 @@ import javax.persistence.Entity;
 @DiscriminatorValue("saida")
 public class Saida extends AbstractConta implements IConta {
 
+	/**
+	 * 
+	 */
+	public Saida() {
+		this.parcelamento = 1;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

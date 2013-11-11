@@ -3,6 +3,7 @@
  */
 package br.com.earfinanceiro.cadastro;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -13,6 +14,7 @@ import br.com.earfinanceiro.dao.ISaidaDAO;
 import br.com.earfinanceiro.dao.ISubgrupoDAO;
 import br.com.earfinanceiro.entidades.Saida;
 import br.com.earfinanceiro.entidades.Subgrupo;
+import br.com.earfinanceiro.exceptions.ErroCadastroException;
 
 /**
  * @author Richard
@@ -37,7 +39,23 @@ public class SaidaNegocio implements ISaidaNegocio {
 	 */
 	@Override
 	public void salva(Saida saida) {
-		dao.salvar(saida);
+		Integer parcelas = saida.getParcelamento();
+		for (int i = 1; i < parcelas; i++) {
+			Saida salvar = new Saida();
+			try {
+				salvar.setParcelamento(1);
+				salvar.setDescricao(saida.getDescricao());
+				double valor = saida.getValor() / new Double(parcelas);
+				salvar.setValor(valor);
+				Calendar dataPrevisao = (Calendar) saida.getDataPrevisao()
+						.clone();
+				dataPrevisao.add(Calendar.MONTH, i - 1);
+				salvar.setDataPrevisao(dataPrevisao);
+				dao.salvar(salvar);
+			} catch (ErroCadastroException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/*
