@@ -7,27 +7,46 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="conteudo">
 		<h:form>
-			<rich:messages globalOnly="true"/>
+			<rich:messages globalOnly="true" />
 			<h1>
-				<h:outputLabel value="Saida" />
+				<h:outputLabel value="Saída" />
 			</h1>
-			<h:outputText id="lblDescricao" value="Descricao" />
-			<h:inputText id="txtDescricao"
-				value="#{saidaController.saida.descricao}" />
-			<rich:message for="txtDescricao" />
-			<h:outputText id="lblValor" value="Valor" />
-			<h:inputText id="txtValor" value="#{saidaController.saida.valor}">
-				<f:convertNumber currencyCode="BRL" currencySymbol="R$"
-					type="currency" />
-			</h:inputText>
-			<rich:message for="txtDescricao" />
-			<h:outputText id="lblSubgrupo" value="Subgrupo" />
-			<h:selectOneMenu id="smSubgrupo"
-				value="#{saidaController.saida.subgrupo}">
-				<f:selectItems value="#{saidaController.subgrupos}" />
-			</h:selectOneMenu>
-			<rich:message for="smSubgrupo" />
-			<h:commandButton value="Salvar" action="#{saidaController.salvar}" />
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="panel-title">
+						<h:outputLabel value="Cadastro de saída" />
+					</p>
+				</div>
+				<div class="panel-body">
+					<h:panelGrid columns="2">
+						<h:outputText id="lblDescricao" value="Descricao" />
+						<h:panelGroup>
+							<h:inputText id="txtDescricao" class="form-control"
+								value="#{saidaController.saida.descricao}" />
+							<rich:message for="txtDescricao" />
+						</h:panelGroup>
+						<h:outputText id="lblValor" value="Valor" />
+						<h:panelGroup>
+							<h:inputText id="txtValor" value="#{saidaController.saida.valor}"
+								class="form-control">
+								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+									type="currency" />
+							</h:inputText>
+							<rich:message for="txtDescricao" />
+						</h:panelGroup>
+						<h:outputText id="lblSubgrupo" value="Subgrupo" />
+						<h:panelGroup>
+							<h:selectOneMenu id="smSubgrupo" class="form-control"
+								value="#{saidaController.saida.subgrupo}">
+								<f:selectItems value="#{saidaController.subgrupos}" />
+							</h:selectOneMenu>
+							<rich:message for="smSubgrupo" />
+						</h:panelGroup>
+						<h:commandButton value="Salvar" action="#{saidaController.salvar}"
+							class="btn btn-default" />
+					</h:panelGrid>
+				</div>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>

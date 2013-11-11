@@ -8,70 +8,87 @@
 	<ui:define name="conteudo">
 		<h:form>
 			<rich:messages globalOnly="true" />
-			<h:outputText id="lblDataInicial" value="Data inicial" />
-			<rich:calendar id="clnDataInicial" datePattern="dd/MM/yyyy"
-				value="#{balancoController.dataInicial.time}"
-				enableManualInput="true" showWeeksBar="false"></rich:calendar>
-			<rich:message for="clnDataInicial" />
-			<h:outputText id="lblDataFinal" value="Data inicial" />
-			<rich:calendar id="clnDataFinal" datePattern="dd/MM/yyyy"
-				value="#{balancoController.dataFinal.time}" enableManualInput="true"
-				showWeeksBar="false"></rich:calendar>
-			<rich:message for="clnDataFinal" />
-			<h:commandButton value="Gerar Balanco"
-				action="#{balancoController.geraBalanco}" />
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="panel-title">
+						<h:outputLabel value="Definição de datas" />
+					</p>
+				</div>
+				<div class="panel-body">
+					<h:panelGrid columns="2">
+						<h:outputText id="lblDataInicial" value="Data inicial" />
+						<h:panelGroup>
+							<rich:calendar id="clnDataInicial" datePattern="dd/MM/yyyy"
+								value="#{balancoController.dataInicial.time}"
+								enableManualInput="true" showWeeksBar="false"></rich:calendar>
+							<rich:message for="clnDataInicial" />
+						</h:panelGroup>
+						<h:outputText id="lblDataFinal" value="Data inicial" />
+						<h:panelGroup>
+							<rich:calendar id="clnDataFinal" datePattern="dd/MM/yyyy"
+								value="#{balancoController.dataFinal.time}"
+								enableManualInput="true" showWeeksBar="false"></rich:calendar>
+							<rich:message for="clnDataFinal" />
+						</h:panelGroup>
+						<h:commandButton value="Gerar Balanco" class="btn btn-default"
+							action="#{balancoController.geraBalanco}" />
+					</h:panelGrid>
+				</div>
+			</div>
 		</h:form>
 		<h:form>
-			<rich:dataTable id="dtbGrupos"
-				value="#{balancoController.balanco.contas}" var="atual"
-				noDataLabel="Nao existem contas cadastradas">
-				<f:facet name="header">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<p class="panel-title">
+						<h:outputLabel value="Tabela de contas" />
+					</p>
+				</div>
+				<rich:dataTable id="dtbGrupos"
+					value="#{balancoController.balanco.contas}" var="atual"
+					noDataLabel="Nao existem contas cadastradas" styleClass="table">
 					<rich:column>
-						<h:outputLabel value="Tabela de Contas" />
-					</rich:column>
-				</f:facet>
-				<rich:column>
-					<f:facet name="header">
-						<h:outputText value="Descricao" />
-					</f:facet>
-					<h:outputText value="#{atual.descricao}" />
-				</rich:column>
-				<rich:column>
-					<f:facet name="header">
-						<h:outputText value="Valor" />
-					</f:facet>
-					<h:outputText value="#{atual.valor}">
-						<f:convertNumber currencyCode="BRL" currencySymbol="R$"
-							type="currency" />
-					</h:outputText>
-				</rich:column>
-				<rich:column>
-					<f:facet name="header">
-						<h:outputText value="SubGrupo" />
-					</f:facet>
-					<h:outputText value="#{atual.subgrupo.descricao}">
-					</h:outputText>
-				</rich:column>
-				<rich:column>
-					<f:facet name="header">
-						<h:outputText value="Grupo" />
-					</f:facet>
-					<h:outputText value="#{atual.subgrupo.grupo.descricao}">
-					</h:outputText>
-				</rich:column>
-				<f:facet name="footer">
-					<rich:column colspan="2"></rich:column>
-					<rich:column>
-						<h:outputLabel value="Total" />
+						<f:facet name="header">
+							<h:outputText value="Descricao" />
+						</f:facet>
+						<h:outputText value="#{atual.descricao}" />
 					</rich:column>
 					<rich:column>
-						<h:outputLabel value="#{balancoController.balanco.total}">
+						<f:facet name="header">
+							<h:outputText value="Valor" />
+						</f:facet>
+						<h:outputText value="#{atual.valor}">
 							<f:convertNumber currencyCode="BRL" currencySymbol="R$"
 								type="currency" />
-						</h:outputLabel>
+						</h:outputText>
 					</rich:column>
-				</f:facet>
-			</rich:dataTable>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="SubGrupo" />
+						</f:facet>
+						<h:outputText value="#{atual.subgrupo.descricao}">
+						</h:outputText>
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Grupo" />
+						</f:facet>
+						<h:outputText value="#{atual.subgrupo.grupo.descricao}">
+						</h:outputText>
+					</rich:column>
+					<f:facet name="footer">
+						<rich:column colspan="2"></rich:column>
+						<rich:column>
+							<h:outputLabel value="Total" />
+						</rich:column>
+						<rich:column>
+							<h:outputLabel value="#{balancoController.balanco.total}">
+								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+									type="currency" />
+							</h:outputLabel>
+						</rich:column>
+					</f:facet>
+				</rich:dataTable>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>
