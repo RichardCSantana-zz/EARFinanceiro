@@ -7,9 +7,17 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<h:form>
+			<h1>
+				<h:outputLabel value="Grupos" />
+			</h1>
 			<rich:messages globalOnly="true" />
 			<rich:dataTable id="dtbGrupos" value="#{grupoController.grupos}"
 				var="atual" noDataLabel="Nao existem grupos cadastrados">
+				<f:facet name="header">
+					<rich:column colspan="4">
+						<h:outputLabel value="Tabela de Grupos" />
+					</rich:column>
+				</f:facet>
 				<rich:column>
 					<f:facet name="header">
 						<h:outputText value="Descricao" />
@@ -36,20 +44,31 @@
 							value="#{atual}" />
 					</h:commandLink>
 				</rich:column>
+				<f:facet name="footer">
+					<rich:column colspan="4">
+					</rich:column>
+				</f:facet>
 			</rich:dataTable>
 		</h:form>
 		<h:form>
-			<h:outputText id="lblDescricao" value="Descricao" />
-			<h:inputText id="txtDescricao"
-				value="#{grupoController.grupo.descricao}" />
-			<rich:message for="txtDescricao" />
-			<h:outputText id="lblTipo" value="Tipo" />
-			<h:selectOneMenu id="smTipo" value="#{grupoController.grupo.tipo}">
-				<f:selectItems value="#{grupoController.tipos}" />
-			</h:selectOneMenu>
-			<rich:message for="smTipo" />
-			<h:commandButton value="Salvar"
-				action="#{grupoController.salvarGrupo}" />
+			<h:panelGrid columns="2">
+				<h:outputText id="lblDescricao" value="Descricao:" />
+				<h:panelGroup>
+					<h:inputText id="txtDescricao"
+						value="#{grupoController.grupo.descricao}" />
+					<rich:message for="txtDescricao" />
+				</h:panelGroup>
+				<h:panelGroup>
+					<h:outputText id="lblTipo" value="Tipo:" />
+					<h:selectOneMenu id="smTipo" value="#{grupoController.grupo.tipo}">
+						<f:selectItems value="#{grupoController.tipos}" />
+					</h:selectOneMenu>
+					<rich:message for="smTipo" />
+				</h:panelGroup>
+				<h:outputText value="" />
+				<h:commandButton value="Salvar"
+					action="#{grupoController.salvarGrupo}" />
+			</h:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>

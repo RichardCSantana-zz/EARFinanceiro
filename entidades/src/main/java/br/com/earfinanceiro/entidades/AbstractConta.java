@@ -42,7 +42,7 @@ public abstract class AbstractConta implements IConta {
 	protected String descricao;
 	protected Calendar dataPrevisao;
 	protected Calendar dataEfetivacao;
-	protected Subgrupo subGrupo;
+	protected Subgrupo subgrupo;
 	protected boolean efetiva;
 	protected double valor;
 	protected int reincidencia;
@@ -86,6 +86,11 @@ public abstract class AbstractConta implements IConta {
 		this.reincidencia = reincidencia;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -95,6 +100,11 @@ public abstract class AbstractConta implements IConta {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -103,10 +113,10 @@ public abstract class AbstractConta implements IConta {
 		if (obj == null) {
 			return false;
 		}
-		if (this.getClass() != obj.getClass()) {
+		if (!(obj instanceof AbstractConta)) {
 			return false;
 		}
-		Entrada other = (Entrada) obj;
+		AbstractConta other = (AbstractConta) obj;
 		if (this.id == null) {
 			if (other.id != null) {
 				return false;
@@ -246,19 +256,19 @@ public abstract class AbstractConta implements IConta {
 	 */
 	@Override
 	@ManyToOne(targetEntity = Subgrupo.class, fetch = FetchType.EAGER)
-	public Subgrupo getSubGrupo() {
-		return this.subGrupo;
+	public Subgrupo getSubgrupo() {
+		return this.subgrupo;
 	}
 
 	/**
 	 * 
 	 * Insere um subgrupo
 	 * 
-	 * @param subGrupo
+	 * @param subgrupo
 	 *            - {@link Subgrupo} da conta
 	 */
-	public void setSubGrupo(Subgrupo subGrupo) {
-		this.subGrupo = subGrupo;
+	public void setSubgrupo(Subgrupo subgrupo) {
+		this.subgrupo = subgrupo;
 	}
 
 	/*
@@ -281,6 +291,31 @@ public abstract class AbstractConta implements IConta {
 	@Column(name = "eh_reincidente")
 	public boolean isReincidente() {
 		return this.reincidente;
+	}
+
+	@SuppressWarnings("unused")
+	private void setDataEfetivacao(Calendar dataEfetivacao) {
+		this.dataEfetivacao = dataEfetivacao;
+	}
+
+	@SuppressWarnings("unused")
+	private void setEfetiva(boolean efetiva) {
+		this.efetiva = efetiva;
+	}
+
+	@SuppressWarnings("unused")
+	private void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	@SuppressWarnings("unused")
+	private void setReincidencia(int reincidencia) {
+		this.reincidencia = reincidencia;
+	}
+
+	@SuppressWarnings("unused")
+	private void setReincidente(boolean reincidente) {
+		this.reincidente = reincidente;
 	}
 
 }

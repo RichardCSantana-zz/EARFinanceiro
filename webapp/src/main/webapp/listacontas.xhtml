@@ -29,48 +29,80 @@
 					<f:facet name="header">
 						<h:outputText value="Tipo" />
 					</f:facet>
-					<h:outputText value="#{atual.subGrupo.grupo.tipo}" />
+					<h:outputText value="#{atual.subgrupo.grupo.tipo}" />
 				</rich:column>
 				<rich:column>
 					<f:facet name="header">
 						<h:outputText value="Subgrupo" />
 					</f:facet>
-					<h:outputText value="#{atual.subGrupo.descricao}" />
+					<h:outputText value="#{atual.subgrupo.descricao}" />
 				</rich:column>
 				<rich:column>
 					<f:facet name="header">
 						<h:outputText value="Grupo" />
 					</f:facet>
-					<h:outputText value="#{atual.subGrupo.grupo.descricao}" />
+					<h:outputText value="#{atual.subgrupo.grupo.descricao}" />
 				</rich:column>
 				<rich:column>
-					<h:commandButton
-						action="#{contaController.iniciaEfetivacao(atual)}"
-						value="Efetivar">
-						<rich:componentControl target="popEfetivacao" operation="show" />
-					</h:commandButton>
+					<a4j:commandButton value="Adicionar"
+						action="#{contaController.adicionaConta}"
+						render="dtbContas,dtbContasSelecionadas">
+						<f:setPropertyActionListener target="#{contaController.conta}"
+							value="#{atual}" />
+					</a4j:commandButton>
 				</rich:column>
 			</rich:dataTable>
-			<rich:popupPanel id="popEfetivacao" modal="true"
-				domElementAttachment="form">
-				<f:facet name="header">
-					<h:outputText value="Deseja efetivar ?" />
-				</f:facet>
-				<f:facet name="controls">
-					<h:outputLink value="X">
-						<rich:componentControl target="popEfetivacao" operation="hide" />
-					</h:outputLink>
-				</f:facet>
-				<h:outputText
-					value="Deseja efetivar a conta #{contaController.conta.descricao} com o valor de #{contaController.conta.valor} para qual dia:" />
-				<rich:calendar id="clnDataEfetivacao"
-					value="#{contaController.dataEfetivacao.time}"
-					datePattern="dd/MM/yyyy" enableManualInput="true"
-					showWeeksBar="false"></rich:calendar>
-				<rich:message for="clnDataEfetivacao" />
-				<h:commandButton value="Salvar" action="#{contaController.efetiva}">
-				</h:commandButton>
-			</rich:popupPanel>
+			<rich:dataTable id="dtbContasSelecionadas"
+				value="#{contaController.selecionadas}" var="atual"
+				noDataLabel="Nao existem contas selecionadas">
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Descricao" />
+					</f:facet>
+					<h:outputText value="#{atual.descricao}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Valor" />
+					</f:facet>
+					<h:outputText value="#{atual.valor}">
+						<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+							type="currency" />
+					</h:outputText>
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Tipo" />
+					</f:facet>
+					<h:outputText value="#{atual.subgrupo.grupo.tipo}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Subgrupo" />
+					</f:facet>
+					<h:outputText value="#{atual.subgrupo.descricao}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">
+						<h:outputText value="Grupo" />
+					</f:facet>
+					<h:outputText value="#{atual.subgrupo.grupo.descricao}" />
+				</rich:column>
+				<rich:column>
+					<a4j:commandButton value="Remover"
+						action="#{contaController.removeConta}"
+						render="dtbContas,dtbContasSelecionadas">
+						<f:setPropertyActionListener target="#{contaController.conta}"
+							value="#{atual}" />
+					</a4j:commandButton>
+				</rich:column>
+			</rich:dataTable>
+			<rich:calendar id="clnDataEfetivacao"
+				value="#{contaController.dataEfetivacao.time}"
+				datePattern="dd/MM/yyyy" enableManualInput="true"
+				showWeeksBar="false"></rich:calendar>
+			<rich:message for="clnDataEfetivacao" />
+			<h:commandButton action="#{contaController.efetiva}" value="Efetiva" />
 		</h:form>
 	</ui:define>
 </ui:composition>

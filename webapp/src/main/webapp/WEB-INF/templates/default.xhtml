@@ -9,13 +9,55 @@
 	<title>EARFinanceiro</title>
 	<meta charset="utf-8" />
 	<h:outputStylesheet name="css/style.css" />
+	<h:outputStylesheet name="css/bootstrap.css" />
 	<h:outputScript name="scripts/script.js" />
+	<h:outputScript name="scripts/bootstrap.js" />
 </h:head>
 <h:body>
-	<header> Cabeçalho </header>
-	<ui:insert name="content">
-		<!-- [Template content will be inserted here]  -->
-	</ui:insert>
+	<header>
+		<h:form>
+			<div class="navbar navbar-default navbar-static-top" role="navigation">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar">ts</span> <span class="icon-bar">ts</span> <span
+								class="icon-bar">ts</span>
+						</button>
+						<h:commandLink class="navbar-brand" value="EARFinanceiro"
+							action="/index" />
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li class="active"><h:commandLink value="Home"
+									action="/index" /></li>
+							<li><h:commandLink value="Grupos"
+									action="#{grupoController.criarGrupo}" /></li>
+							<li><h:commandLink value="Subgrupos"
+									action="#{subgrupoController.criarSubgrupo}" /></li>
+							<li><h:commandLink value="Entrada"
+									action="#{entradaController.criarEntrada}" /></li>
+							<li><h:commandLink value="Saida"
+									action="#{saidaController.criarSaida}" /></li>
+							<li><h:commandLink value="ListaContas"
+									action="#{contaController.iniciaListagem}" /></li>
+							<li><h:commandLink value="Balanco"
+									action="#{balancoController.iniciaBalanco}" /></li>
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+				</div>
+			</div>
+		</h:form>
+	</header>
+
+	<div class="container">
+		<ui:insert name="content">
+			<!-- [Template content will be inserted here]  -->
+		</ui:insert>
+	</div>
+
 	<footer> Rodape</footer>
 </h:body>
 </html>

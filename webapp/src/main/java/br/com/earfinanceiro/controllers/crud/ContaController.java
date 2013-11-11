@@ -1,6 +1,7 @@
 package br.com.earfinanceiro.controllers.crud;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class ContaController implements Serializable {
 	private IContaNegocio negocio;
 
 	private IConta conta;
+	private List<IConta> contas;
+	private List<IConta> selecionadas;
 	private Calendar dataEfetivacao;
 
 	/**
@@ -36,6 +39,8 @@ public class ContaController implements Serializable {
 	 */
 	public ContaController() {
 		this.dataEfetivacao = Calendar.getInstance();
+		this.selecionadas = new ArrayList<>();
+		this.contas = new ArrayList<>();
 	}
 
 	/**
@@ -55,15 +60,33 @@ public class ContaController implements Serializable {
 	 * @return {@link List} de {@link IConta}
 	 */
 	public List<IConta> getContas() {
-		return this.negocio.getContasNaoEfetivas();
+		this.contas = this.negocio.getContasNaoEfetivas();
+		for (IConta contaAtual : this.selecionadas) {
+			this.contas.remove(contaAtual);
+		}
+		return this.contas;
 	}
 
 	/**
-	 * @param conta
-	 *            - {@link IConta} que deverá ser efetivada
+	 * 
+	 * Adiciona conta à lista de selecionados
+	 * 
 	 */
-	public void iniciaEfetivacao(IConta conta) {
-		this.conta = conta;
+	public void adicionaConta() {
+		this.contas.remove(this.conta);
+		this.selecionadas.add(this.conta);
+		this.conta = null;
+	}
+
+	/**
+	 * 
+	 * Remove conta da lista de selecionados
+	 * 
+	 */
+	public void removeConta() {
+		this.selecionadas.remove(this.conta);
+		this.contas.add(this.conta);
+		this.conta = null;
 	}
 
 	/**
@@ -72,13 +95,15 @@ public class ContaController implements Serializable {
 	 * 
 	 */
 	public void efetiva() {
-		try {
-			this.negocio.efetiva(this.conta, this.dataEfetivacao);
-			this.conta = null;
-			this.dataEfetivacao = Calendar.getInstance();
-		} catch (ErroCadastroException e) {
-			e.printStackTrace();
+		for (IConta contaAtual : this.selecionadas) {
+			try {
+				this.negocio.efetiva(contaAtual, this.dataEfetivacao);
+				this.dataEfetivacao = Calendar.getInstance();
+			} catch (ErroCadastroException e) {
+				e.printStackTrace();
+			}
 		}
+		this.selecionadas = new ArrayList<>();
 	}
 
 	/**
@@ -121,6 +146,27 @@ public class ContaController implements Serializable {
 	 */
 	public void setDataEfetivacao(Calendar dataEfetivacao) {
 		this.dataEfetivacao = dataEfetivacao;
+	}
+
+	/**
+	 * 
+	 * Retorna lista das contas selecionadas
+	 * 
+	 * @return {@link List} de {@link IConta} selecionadas
+	 */
+	public List<IConta> getSelecionadas() {
+		return this.selecionadas;
+	}
+
+	/**
+	 * 
+	 * Preenche as contas selecionadas
+	 * 
+	 * @param selecionadas
+	 *            - {@link List} de {@link IConta} selecionadas
+	 */
+	public void setSelecionadas(List<IConta> selecionadas) {
+		this.selecionadas = selecionadas;
 	}
 
 }

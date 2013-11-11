@@ -58,7 +58,7 @@ public interface IConta {
 	 * 
 	 * @return {@link Subgrupo} a qual a conta pertence
 	 */
-	Subgrupo getSubGrupo();
+	Subgrupo getSubgrupo();
 
 	/**
 	 * 
