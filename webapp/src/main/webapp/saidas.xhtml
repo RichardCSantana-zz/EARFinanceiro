@@ -30,9 +30,9 @@
 							<h:inputText id="txtValor" value="#{saidaController.saida.valor}"
 								class="form-control">
 								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
-									type="currency" />
+									type="currency" pattern="#,###,##0.00" />
 							</h:inputText>
-							<rich:message for="txtDescricao" />
+							<rich:message for="txtValor" />
 						</h:panelGroup>
 						<h:outputText id="lblSubgrupo" value="Subgrupo" />
 						<h:panelGroup>

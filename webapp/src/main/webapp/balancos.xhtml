@@ -8,6 +8,9 @@
 	<ui:define name="conteudo">
 		<h:form>
 			<rich:messages globalOnly="true" />
+			<h1>
+				<h:outputLabel value="Balanço" />
+			</h1>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<p class="panel-title">
@@ -63,7 +66,13 @@
 					</rich:column>
 					<rich:column>
 						<f:facet name="header">
-							<h:outputText value="SubGrupo" />
+							<h:outputText value="Tipo" />
+						</f:facet>
+						<h:outputText value="#{atual.subgrupo.grupo.tipo}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Subgrupo" />
 						</f:facet>
 						<h:outputText value="#{atual.subgrupo.descricao}">
 						</h:outputText>

@@ -96,8 +96,8 @@ public class Subgrupo {
 	 * @return String que define a descrição do subgrupo
 	 */
 	@Column(name = "descricao")
-	@NotNull(message = "O campo descricao deve ser preenchido")
-	@Size(min = 3, max = 40)
+	@NotNull(message = "O campo descrição deve ser preenchido")
+	@Size(min = 3, max = 40, message = "O campo descrição deve possuir entre 3 e 40 caracteres")
 	public String getDescricao() {
 		return this.descricao;
 	}

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author Richard
@@ -94,7 +95,8 @@ public class Grupo {
 	 * @return String que descreve o grupo
 	 */
 	@Column(name = "descricao")
-	@NotNull(message = "O campo descricao deve ser preenchido")
+	@NotNull(message = "O campo descrição deve ser preenchido")
+	@Size(min = 3, max = 40, message = "O campo descrição deve possuir entre 3 e 40 caracteres")
 	public String getDescricao() {
 		return this.descricao;
 	}

@@ -6,7 +6,7 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="conteudo">
-		<h:form>
+		<h:form id="formEntradas">
 			<rich:messages globalOnly="true" />
 			<h1>
 				<h:outputLabel value="Entrada" />
@@ -30,9 +30,9 @@
 							<h:inputText id="txtValor" class="form-control"
 								value="#{entradaController.entrada.valor}">
 								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
-									type="currency" />
+									type="currency" pattern="#,###,##0.00" />
 							</h:inputText>
-							<rich:message for="txtDescricao" />
+							<rich:message for="txtValor" />
 						</h:panelGroup>
 						<h:outputText id="lblSubgrupo" value="Subgrupo" />
 						<h:panelGroup>
