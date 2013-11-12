@@ -29,7 +29,7 @@ public class SaidaTest {
 	@Test
 	public void testaEfetiva() throws ErroCadastroException {
 		AbstractConta saida = new Saida();
-		saida.setDataPrevisao(Calendar.getInstance());
+		saida.setDataVencimento(Calendar.getInstance());
 		saida.setDescricao("teste");
 		saida.setValor(1.0);
 		Calendar instance = Calendar.getInstance();
@@ -61,7 +61,7 @@ public class SaidaTest {
 	public void testaParcelamentoComMenosDeUmaParcela()
 			throws ErroCadastroException {
 		AbstractConta saida = new Saida();
-		saida.setDataPrevisao(Calendar.getInstance());
+		saida.setDataVencimento(Calendar.getInstance());
 		saida.setDescricao("teste");
 		saida.setValor(1.0);
 		saida.setParcelamento(0);
@@ -78,7 +78,7 @@ public class SaidaTest {
 	@Test
 	public void testaParcelamento() throws ErroCadastroException {
 		AbstractConta saida = new Saida();
-		saida.setDataPrevisao(Calendar.getInstance());
+		saida.setDataVencimento(Calendar.getInstance());
 		saida.setDescricao("teste");
 		saida.setValor(1.0);
 		saida.setParcelamento(2);
@@ -91,7 +91,7 @@ public class SaidaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.Saida#contabilizaValor()}.
+	 * {@link br.com.earfinanceiro.entidades.Saida#getContabilizaValor()}.
 	 * 
 	 * @throws ErroCadastroException
 	 *             - não deve lançar
@@ -99,11 +99,11 @@ public class SaidaTest {
 	@Test
 	public void testaContabilizaValor() throws ErroCadastroException {
 		AbstractConta saida = new Saida();
-		saida.setDataPrevisao(Calendar.getInstance());
+		saida.setDataVencimento(Calendar.getInstance());
 		saida.setDescricao("teste");
 		saida.setValor(20.0);
 		Double expected = -20.0;
-		Double actual = saida.contabilizaValor();
+		Double actual = saida.getContabilizaValor();
 		assertEquals(expected, actual);
 	}
 
@@ -117,7 +117,7 @@ public class SaidaTest {
 	@Test(expected = ErroCadastroException.class)
 	public void testaCadastroValorZerado() throws ErroCadastroException {
 		AbstractConta saida = new Saida();
-		saida.setDataPrevisao(Calendar.getInstance());
+		saida.setDataVencimento(Calendar.getInstance());
 		saida.setDescricao("teste");
 		saida.setValor(0.0);
 	}
@@ -132,7 +132,7 @@ public class SaidaTest {
 	@Test(expected = ErroCadastroException.class)
 	public void testaCadastroValorNegativo() throws ErroCadastroException {
 		AbstractConta saida = new Saida();
-		saida.setDataPrevisao(Calendar.getInstance());
+		saida.setDataVencimento(Calendar.getInstance());
 		saida.setDescricao("teste");
 		saida.setValor(-10.0);
 	}
@@ -147,7 +147,7 @@ public class SaidaTest {
 	@Test
 	public void testaCadastroValor() throws ErroCadastroException {
 		AbstractConta entrada = new Entrada();
-		entrada.setDataPrevisao(Calendar.getInstance());
+		entrada.setDataVencimento(Calendar.getInstance());
 		entrada.setDescricao("teste");
 		entrada.setValor(10.0);
 		Double expected = 10.0;

@@ -14,6 +14,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Richard
@@ -22,6 +27,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "subgrupo")
 @SequenceGenerator(name = Subgrupo.SUBGRUPO_SEQUENCE, sequenceName = Subgrupo.SUBGRUPO_SEQUENCE, initialValue = 1, allocationSize = 10)
+@XmlRootElement(name = "subgrupo")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Subgrupo {
 
 	static final String SUBGRUPO_SEQUENCE = "subgrupo_sequence";
@@ -74,6 +81,7 @@ public class Subgrupo {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SUBGRUPO_SEQUENCE)
+	@XmlAttribute(name = "id", required = true)
 	public Long getId() {
 		return this.id;
 	}
@@ -98,6 +106,7 @@ public class Subgrupo {
 	@Column(name = "descricao")
 	@NotNull(message = "O campo descrição deve ser preenchido")
 	@Size(min = 3, max = 40, message = "O campo descrição deve possuir entre 3 e 40 caracteres")
+	@XmlElement(name = "descricao", required = true)
 	public String getDescricao() {
 		return this.descricao;
 	}
@@ -120,6 +129,7 @@ public class Subgrupo {
 	 * @return {@link Grupo} ao qual o subgrupo pertence
 	 */
 	@ManyToOne(targetEntity = Grupo.class, fetch = FetchType.EAGER)
+	@XmlElement(type = Grupo.class, name = "grupo", required = true)
 	public Grupo getGrupo() {
 		return this.grupo;
 	}

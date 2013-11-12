@@ -13,6 +13,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Richard
@@ -21,6 +26,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "grupo")
 @SequenceGenerator(name = Grupo.GRUPO_SEQUENCE, sequenceName = Grupo.GRUPO_SEQUENCE, initialValue = 1, allocationSize = 10)
+@XmlRootElement(name = "subgrupo")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Grupo {
 
 	static final String GRUPO_SEQUENCE = "grupo_sequence";
@@ -73,6 +80,7 @@ public class Grupo {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GRUPO_SEQUENCE)
+	@XmlAttribute(name = "id", required = true)
 	public Long getId() {
 		return this.id;
 	}
@@ -97,6 +105,7 @@ public class Grupo {
 	@Column(name = "descricao")
 	@NotNull(message = "O campo descrição deve ser preenchido")
 	@Size(min = 3, max = 40, message = "O campo descrição deve possuir entre 3 e 40 caracteres")
+	@XmlElement(name = "descricao", required = true)
 	public String getDescricao() {
 		return this.descricao;
 	}
@@ -121,6 +130,7 @@ public class Grupo {
 	@Enumerated
 	@Column(name = "tipo")
 	@NotNull(message = "O campo tipo deve ser preenchido")
+	@XmlElement(type = TipoEnum.class, name = "tipo", required = true)
 	public TipoEnum getTipo() {
 		return this.tipo;
 	}

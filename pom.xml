@@ -19,47 +19,8 @@
 		<module>dados</module>
 		<module>entidades</module>
 		<module>webapp</module>
+		<module>services</module>
 	</modules>
-
-	<profiles>
-		<profile>
-			<id>openshift</id>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-ear-plugin</artifactId>
-							<version>2.8</version>
-							<configuration>
-								<displayName>EARFinanceiro</displayName>
-								<defaultLibBundleDir>APP-INF/lib</defaultLibBundleDir>
-								<modules>
-									<webModule>
-										<groupId>br.com.earfinanceiro</groupId>
-										<artifactId>webapp</artifactId>
-										<contextRoot>/earfinanceiro</contextRoot>
-									</webModule>
-									<ejbModule>
-										<groupId>br.com.earfinanceiro</groupId>
-										<artifactId>negocio</artifactId>
-									</ejbModule>
-									<ejbModule>
-										<groupId>br.com.earfinanceiro</groupId>
-										<artifactId>dados</artifactId>
-									</ejbModule>
-									<ejbModule>
-										<groupId>br.com.earfinanceiro</groupId>
-										<artifactId>entidades</artifactId>
-									</ejbModule>
-								</modules>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-	</profiles>
 
 	<build>
 		<pluginManagement>

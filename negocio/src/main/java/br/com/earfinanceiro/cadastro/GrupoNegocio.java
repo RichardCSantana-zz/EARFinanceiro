@@ -32,18 +32,11 @@ public class GrupoNegocio implements IGrupoNegocio {
 	 */
 	@Override
 	public void salvaGrupo(Grupo grupo) {
-		dao.salvar(grupo);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.earfinanceiro.cadastro.IGrupoNegocio#atualizarGrupo(br.com.
-	 * earfinanceiro.entidades.Grupo)
-	 */
-	@Override
-	public void atualizaGrupo(Grupo grupo) {
-		dao.atualizar(grupo);
+		if (grupo.getId() == null) {
+			dao.salvar(grupo);
+		} else {
+			dao.atualizar(grupo);
+		}
 	}
 
 	/*
@@ -66,6 +59,14 @@ public class GrupoNegocio implements IGrupoNegocio {
 	@Override
 	public List<Grupo> listarGrupos() {
 		return dao.listaTodos();
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.earfinanceiro.cadastro.IGrupoNegocio#excluirGrupo(java.lang.Long)
+	 */
+	@Override
+	public void excluirGrupo(Long id) {
+		dao.excluir(id);
 	}
 
 }

@@ -24,21 +24,21 @@ public interface IGrupoNegocio {
 
 	/**
 	 * 
-	 * Atualiza os dados de um grupo já persistido
-	 * 
-	 * @param grupo
-	 *            - {@link Grupo} a ser atualizado
-	 */
-	public abstract void atualizaGrupo(Grupo grupo);
-
-	/**
-	 * 
 	 * Exclui um grupo
 	 * 
 	 * @param grupo
 	 *            - {@link Grupo} a ser excluído
 	 */
 	public abstract void excluirGrupo(Grupo grupo);
+
+	/**
+	 * 
+	 * Exclui um grupo
+	 * 
+	 * @param grupo
+	 *            - Integer que representa o id do grupo a ser excluído
+	 */
+	public abstract void excluirGrupo(Long id);
 
 	/**
 	 * 

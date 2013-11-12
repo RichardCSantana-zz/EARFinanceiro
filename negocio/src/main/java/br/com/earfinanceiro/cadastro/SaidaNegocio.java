@@ -47,10 +47,11 @@ public class SaidaNegocio implements ISaidaNegocio {
 				salvar.setDescricao(saida.getDescricao());
 				double valor = saida.getValor() / new Double(parcelas);
 				salvar.setValor(valor);
-				Calendar dataPrevisao = (Calendar) saida.getDataPrevisao()
+				Calendar dataPrevisao = (Calendar) saida.getDataVencimento()
 						.clone();
 				dataPrevisao.add(Calendar.MONTH, i - 1);
-				salvar.setDataPrevisao(dataPrevisao);
+				salvar.setDataVencimento(dataPrevisao);
+				salvar.setSubgrupo(saida.getSubgrupo());
 				dao.salvar(salvar);
 			} catch (ErroCadastroException e) {
 				e.printStackTrace();

@@ -61,11 +61,7 @@ public class GrupoController implements Serializable {
 	 * 
 	 */
 	public void salvarGrupo() {
-		if (this.grupo.getId() == null) {
-			this.grupoNegocio.salvaGrupo(this.grupo);
-		} else {
-			this.grupoNegocio.atualizaGrupo(this.grupo);
-		}
+		this.grupoNegocio.salvaGrupo(this.grupo);
 		this.grupo = null;
 		this.init();
 	}

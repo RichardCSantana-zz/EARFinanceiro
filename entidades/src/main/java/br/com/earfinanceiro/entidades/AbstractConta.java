@@ -20,6 +20,12 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import br.com.earfinanceiro.exceptions.ErroCadastroException;
 
@@ -32,13 +38,15 @@ import br.com.earfinanceiro.exceptions.ErroCadastroException;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo")
 @SequenceGenerator(name = AbstractConta.CONTA_SEQUENCE, sequenceName = AbstractConta.CONTA_SEQUENCE, initialValue = 1, allocationSize = 10)
+@XmlRootElement(name = "conta")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public abstract class AbstractConta implements IConta {
 
 	/**
 	 * 
 	 */
 	public AbstractConta() {
-		this.dataPrevisao = Calendar.getInstance();
+		this.dataVencimento = Calendar.getInstance();
 	}
 
 	/**
@@ -48,18 +56,21 @@ public abstract class AbstractConta implements IConta {
 
 	protected Long id;
 	protected String descricao;
-	protected Calendar dataPrevisao;
+	protected Calendar dataVencimento;
 	protected Calendar dataEfetivacao;
 	protected Subgrupo subgrupo;
 	protected double valor;
 	protected int parcelamento;
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see br.com.earfinanceiro.entidades.IConta#reincide(java.lang.Integer)
+	 * Preenche o número de parcelas da conta
+	 * 
+	 * @param parcelamento
+	 *            - Integer que representa o número de parcelas
+	 * @throws ErroCadastroException
+	 *             - Caso o número de parcelas seja menor que 1
 	 */
-	@Override
 	public void setParcelamento(Integer parcelamento)
 			throws ErroCadastroException {
 		if (parcelamento < 1) {
@@ -135,6 +146,7 @@ public abstract class AbstractConta implements IConta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CONTA_SEQUENCE)
 	@Column(name = "id")
+	@XmlAttribute(name = "id", required = true)
 	public Long getId() {
 		return this.id;
 	}
@@ -159,6 +171,7 @@ public abstract class AbstractConta implements IConta {
 	@Column(name = "descricao")
 	@NotNull(message = "O campo descrição deve ser preenchido")
 	@Size(min = 3, max = 40, message = "O campo descricao deve possuir entre 3 e 40 caracteres")
+	@XmlElement(name = "descricao", required = true)
 	public String getDescricao() {
 		return this.descricao;
 	}
@@ -180,22 +193,23 @@ public abstract class AbstractConta implements IConta {
 	 * @see br.com.earfinanceiro.entidades.IConta#getDataCadastro()
 	 */
 	@Override
-	@Column(name = "data_cadastro")
+	@Column(name = "data_vencimento")
 	@NotNull(message = "O campo data cadastro deve ser preenchido")
-	public Calendar getDataPrevisao() {
-		return this.dataPrevisao;
+	@XmlElement(name = "dataVencimento", required = true)
+	public Calendar getDataVencimento() {
+		return this.dataVencimento;
 	}
 
 	/**
 	 * 
-	 * Insere a data de previsão para pagamento da conta
+	 * Insere a data de vencimento da conta
 	 * 
-	 * @param dataPrevisao
-	 *            - Calendar que define a data de previsão para o pagamento da
+	 * @param dataVencimento
+	 *            - Calendar que define a data de vencimento para o pagamento da
 	 *            conta
 	 */
-	public void setDataPrevisao(Calendar dataPrevisao) {
-		this.dataPrevisao = dataPrevisao;
+	public void setDataVencimento(Calendar dataVencimento) {
+		this.dataVencimento = dataVencimento;
 	}
 
 	/*
@@ -206,6 +220,7 @@ public abstract class AbstractConta implements IConta {
 	@Override
 	@Column(name = "valor")
 	@NotNull(message = "O campo valor deve ser preenchido")
+	@XmlElement(name = "valor", required = true)
 	public Double getValor() {
 		return this.valor;
 	}
@@ -217,6 +232,7 @@ public abstract class AbstractConta implements IConta {
 	 */
 	@Override
 	@Column(name = "data_efetivacao")
+	@XmlElement(name = "dataEfetivacao")
 	public Calendar getDataEfetivacao() {
 		return this.dataEfetivacao;
 	}
@@ -228,12 +244,9 @@ public abstract class AbstractConta implements IConta {
 	 */
 	@Override
 	@Transient
+	@XmlTransient
 	public Boolean isEfetiva() {
-		if (this.dataEfetivacao == null) {
-			return false;
-		}
-		Calendar instance = Calendar.getInstance();
-		return instance.after(this.dataEfetivacao);
+		return (this.dataEfetivacao != null);
 	}
 
 	/*
@@ -243,6 +256,7 @@ public abstract class AbstractConta implements IConta {
 	 */
 	@Override
 	@ManyToOne(targetEntity = Subgrupo.class, fetch = FetchType.EAGER)
+	@XmlElement(type = Subgrupo.class, name = "subgrupo", required = true)
 	public Subgrupo getSubgrupo() {
 		return this.subgrupo;
 	}
@@ -264,7 +278,9 @@ public abstract class AbstractConta implements IConta {
 	 * @see br.com.earfinanceiro.entidades.IConta#getReincidencia()
 	 */
 	@Override
-	@Column(name = "parcelas")
+	@Column(name = "parcela")
+	@NotNull(message = "O campo parcela deve ser preenchido")
+	@XmlElement(name = "parcela", required = true)
 	public Integer getParcelamento() {
 		return this.parcelamento;
 	}
@@ -276,12 +292,24 @@ public abstract class AbstractConta implements IConta {
 	 * @return boolean que define se a conta foi parcelada
 	 */
 	@Transient
+	@XmlTransient
 	public boolean isParcelada() {
 		return (this.parcelamento > 1);
 	}
 
-	public void setDataEfetivacao(Calendar dataEfetivacao) {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.earfinanceiro.entidades.IConta#setDataEfetivacao(java.util.Calendar
+	 * )
+	 */
+	public void setDataEfetivacao(Calendar dataEfetivacao)
+			throws ErroCadastroException {
+		if (dataEfetivacao.after(Calendar.getInstance())) {
+			throw new ErroCadastroException(
+					"Uma conta não pode ser efetivada para um dia depois de hoje.");
+		}
 		this.dataEfetivacao = dataEfetivacao;
 	}
-
 }

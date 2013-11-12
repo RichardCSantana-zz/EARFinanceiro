@@ -61,6 +61,13 @@
 		</dependency>
 
 		<dependency>
+			<artifactId>services</artifactId>
+			<groupId>br.com.earfinanceiro</groupId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
 			<artifactId>negocio</artifactId>
 			<groupId>br.com.earfinanceiro</groupId>
 			<version>1.0</version>
@@ -181,7 +188,12 @@
 						<webModule>
 							<groupId>br.com.earfinanceiro</groupId>
 							<artifactId>webapp</artifactId>
-							<contextRoot>/earfinanceiro</contextRoot>
+							<contextRoot>/earfinanceiroweb</contextRoot>
+						</webModule>
+						<webModule>
+							<groupId>br.com.earfinanceiro</groupId>
+							<artifactId>services</artifactId>
+							<contextRoot>/earfinanceirorest</contextRoot>
 						</webModule>
 						<ejbModule>
 							<groupId>br.com.earfinanceiro</groupId>

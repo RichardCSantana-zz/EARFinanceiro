@@ -79,6 +79,16 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see br.com.earfinanceiro.dao.IDAO#excluir(java.lang.Long)
+	 */
+	@Override
+	public void excluir(Long id) {
+		this.em.remove(id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see br.com.earfinanceiro.dao.IDAO#listaTodos()
 	 */
 	@Override

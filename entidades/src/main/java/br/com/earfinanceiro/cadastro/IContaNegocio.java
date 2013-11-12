@@ -35,7 +35,7 @@ public interface IContaNegocio {
 	 * @throws ErroCadastroException
 	 *             - Quando a data de efetivação é inferior a data de cadastro
 	 */
-	void efetiva(IConta conta, Calendar dataEfetivacao)
+	void efetiva(List<IConta> contas, Calendar dataEfetivacao)
 			throws ErroCadastroException;
 
 }

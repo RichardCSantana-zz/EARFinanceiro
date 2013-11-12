@@ -5,6 +5,10 @@ package br.com.earfinanceiro.entidades;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Richard
@@ -12,6 +16,8 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("saida")
+@XmlRootElement(name = "saida")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Saida extends AbstractConta implements IConta {
 
 	/**
@@ -27,7 +33,8 @@ public class Saida extends AbstractConta implements IConta {
 	 * @see br.com.financemanager.dados.IConta#contabilizaValor()
 	 */
 	@Override
-	public Double contabilizaValor() {
+	@XmlElement(name = "valorReal")
+	public Double getContabilizaValor() {
 		Double retorno = new Double(0.0) - this.valor;
 		return retorno;
 	}

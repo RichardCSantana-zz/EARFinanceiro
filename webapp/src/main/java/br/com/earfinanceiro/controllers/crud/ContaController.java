@@ -95,13 +95,11 @@ public class ContaController implements Serializable {
 	 * 
 	 */
 	public void efetiva() {
-		for (IConta contaAtual : this.selecionadas) {
-			try {
-				this.negocio.efetiva(contaAtual, this.dataEfetivacao);
-				this.dataEfetivacao = Calendar.getInstance();
-			} catch (ErroCadastroException e) {
-				e.printStackTrace();
-			}
+		try {
+			this.negocio.efetiva(selecionadas, this.dataEfetivacao);
+		} catch (ErroCadastroException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		this.selecionadas = new ArrayList<>();
 	}

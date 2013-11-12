@@ -39,6 +39,15 @@ public interface IDAO<T> {
 
 	/**
 	 * 
+	 * Exclui um valor
+	 * 
+	 * @param valor
+	 *            - Long que representa o Id do grupo a ser excluído
+	 */
+	public void excluir(Long id);
+
+	/**
+	 * 
 	 * Retorna lista com todos os T
 	 * 
 	 * @return {@link List} de T - lista de todos os T

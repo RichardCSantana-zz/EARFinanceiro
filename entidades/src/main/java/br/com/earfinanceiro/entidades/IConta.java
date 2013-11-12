@@ -19,7 +19,7 @@ public interface IConta {
 	 * 
 	 * @return Double significativo da conta
 	 */
-	Double contabilizaValor();
+	Double getContabilizaValor();
 
 	/**
 	 * 
@@ -69,7 +69,7 @@ public interface IConta {
 	 * @return {@link Calendar} que indica a data de previsão de pagamento da
 	 *         conta
 	 */
-	Calendar getDataPrevisao();
+	Calendar getDataVencimento();
 
 	/**
 	 * 
@@ -87,8 +87,16 @@ public interface IConta {
 	 */
 	Long getId();
 
-	void setParcelamento(Integer reincidencia) throws ErroCadastroException;
-
-	void setDataEfetivacao(Calendar dataEfetivacao);
+	/**
+	 * 
+	 * Preenche a data de Efetivação da conta
+	 * 
+	 * @param dataEfetivacao
+	 *            Calendar que define a data de efetivação da conta
+	 * @throws ErroCadastroException
+	 *             - Quando a data de efetivação é superior ao dia corrente
+	 */
+	void setDataEfetivacao(Calendar dataEfetivacao)
+			throws ErroCadastroException;
 
 }

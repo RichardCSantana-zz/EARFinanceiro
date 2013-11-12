@@ -39,15 +39,17 @@ public class ContaNegocio implements IContaNegocio {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * br.com.earfinanceiro.cadastro.IContaNegocio#efetiva(br.com.earfinanceiro
-	 * .entidades.IConta)
+	 * @see br.com.earfinanceiro.cadastro.IContaNegocio#efetiva(java.util.List,
+	 * java.util.Calendar)
 	 */
 	@Override
-	public void efetiva(IConta conta, Calendar dataEfetivacao)
+	public void efetiva(List<IConta> contas, Calendar dataEfetivacao)
 			throws ErroCadastroException {
-		conta.setDataEfetivacao(dataEfetivacao);
-		dao.atualizar((AbstractConta) conta);
+		for (IConta conta : contas) {
+			conta.setDataEfetivacao(dataEfetivacao);
+			dao.atualizar((AbstractConta) conta);
+		}
+
 	}
 
 }
