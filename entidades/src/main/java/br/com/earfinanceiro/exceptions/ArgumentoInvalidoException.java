@@ -7,7 +7,7 @@ package br.com.earfinanceiro.exceptions;
  * @author Richard
  * 
  */
-public class ErroCadastroException extends Exception {
+public class ArgumentoInvalidoException extends Exception {
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class ErroCadastroException extends Exception {
 	 *            - String que define a mensagem de erro retornada pela
 	 *            Exception
 	 */
-	public ErroCadastroException(String mensagem) {
+	public ArgumentoInvalidoException(String mensagem) {
 		super(mensagem);
 	}
 

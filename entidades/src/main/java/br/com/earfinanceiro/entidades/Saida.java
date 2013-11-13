@@ -3,13 +3,18 @@
  */
 package br.com.earfinanceiro.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
 
 /**
  * @author Richard
@@ -21,11 +26,43 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Saida extends AbstractConta implements IConta {
 
+	protected int parcelamento;
+
 	/**
 	 * 
 	 */
 	public Saida() {
 		this.parcelamento = 1;
+	}
+
+	/**
+	 * 
+	 * Retorna se a conta foi parcelada
+	 * 
+	 * @return boolean que define se a conta foi parcelada
+	 */
+	@Transient
+	@XmlTransient
+	public boolean isParcelada() {
+		return (this.parcelamento > 1);
+	}
+
+	/**
+	 * 
+	 * Preenche o número de parcelas da conta
+	 * 
+	 * @param parcelamento
+	 *            - Integer que representa o número de parcelas
+	 * @throws ArgumentoInvalidoException
+	 *             - Caso o número de parcelas seja menor que 1
+	 */
+	public void setParcelamento(Integer parcelamento)
+			throws ArgumentoInvalidoException {
+		if (parcelamento < 1) {
+			throw new ArgumentoInvalidoException(
+					"O número de parcelas deve ser no minimo 1");
+		}
+		this.parcelamento = parcelamento;
 	}
 
 	/*
@@ -58,6 +95,19 @@ public class Saida extends AbstractConta implements IConta {
 			return false;
 		}
 		return super.equals(obj);
+	}
+
+	/**
+	 * 
+	 * Retorna o número de parcelas
+	 * 
+	 * @return Integer que representa o número de parcelas
+	 */
+	@Column(name = "parcela")
+	@NotNull(message = "O campo parcela deve ser preenchido")
+	@XmlElement(name = "parcela", required = true)
+	public Integer getParcelamento() {
+		return this.parcelamento;
 	}
 
 }

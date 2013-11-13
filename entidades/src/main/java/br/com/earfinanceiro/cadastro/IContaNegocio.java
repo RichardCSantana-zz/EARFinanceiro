@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.earfinanceiro.entidades.IConta;
-import br.com.earfinanceiro.exceptions.ErroCadastroException;
+import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
 
 /**
  * @author richard.santana
@@ -32,10 +32,10 @@ public interface IContaNegocio {
 	 *            - {@link List} de {@link IConta} a serem efetivadas
 	 * @param dataEfetivacao
 	 *            - {@link Calendar} que representa a data de efetivação
-	 * @throws ErroCadastroException
+	 * @throws ArgumentoInvalidoException
 	 *             - Quando a data de efetivação é inferior a data de cadastro
 	 */
 	void efetiva(List<IConta> contas, Calendar dataEfetivacao)
-			throws ErroCadastroException;
+			throws ArgumentoInvalidoException;
 
 }

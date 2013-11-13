@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 import br.com.earfinanceiro.cadastro.IContaNegocio;
 import br.com.earfinanceiro.entidades.IConta;
-import br.com.earfinanceiro.exceptions.ErroCadastroException;
+import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
 import br.com.earfinanceiro.services.auxiliares.ParametrosBalanco;
 import br.com.earfinanceiro.services.auxiliares.ParametrosConta;
 
@@ -58,7 +58,7 @@ public class ContaServico {
 		try {
 			this.negocio.efetiva(parametrosConta.getContas(),
 					parametrosConta.getDataEfetivar());
-		} catch (ErroCadastroException e) {
+		} catch (ArgumentoInvalidoException e) {
 			e.printStackTrace();
 		}
 	}

@@ -15,7 +15,7 @@ import br.com.earfinanceiro.entidades.AbstractConta;
 import br.com.earfinanceiro.entidades.Entrada;
 import br.com.earfinanceiro.entidades.IConta;
 import br.com.earfinanceiro.entidades.Saida;
-import br.com.earfinanceiro.exceptions.ErroCadastroException;
+import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
 
 /**
  * @author richard.santana
@@ -23,12 +23,22 @@ import br.com.earfinanceiro.exceptions.ErroCadastroException;
  */
 public class BalancoTest {
 
+	@Test
+	public void testaSemEntrada() {
+		List<IConta> contas = new ArrayList<>();
+		Balanco balanco = new Balanco();
+		balanco.setContas(contas);
+		Double actual = balanco.getTotal();
+		Double expected = 0.0;
+		assertEquals(expected, actual);
+	}
+
 	/**
-	 * @throws ErroCadastroException
+	 * @throws ArgumentoInvalidoException
 	 *             - não lança
 	 */
 	@Test
-	public void testVerificaValorDuasEntradas() throws ErroCadastroException {
+	public void testVerificaValorDuasEntradas() throws ArgumentoInvalidoException {
 		List<IConta> contas = new ArrayList<>();
 		AbstractConta entrada1 = new Entrada();
 		entrada1.setDataVencimento(Calendar.getInstance());
@@ -46,11 +56,11 @@ public class BalancoTest {
 	}
 
 	/**
-	 * @throws ErroCadastroException
+	 * @throws ArgumentoInvalidoException
 	 *             - não lança
 	 */
 	@Test
-	public void testVerificaValorDuasSaidas() throws ErroCadastroException {
+	public void testVerificaValorDuasSaidas() throws ArgumentoInvalidoException {
 		List<IConta> contas = new ArrayList<>();
 		AbstractConta saida1 = new Saida();
 		saida1.setDataVencimento(Calendar.getInstance());
@@ -68,11 +78,11 @@ public class BalancoTest {
 	}
 
 	/**
-	 * @throws ErroCadastroException
+	 * @throws ArgumentoInvalidoException
 	 *             - não lança
 	 */
 	@Test
-	public void testVerificaValorEntradasESaidas() throws ErroCadastroException {
+	public void testVerificaValorEntradasESaidas() throws ArgumentoInvalidoException {
 		List<IConta> contas = new ArrayList<>();
 		AbstractConta entrada1 = new Entrada();
 		entrada1.setDataVencimento(Calendar.getInstance());

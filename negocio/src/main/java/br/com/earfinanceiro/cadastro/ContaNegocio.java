@@ -13,7 +13,7 @@ import javax.ejb.Stateless;
 import br.com.earfinanceiro.dao.IContaDAO;
 import br.com.earfinanceiro.entidades.AbstractConta;
 import br.com.earfinanceiro.entidades.IConta;
-import br.com.earfinanceiro.exceptions.ErroCadastroException;
+import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
 
 /**
  * @author richard.santana
@@ -44,7 +44,7 @@ public class ContaNegocio implements IContaNegocio {
 	 */
 	@Override
 	public void efetiva(List<IConta> contas, Calendar dataEfetivacao)
-			throws ErroCadastroException {
+			throws ArgumentoInvalidoException {
 		for (IConta conta : contas) {
 			conta.setDataEfetivacao(dataEfetivacao);
 			dao.atualizar((AbstractConta) conta);

@@ -11,7 +11,7 @@ import javax.inject.Named;
 
 import br.com.earfinanceiro.cadastro.IContaNegocio;
 import br.com.earfinanceiro.entidades.IConta;
-import br.com.earfinanceiro.exceptions.ErroCadastroException;
+import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
 
 /**
  * @author Richard
@@ -97,7 +97,7 @@ public class ContaController implements Serializable {
 	public void efetiva() {
 		try {
 			this.negocio.efetiva(this.selecionadas, this.dataEfetivacao);
-		} catch (ErroCadastroException e) {
+		} catch (ArgumentoInvalidoException e) {
 			e.printStackTrace();
 		}
 		this.selecionadas = new ArrayList<>();

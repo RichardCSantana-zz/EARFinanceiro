@@ -5,7 +5,7 @@ package br.com.earfinanceiro.entidades;
 
 import java.util.Calendar;
 
-import br.com.earfinanceiro.exceptions.ErroCadastroException;
+import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
 
 /**
  * @author Richard
@@ -20,15 +20,6 @@ public interface IConta {
 	 * @return Double significativo da conta
 	 */
 	Double getContabilizaValor();
-
-	/**
-	 * 
-	 * Retorna frequência de reincidência da conta
-	 * 
-	 * @return Integer que define a frequência(em dias) em que a conta vai
-	 *         ocorrer
-	 */
-	Integer getParcelamento();
 
 	/**
 	 * 
@@ -93,10 +84,10 @@ public interface IConta {
 	 * 
 	 * @param dataEfetivacao
 	 *            Calendar que define a data de efetivação da conta
-	 * @throws ErroCadastroException
+	 * @throws ArgumentoInvalidoException
 	 *             - Quando a data de efetivação é superior ao dia corrente
 	 */
 	void setDataEfetivacao(Calendar dataEfetivacao)
-			throws ErroCadastroException;
+			throws ArgumentoInvalidoException;
 
 }
