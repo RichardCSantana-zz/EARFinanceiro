@@ -24,6 +24,16 @@ public interface IGrupoNegocio {
 
 	/**
 	 * 
+	 * Persiste um grupo
+	 * 
+	 * @param id
+	 *            - Long que representa o id do grupo a ser encontrado
+	 * @return {@link Grupo} referente ao id apresentado
+	 */
+	Grupo retornaGrupo(Long id);
+
+	/**
+	 * 
 	 * Exclui um grupo
 	 * 
 	 * @param grupo
@@ -35,7 +45,7 @@ public interface IGrupoNegocio {
 	 * 
 	 * Exclui um grupo
 	 * 
-	 * @param grupo
+	 * @param id
 	 *            - Integer que representa o id do grupo a ser excluído
 	 */
 	public abstract void excluirGrupo(Long id);

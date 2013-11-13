@@ -49,6 +49,16 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see br.com.earfinanceiro.dao.IDAO#procurar(java.lang.Long)
+	 */
+	@Override
+	public T procurar(Long id) {
+		return this.em.find(this.classe, id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see br.com.earfinanceiro.dao.IDAO#salvar(T)
 	 */
 	@Override

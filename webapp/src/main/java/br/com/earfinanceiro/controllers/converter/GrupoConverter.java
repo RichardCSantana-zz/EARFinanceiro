@@ -52,7 +52,7 @@ public class GrupoConverter implements Serializable, Converter {
 	 */
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		return this.dao.getPorId(new Long(arg2));
+		return this.dao.procurar(new Long(arg2));
 	}
 
 	/*

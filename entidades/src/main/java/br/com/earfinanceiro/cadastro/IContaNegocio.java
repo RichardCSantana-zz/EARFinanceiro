@@ -28,8 +28,8 @@ public interface IContaNegocio {
 	 * 
 	 * Efetiva uma conta
 	 * 
-	 * @param conta
-	 *            - {@link IConta} a ser efetivada
+	 * @param contas
+	 *            - {@link List} de {@link IConta} a serem efetivadas
 	 * @param dataEfetivacao
 	 *            - {@link Calendar} que representa a data de efetivação
 	 * @throws ErroCadastroException

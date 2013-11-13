@@ -12,6 +12,16 @@ public interface IDAO<T> {
 
 	/**
 	 * 
+	 * Retorna um valor baseado em um id
+	 * 
+	 * @param id
+	 *            - Long que representa o objeto a ser retornado
+	 * @return T referente ao id
+	 */
+	public T procurar(Long id);
+
+	/**
+	 * 
 	 * Persiste um valor
 	 * 
 	 * @param valor
@@ -41,7 +51,7 @@ public interface IDAO<T> {
 	 * 
 	 * Exclui um valor
 	 * 
-	 * @param valor
+	 * @param id
 	 *            - Long que representa o Id do grupo a ser excluído
 	 */
 	public void excluir(Long id);

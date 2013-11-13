@@ -33,9 +33,9 @@ public class GrupoNegocio implements IGrupoNegocio {
 	@Override
 	public void salvaGrupo(Grupo grupo) {
 		if (grupo.getId() == null) {
-			dao.salvar(grupo);
+			this.dao.salvar(grupo);
 		} else {
-			dao.atualizar(grupo);
+			this.dao.atualizar(grupo);
 		}
 	}
 
@@ -48,7 +48,7 @@ public class GrupoNegocio implements IGrupoNegocio {
 	 */
 	@Override
 	public void excluirGrupo(Grupo grupo) {
-		dao.excluir(grupo);
+		this.dao.excluir(grupo);
 	}
 
 	/*
@@ -58,15 +58,30 @@ public class GrupoNegocio implements IGrupoNegocio {
 	 */
 	@Override
 	public List<Grupo> listarGrupos() {
-		return dao.listaTodos();
+		return this.dao.listaTodos();
 	}
 
-	/* (non-Javadoc)
-	 * @see br.com.earfinanceiro.cadastro.IGrupoNegocio#excluirGrupo(java.lang.Long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.earfinanceiro.cadastro.IGrupoNegocio#excluirGrupo(java.lang.Long)
 	 */
 	@Override
 	public void excluirGrupo(Long id) {
-		dao.excluir(id);
+		this.dao.excluir(id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.earfinanceiro.cadastro.IGrupoNegocio#retornaGrupo(java.lang.Long)
+	 */
+	@Override
+	public Grupo retornaGrupo(Long id) {
+		return this.dao.procurar(id);
+
 	}
 
 }

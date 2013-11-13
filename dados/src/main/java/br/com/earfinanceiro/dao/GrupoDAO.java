@@ -35,14 +35,4 @@ public class GrupoDAO extends AbstractDAO<Grupo> implements IGrupoDAO {
 		return this.unicoCondicoes(pred1);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.earfinanceiro.dao.IGrupoDAO#getPorId(java.lang.String)
-	 */
-	@Override
-	public Grupo getPorId(Long id) {
-		return this.em.find(Grupo.class, id);
-	}
-
 }

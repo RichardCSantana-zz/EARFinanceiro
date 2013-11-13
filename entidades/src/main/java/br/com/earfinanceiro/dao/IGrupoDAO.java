@@ -21,14 +21,4 @@ public interface IGrupoDAO extends IDAO<Grupo> {
 	 */
 	public Grupo getPorNome(String descricao);
 
-	/**
-	 * 
-	 * Retorna um grupo de acordo com um id
-	 * 
-	 * @param id
-	 *            - Long para busca por id
-	 * @return {@link Grupo} - grupo referente ao id
-	 */
-	public Grupo getPorId(Long id);
-
 }

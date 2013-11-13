@@ -20,7 +20,7 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#efetiva(java.util.Calendar)}
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setDataEfetivacao(java.util.Calendar)}
 	 * .
 	 * 
 	 * @throws ErroCadastroException
@@ -68,7 +68,8 @@ public class EntradaTest {
 
 	/**
 	 * Test method for
-	 * {@link br.com.earfinanceiro.entidades.AbstractConta#reincide(Integer)} .
+	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setParcelamento(Integer)}
+	 * .
 	 * 
 	 * @throws ErroCadastroException
 	 *             - não deve lançar
