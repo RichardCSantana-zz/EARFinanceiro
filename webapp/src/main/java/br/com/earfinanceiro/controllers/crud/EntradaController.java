@@ -61,11 +61,7 @@ public class EntradaController implements Serializable {
 	 * 
 	 */
 	public void salvar() {
-		if (this.entrada.getId() == null) {
-			this.negocio.salva(this.entrada);
-		} else {
-			this.negocio.atualiza(this.entrada);
-		}
+		this.negocio.salva(this.entrada);
 		this.entrada = null;
 		this.init();
 	}

@@ -6,6 +6,7 @@ package br.com.earfinanceiro.cadastro;
 import java.util.List;
 
 import br.com.earfinanceiro.entidades.Grupo;
+import br.com.earfinanceiro.entidades.TipoEnum;
 
 /**
  * @author Richard
@@ -20,17 +21,17 @@ public interface IGrupoNegocio {
 	 * @param grupo
 	 *            - {@link Grupo} a ser persistido
 	 */
-	public abstract void salvaGrupo(Grupo grupo);
+	public abstract void salva(Grupo grupo);
 
 	/**
 	 * 
-	 * Persiste um grupo
+	 * Retorna um grupo referente ao id
 	 * 
 	 * @param id
 	 *            - Long que representa o id do grupo a ser encontrado
 	 * @return {@link Grupo} referente ao id apresentado
 	 */
-	Grupo retornaGrupo(Long id);
+	Grupo retorna(Long id);
 
 	/**
 	 * 
@@ -39,7 +40,7 @@ public interface IGrupoNegocio {
 	 * @param grupo
 	 *            - {@link Grupo} a ser excluído
 	 */
-	public abstract void excluirGrupo(Grupo grupo);
+	public abstract void exclui(Grupo grupo);
 
 	/**
 	 * 
@@ -48,7 +49,7 @@ public interface IGrupoNegocio {
 	 * @param id
 	 *            - Integer que representa o id do grupo a ser excluído
 	 */
-	public abstract void excluirGrupo(Long id);
+	public abstract void exclui(Long id);
 
 	/**
 	 * 
@@ -56,6 +57,14 @@ public interface IGrupoNegocio {
 	 * 
 	 * @return {@link List} de {@link Grupo} - lista de grupos
 	 */
-	public abstract List<Grupo> listarGrupos();
+	public abstract List<Grupo> lista();
+
+	/**
+	 * 
+	 * Retorna lista de tipos
+	 * 
+	 * @return {@link List} de {@link TipoEnum}
+	 */
+	public abstract List<TipoEnum> listaTipos();
 
 }

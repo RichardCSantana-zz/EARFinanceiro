@@ -5,6 +5,7 @@ package br.com.earfinanceiro.entidades;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -34,6 +35,7 @@ public class Saida extends AbstractConta implements IConta {
 	 */
 	@Override
 	@XmlElement(name = "valorReal")
+	@Transient
 	public Double getContabilizaValor() {
 		Double retorno = new Double(0.0) - this.valor;
 		return retorno;

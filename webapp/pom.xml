@@ -143,13 +143,9 @@
 				<version>2.4</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>APP-INF/lib</classpathPrefix>
-						</manifest>
-					</archive>
+					<!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> <archive> 
+						<manifest> <addClasspath>true</addClasspath> <classpathPrefix>APP-INF/lib</classpathPrefix> 
+						</manifest> </archive> -->
 				</configuration>
 			</plugin>
 			<plugin>

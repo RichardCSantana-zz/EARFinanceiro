@@ -61,11 +61,7 @@ public class SaidaController implements Serializable {
 	 * 
 	 */
 	public void salvar() {
-		if (this.saida.getId() == null) {
-			this.negocio.salva(this.saida);
-		} else {
-			this.negocio.atualiza(this.saida);
-		}
+		this.negocio.salva(this.saida);
 		this.saida = null;
 		this.init();
 	}

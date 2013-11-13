@@ -61,11 +61,7 @@ public class SubgrupoController implements Serializable {
 	 * 
 	 */
 	public void salvarSubgrupo() {
-		if (this.subgrupo.getId() == null) {
-			this.negocio.salvaSubgrupo(this.subgrupo);
-		} else {
-			this.negocio.atualizaSubgrupo(this.subgrupo);
-		}
+		this.negocio.salva(this.subgrupo);
 		this.subgrupo = null;
 		this.init();
 	}
@@ -76,7 +72,7 @@ public class SubgrupoController implements Serializable {
 	 * 
 	 */
 	public void excluiSubgrupo() {
-		this.negocio.excluirsubSubgrupo(this.subgrupo);
+		this.negocio.exclui(this.subgrupo);
 	}
 
 	/**
@@ -118,7 +114,7 @@ public class SubgrupoController implements Serializable {
 	 * 
 	 */
 	public List<Subgrupo> getSubgrupos() {
-		return this.negocio.listarSubgrupos();
+		return this.negocio.lista();
 	}
 
 	/**

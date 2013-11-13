@@ -96,9 +96,8 @@ public class ContaController implements Serializable {
 	 */
 	public void efetiva() {
 		try {
-			this.negocio.efetiva(selecionadas, this.dataEfetivacao);
+			this.negocio.efetiva(this.selecionadas, this.dataEfetivacao);
 		} catch (ErroCadastroException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.selecionadas = new ArrayList<>();

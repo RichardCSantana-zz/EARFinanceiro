@@ -31,7 +31,7 @@ public class GrupoController implements Serializable {
 	private static final long serialVersionUID = 68758873813372893L;
 
 	@EJB
-	private IGrupoNegocio grupoNegocio;
+	private IGrupoNegocio negocio;
 
 	private Grupo grupo;
 
@@ -61,7 +61,7 @@ public class GrupoController implements Serializable {
 	 * 
 	 */
 	public void salvarGrupo() {
-		this.grupoNegocio.salvaGrupo(this.grupo);
+		this.negocio.salva(this.grupo);
 		this.grupo = null;
 		this.init();
 	}
@@ -72,7 +72,7 @@ public class GrupoController implements Serializable {
 	 * 
 	 */
 	public void excluiGrupo() {
-		this.grupoNegocio.excluirGrupo(this.grupo);
+		this.negocio.exclui(this.grupo);
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class GrupoController implements Serializable {
 	 * @return {@link List} de {@link Grupo} para o subgrupo
 	 */
 	public List<Grupo> getGrupos() {
-		return this.grupoNegocio.listarGrupos();
+		return this.negocio.lista();
 	}
 
 	/**
@@ -123,7 +123,8 @@ public class GrupoController implements Serializable {
 	 */
 	public List<SelectItem> getTipos() {
 		List<SelectItem> itens = new ArrayList<>();
-		for (TipoEnum tipo : TipoEnum.values()) {
+		List<TipoEnum> tipos = this.negocio.listaTipos();
+		for (TipoEnum tipo : tipos) {
 			SelectItem item = new SelectItem(tipo, tipo.toString());
 			itens.add(item);
 		}

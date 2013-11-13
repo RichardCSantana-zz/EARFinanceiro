@@ -21,16 +21,7 @@ public interface ISubgrupoNegocio {
 	 * @param subgrupo
 	 *            - {@link Subgrupo} a ser persistido
 	 */
-	public abstract void salvaSubgrupo(Subgrupo subgrupo);
-
-	/**
-	 * 
-	 * Atualiza um subgrupo
-	 * 
-	 * @param subgrupo
-	 *            - {@link Subgrupo} a ser atualizado
-	 */
-	public abstract void atualizaSubgrupo(Subgrupo subgrupo);
+	public abstract void salva(Subgrupo subgrupo);
 
 	/**
 	 * 
@@ -39,7 +30,7 @@ public interface ISubgrupoNegocio {
 	 * @param subgrupo
 	 *            - {@link Subgrupo} a ser excluido
 	 */
-	public abstract void excluirsubSubgrupo(Subgrupo subgrupo);
+	public abstract void exclui(Subgrupo subgrupo);
 
 	/**
 	 * 
@@ -47,7 +38,7 @@ public interface ISubgrupoNegocio {
 	 * 
 	 * @return {@link List} de {@link Subgrupo}
 	 */
-	public abstract List<Subgrupo> listarSubgrupos();
+	public abstract List<Subgrupo> lista();
 
 	/**
 	 * 
@@ -56,5 +47,24 @@ public interface ISubgrupoNegocio {
 	 * @return {@link List} de {@link Grupo}
 	 */
 	public abstract List<Grupo> getGrupos();
+
+	/**
+	 * 
+	 * Persiste um subgrupo
+	 * 
+	 * @param id
+	 *            - Long que representa o id do subgrupo a ser encontrado
+	 * @return {@link Subgrupo} referente ao id apresentado
+	 */
+	public abstract Subgrupo retorna(Long id);
+
+	/**
+	 * 
+	 * Exclui um subgrupo
+	 * 
+	 * @param id
+	 *            - Integer que representa o id do subgrupo a ser excluído
+	 */
+	public abstract void exclui(Long id);
 
 }

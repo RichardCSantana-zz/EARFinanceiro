@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "grupo")
 @SequenceGenerator(name = Grupo.GRUPO_SEQUENCE, sequenceName = Grupo.GRUPO_SEQUENCE, initialValue = 1, allocationSize = 10)
-@XmlRootElement(name = "subgrupo")
+@XmlRootElement(name = "grupo")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Grupo {
 
@@ -80,7 +80,7 @@ public class Grupo {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = GRUPO_SEQUENCE)
-	@XmlAttribute(name = "id", required = true)
+	@XmlAttribute(name = "id")
 	public Long getId() {
 		return this.id;
 	}

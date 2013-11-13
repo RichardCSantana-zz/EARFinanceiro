@@ -21,16 +21,7 @@ public interface IEntradaNegocio {
 	 * @param entrada
 	 *            - {@link Entrada} a ser persistida
 	 */
-	public abstract void salva(Entrada entrada);
-
-	/**
-	 * 
-	 * Atualiza os dados de uma entrada já persistida
-	 * 
-	 * @param entrada
-	 *            - {@link Entrada} a ser atualizada
-	 */
-	public abstract void atualiza(Entrada entrada);
+	void salva(Entrada entrada);
 
 	/**
 	 * 
@@ -39,7 +30,7 @@ public interface IEntradaNegocio {
 	 * @param entrada
 	 *            - {@link Entrada} a ser excluída
 	 */
-	public abstract void excluir(Entrada entrada);
+	void excluir(Entrada entrada);
 
 	/**
 	 * 
@@ -47,6 +38,25 @@ public interface IEntradaNegocio {
 	 * 
 	 * @return {@link List} de {@link Subgrupo} - lista de subgrupos de entrada
 	 */
-	public abstract List<Subgrupo> getSubgrupos();
+	List<Subgrupo> getSubgrupos();
+
+	/**
+	 * 
+	 * Retorna uma entrada referente ao id
+	 * 
+	 * @param id
+	 *            - Long que representa o id da entrada a ser retornada
+	 * @return {@link Entrada} referente ao id apresentado
+	 */
+	Entrada retorna(Long id);
+
+	/**
+	 * 
+	 * Exclui um entrada
+	 * 
+	 * @param id
+	 *            - Integer que representa o id da entrada a ser excluída
+	 */
+	void exclui(Long id);
 
 }

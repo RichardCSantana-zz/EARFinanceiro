@@ -80,6 +80,52 @@ public abstract class AbstractConta implements IConta {
 		this.parcelamento = parcelamento;
 	}
 
+	/**
+	 * 
+	 * Insere um valor
+	 * 
+	 * @param valor
+	 *            - Double a ser inserida na conta
+	 * @throws ErroCadastroException
+	 *             - Quando o valor do Double for menor ou igual a 0
+	 */
+	public void setValor(Double valor) throws ErroCadastroException {
+		if (valor.compareTo(0.0) < 1) {
+			throw new ErroCadastroException("Valor deve ser maior que 0");
+		}
+		this.valor = valor;
+	}
+
+	/**
+	 * 
+	 * Retorna se a conta foi parcelada
+	 * 
+	 * @return boolean que define se a conta foi parcelada
+	 */
+	@Transient
+	@XmlTransient
+	public boolean isParcelada() {
+		return (this.parcelamento > 1);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.earfinanceiro.entidades.IConta#setDataEfetivacao(java.util.Calendar
+	 * )
+	 */
+	@Override
+	public void setDataEfetivacao(Calendar dataEfetivacao)
+			throws ErroCadastroException {
+		if ((dataEfetivacao != null)
+				&& dataEfetivacao.after(Calendar.getInstance())) {
+			throw new ErroCadastroException(
+					"Uma conta não pode ser efetivada para um dia depois de hoje.");
+		}
+		this.dataEfetivacao = dataEfetivacao;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -121,22 +167,6 @@ public abstract class AbstractConta implements IConta {
 		return true;
 	}
 
-	/**
-	 * 
-	 * Insere um valor
-	 * 
-	 * @param valor
-	 *            - Double a ser inserida na conta
-	 * @throws ErroCadastroException
-	 *             - Quando o valor do Double for menor ou igual a 0
-	 */
-	public void setValor(Double valor) throws ErroCadastroException {
-		if (valor.compareTo(0.0) < 1) {
-			throw new ErroCadastroException("Valor deve ser maior que 0");
-		}
-		this.valor = valor;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -146,7 +176,7 @@ public abstract class AbstractConta implements IConta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = CONTA_SEQUENCE)
 	@Column(name = "id")
-	@XmlAttribute(name = "id", required = true)
+	@XmlAttribute(name = "id")
 	public Long getId() {
 		return this.id;
 	}
@@ -283,33 +313,5 @@ public abstract class AbstractConta implements IConta {
 	@XmlElement(name = "parcela", required = true)
 	public Integer getParcelamento() {
 		return this.parcelamento;
-	}
-
-	/**
-	 * 
-	 * Retorna se a conta foi parcelada
-	 * 
-	 * @return boolean que define se a conta foi parcelada
-	 */
-	@Transient
-	@XmlTransient
-	public boolean isParcelada() {
-		return (this.parcelamento > 1);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * br.com.earfinanceiro.entidades.IConta#setDataEfetivacao(java.util.Calendar
-	 * )
-	 */
-	public void setDataEfetivacao(Calendar dataEfetivacao)
-			throws ErroCadastroException {
-		if (dataEfetivacao.after(Calendar.getInstance())) {
-			throw new ErroCadastroException(
-					"Uma conta não pode ser efetivada para um dia depois de hoje.");
-		}
-		this.dataEfetivacao = dataEfetivacao;
 	}
 }

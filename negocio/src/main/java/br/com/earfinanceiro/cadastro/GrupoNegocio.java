@@ -3,6 +3,7 @@
  */
 package br.com.earfinanceiro.cadastro;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,6 +12,7 @@ import javax.ejb.Stateless;
 
 import br.com.earfinanceiro.dao.IGrupoDAO;
 import br.com.earfinanceiro.entidades.Grupo;
+import br.com.earfinanceiro.entidades.TipoEnum;
 
 /**
  * @author Richard
@@ -31,7 +33,7 @@ public class GrupoNegocio implements IGrupoNegocio {
 	 * .entidades.Grupo)
 	 */
 	@Override
-	public void salvaGrupo(Grupo grupo) {
+	public void salva(Grupo grupo) {
 		if (grupo.getId() == null) {
 			this.dao.salvar(grupo);
 		} else {
@@ -47,7 +49,7 @@ public class GrupoNegocio implements IGrupoNegocio {
 	 * .entidades.Grupo)
 	 */
 	@Override
-	public void excluirGrupo(Grupo grupo) {
+	public void exclui(Grupo grupo) {
 		this.dao.excluir(grupo);
 	}
 
@@ -57,7 +59,7 @@ public class GrupoNegocio implements IGrupoNegocio {
 	 * @see br.com.earfinanceiro.cadastro.IGrupoNegocio#listarGrupos()
 	 */
 	@Override
-	public List<Grupo> listarGrupos() {
+	public List<Grupo> lista() {
 		return this.dao.listaTodos();
 	}
 
@@ -68,7 +70,7 @@ public class GrupoNegocio implements IGrupoNegocio {
 	 * br.com.earfinanceiro.cadastro.IGrupoNegocio#excluirGrupo(java.lang.Long)
 	 */
 	@Override
-	public void excluirGrupo(Long id) {
+	public void exclui(Long id) {
 		this.dao.excluir(id);
 	}
 
@@ -79,9 +81,20 @@ public class GrupoNegocio implements IGrupoNegocio {
 	 * br.com.earfinanceiro.cadastro.IGrupoNegocio#retornaGrupo(java.lang.Long)
 	 */
 	@Override
-	public Grupo retornaGrupo(Long id) {
+	public Grupo retorna(Long id) {
 		return this.dao.procurar(id);
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.cadastro.IGrupoNegocio#listaTipos()
+	 */
+	@Override
+	public List<TipoEnum> listaTipos() {
+		List<TipoEnum> tipos = Arrays.asList(TipoEnum.values());
+		return tipos;
 	}
 
 }

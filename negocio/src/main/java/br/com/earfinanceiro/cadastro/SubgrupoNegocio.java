@@ -32,31 +32,23 @@ public class SubgrupoNegocio implements ISubgrupoNegocio {
 	 * earfinanceiro.entidades.Subgrupo)
 	 */
 	@Override
-	public void salvaSubgrupo(Subgrupo subgrupo) {
+	public void salva(Subgrupo subgrupo) {
+		if (subgrupo.getId() == null) {
+			this.dao.salvar(subgrupo);
+		} else {
+			this.dao.atualizar(subgrupo);
+		}
 		this.dao.salvar(subgrupo);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * br.com.earfinanceiro.cadastro.ISubGrupoNegocio#atualizaSubgrupo(br.com
-	 * .earfinanceiro.entidades.Subgrupo)
-	 */
-	@Override
-	public void atualizaSubgrupo(Subgrupo subgrupo) {
-		this.dao.atualizar(subgrupo);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * br.com.earfinanceiro.cadastro.ISubGrupoNegocio#excluirsubSubgrupo(br.
+	 * @see br.com.earfinanceiro.cadastro.ISubGrupoNegocio#excluir(br.
 	 * com.earfinanceiro.entidades.Subgrupo)
 	 */
 	@Override
-	public void excluirsubSubgrupo(Subgrupo subgrupo) {
+	public void exclui(Subgrupo subgrupo) {
 		this.dao.excluir(subgrupo);
 	}
 
@@ -66,7 +58,7 @@ public class SubgrupoNegocio implements ISubgrupoNegocio {
 	 * @see br.com.earfinanceiro.cadastro.ISubGrupoNegocio#listarSubgrupos()
 	 */
 	@Override
-	public List<Subgrupo> listarSubgrupos() {
+	public List<Subgrupo> lista() {
 		return this.dao.listaTodos();
 	}
 
@@ -78,6 +70,28 @@ public class SubgrupoNegocio implements ISubgrupoNegocio {
 	@Override
 	public List<Grupo> getGrupos() {
 		return this.grupoDAO.listaTodos();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.earfinanceiro.cadastro.ISubgrupoNegocio#retorna(java.lang.Long)
+	 */
+	@Override
+	public Subgrupo retorna(Long id) {
+		return this.dao.getPorId(id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.earfinanceiro.cadastro.ISubgrupoNegocio#exclui(java.lang.Long)
+	 */
+	@Override
+	public void exclui(Long id) {
+		this.dao.excluir(id);
 	}
 
 }

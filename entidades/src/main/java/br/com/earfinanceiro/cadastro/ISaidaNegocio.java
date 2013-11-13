@@ -25,15 +25,6 @@ public interface ISaidaNegocio {
 
 	/**
 	 * 
-	 * Atualiza os dados de uma saida já persistida
-	 * 
-	 * @param saida
-	 *            - {@link Saida} a ser atualizada
-	 */
-	public abstract void atualiza(Saida saida);
-
-	/**
-	 * 
 	 * Exclui uma saída
 	 * 
 	 * @param saida
@@ -48,5 +39,24 @@ public interface ISaidaNegocio {
 	 * @return {@link List} de {@link Subgrupo}- lista de subgrupos de saida
 	 */
 	public abstract List<Subgrupo> getSubgrupos();
+
+	/**
+	 * 
+	 * Retorna uma saida referente ao id
+	 * 
+	 * @param id
+	 *            - Long que representa o id da saida a ser retornada
+	 * @return {@link Saida} referente ao id apresentado
+	 */
+	Saida retorna(Long id);
+
+	/**
+	 * 
+	 * Exclui um saida
+	 * 
+	 * @param id
+	 *            - Integer que representa o id da saida a ser excluída
+	 */
+	void exclui(Long id);
 
 }

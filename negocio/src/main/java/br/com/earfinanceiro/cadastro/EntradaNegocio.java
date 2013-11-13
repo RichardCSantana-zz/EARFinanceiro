@@ -37,19 +37,11 @@ public class EntradaNegocio implements IEntradaNegocio {
 	 */
 	@Override
 	public void salva(Entrada entrada) {
-		dao.salvar(entrada);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * br.com.earfinanceiro.cadastro.IEntradaNegocio#atualiza(br.com.earfinanceiro
-	 * .entidades.Entrada)
-	 */
-	@Override
-	public void atualiza(Entrada entrada) {
-		dao.atualizar(entrada);
+		if (entrada.getId() == null) {
+			this.dao.salvar(entrada);
+		} else {
+			this.dao.atualizar(entrada);
+		}
 	}
 
 	/*
@@ -61,7 +53,7 @@ public class EntradaNegocio implements IEntradaNegocio {
 	 */
 	@Override
 	public void excluir(Entrada entrada) {
-		dao.excluir(entrada);
+		this.dao.excluir(entrada);
 	}
 
 	/*
@@ -71,7 +63,28 @@ public class EntradaNegocio implements IEntradaNegocio {
 	 */
 	@Override
 	public List<Subgrupo> getSubgrupos() {
-		return subgrupoDAO.listaSubgruposEntrada();
+		return this.subgrupoDAO.listaSubgruposEntrada();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.earfinanceiro.cadastro.IEntradaNegocio#retorna(java.lang.Long)
+	 */
+	@Override
+	public Entrada retorna(Long id) {
+		return this.dao.procurar(id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.cadastro.IEntradaNegocio#exclui(java.lang.Long)
+	 */
+	@Override
+	public void exclui(Long id) {
+		this.dao.excluir(id);
 	}
 
 }

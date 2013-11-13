@@ -188,12 +188,12 @@
 						<webModule>
 							<groupId>br.com.earfinanceiro</groupId>
 							<artifactId>webapp</artifactId>
-							<contextRoot>/earfinanceiroweb</contextRoot>
+							<contextRoot>/web</contextRoot>
 						</webModule>
 						<webModule>
 							<groupId>br.com.earfinanceiro</groupId>
 							<artifactId>services</artifactId>
-							<contextRoot>/earfinanceirorest</contextRoot>
+							<contextRoot>/rest</contextRoot>
 						</webModule>
 						<ejbModule>
 							<groupId>br.com.earfinanceiro</groupId>
