@@ -15,7 +15,6 @@ import br.com.earfinanceiro.entidades.AbstractConta;
 import br.com.earfinanceiro.entidades.Entrada;
 import br.com.earfinanceiro.entidades.IConta;
 import br.com.earfinanceiro.entidades.Saida;
-import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
 
 /**
  * @author richard.santana
@@ -34,11 +33,10 @@ public class BalancoTest {
 	}
 
 	/**
-	 * @throws ArgumentoInvalidoException
-	 *             - não lança
+
 	 */
 	@Test
-	public void testVerificaValorDuasEntradas() throws ArgumentoInvalidoException {
+	public void testVerificaValorDuasEntradas() {
 		List<IConta> contas = new ArrayList<>();
 		AbstractConta entrada1 = new Entrada();
 		entrada1.setDataVencimento(Calendar.getInstance());
@@ -56,11 +54,9 @@ public class BalancoTest {
 	}
 
 	/**
-	 * @throws ArgumentoInvalidoException
-	 *             - não lança
 	 */
 	@Test
-	public void testVerificaValorDuasSaidas() throws ArgumentoInvalidoException {
+	public void testVerificaValorDuasSaidas() {
 		List<IConta> contas = new ArrayList<>();
 		AbstractConta saida1 = new Saida();
 		saida1.setDataVencimento(Calendar.getInstance());
@@ -78,11 +74,9 @@ public class BalancoTest {
 	}
 
 	/**
-	 * @throws ArgumentoInvalidoException
-	 *             - não lança
 	 */
 	@Test
-	public void testVerificaValorEntradasESaidas() throws ArgumentoInvalidoException {
+	public void testVerificaValorEntradasESaidas() {
 		List<IConta> contas = new ArrayList<>();
 		AbstractConta entrada1 = new Entrada();
 		entrada1.setDataVencimento(Calendar.getInstance());

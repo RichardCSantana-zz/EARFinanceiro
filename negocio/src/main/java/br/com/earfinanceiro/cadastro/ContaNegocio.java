@@ -13,7 +13,6 @@ import javax.ejb.Stateless;
 import br.com.earfinanceiro.dao.IContaDAO;
 import br.com.earfinanceiro.entidades.AbstractConta;
 import br.com.earfinanceiro.entidades.IConta;
-import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
 
 /**
  * @author richard.santana
@@ -43,8 +42,7 @@ public class ContaNegocio implements IContaNegocio {
 	 * java.util.Calendar)
 	 */
 	@Override
-	public void efetiva(List<IConta> contas, Calendar dataEfetivacao)
-			throws ArgumentoInvalidoException {
+	public void efetiva(List<IConta> contas, Calendar dataEfetivacao) {
 		for (IConta conta : contas) {
 			conta.setDataEfetivacao(dataEfetivacao);
 			dao.atualizar((AbstractConta) conta);

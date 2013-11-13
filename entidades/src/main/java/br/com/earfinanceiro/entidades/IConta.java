@@ -5,8 +5,6 @@ package br.com.earfinanceiro.entidades;
 
 import java.util.Calendar;
 
-import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
-
 /**
  * @author Richard
  * 
@@ -84,10 +82,7 @@ public interface IConta {
 	 * 
 	 * @param dataEfetivacao
 	 *            Calendar que define a data de efetivação da conta
-	 * @throws ArgumentoInvalidoException
-	 *             - Quando a data de efetivação é superior ao dia corrente
 	 */
-	void setDataEfetivacao(Calendar dataEfetivacao)
-			throws ArgumentoInvalidoException;
+	void setDataEfetivacao(Calendar dataEfetivacao);
 
 }

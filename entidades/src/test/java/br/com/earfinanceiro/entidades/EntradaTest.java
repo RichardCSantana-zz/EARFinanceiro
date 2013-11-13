@@ -10,8 +10,6 @@ import java.util.Calendar;
 
 import org.junit.Test;
 
-import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
-
 /**
  * @author Richard
  * 
@@ -23,11 +21,9 @@ public class EntradaTest {
 	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setDataEfetivacao(java.util.Calendar)}
 	 * .
 	 * 
-	 * @throws ArgumentoInvalidoException
-	 *             - Erros no cadastro do objeto
 	 */
 	@Test
-	public void testaEfetiva() throws ArgumentoInvalidoException {
+	public void testaEfetiva() {
 		AbstractConta entrada = new Entrada();
 		Calendar instance = Calendar.getInstance();
 		instance.set(2013, 9, 20);
@@ -50,11 +46,9 @@ public class EntradaTest {
 	 * Test method for
 	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setDataEfetivacao(java.util.Calendar)}
 	 * 
-	 * @throws ArgumentoInvalidoException
-	 *             - Erros no cadastro do objeto
 	 */
-	@Test(expected = ArgumentoInvalidoException.class)
-	public void testaEfetivaComDataPosterior() throws ArgumentoInvalidoException {
+	@Test(expected = IllegalArgumentException.class)
+	public void testaEfetivaComDataPosterior() {
 		AbstractConta entrada = new Entrada();
 		Calendar instance = Calendar.getInstance();
 		instance.add(Calendar.DAY_OF_MONTH, 1);
@@ -65,11 +59,9 @@ public class EntradaTest {
 	 * Test method for
 	 * {@link br.com.earfinanceiro.entidades.Entrada#getContabilizaValor()}.
 	 * 
-	 * @throws ArgumentoInvalidoException
-	 *             - não deve lançar
 	 */
 	@Test
-	public void testaContabilizaValor() throws ArgumentoInvalidoException {
+	public void testaContabilizaValor() {
 		AbstractConta entrada = new Entrada();
 		entrada.setDataVencimento(Calendar.getInstance());
 		entrada.setDescricao("teste");
@@ -83,12 +75,10 @@ public class EntradaTest {
 	 * Test method for
 	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setValor(Double)}.
 	 * 
-	 * @throws ArgumentoInvalidoException
-	 *             - quando o valor cadastrado é 0
 	 */
 
-	@Test(expected = ArgumentoInvalidoException.class)
-	public void testaCadastroValorZerado() throws ArgumentoInvalidoException {
+	@Test(expected = IllegalArgumentException.class)
+	public void testaCadastroValorZerado() throws IllegalArgumentException {
 		AbstractConta entrada = new Entrada();
 		entrada.setDataVencimento(Calendar.getInstance());
 		entrada.setDescricao("teste");
@@ -99,12 +89,10 @@ public class EntradaTest {
 	 * Test method for
 	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setValor(Double)}.
 	 * 
-	 * @throws ArgumentoInvalidoException
-	 *             - quando o valor cadastrado é negativo
 	 */
 
-	@Test(expected = ArgumentoInvalidoException.class)
-	public void testaCadastroValorNegativo() throws ArgumentoInvalidoException {
+	@Test(expected = IllegalArgumentException.class)
+	public void testaCadastroValorNegativo() {
 		AbstractConta entrada = new Entrada();
 		entrada.setDataVencimento(Calendar.getInstance());
 		entrada.setDescricao("teste");
@@ -115,11 +103,9 @@ public class EntradaTest {
 	 * Test method for
 	 * {@link br.com.earfinanceiro.entidades.AbstractConta#setValor(Double)}.
 	 * 
-	 * @throws ArgumentoInvalidoException
-	 *             - não deve lançar
 	 */
 	@Test
-	public void testaCadastroValor() throws ArgumentoInvalidoException {
+	public void testaCadastroValor() {
 		AbstractConta entrada = new Entrada();
 		entrada.setDataVencimento(Calendar.getInstance());
 		entrada.setDescricao("teste");

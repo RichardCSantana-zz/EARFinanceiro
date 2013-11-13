@@ -27,8 +27,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
-
 /**
  * @author Richard
  * 
@@ -67,12 +65,10 @@ public abstract class AbstractConta implements IConta {
 	 * 
 	 * @param valor
 	 *            - Double a ser inserida na conta
-	 * @throws ArgumentoInvalidoException
-	 *             - Quando o valor do Double for menor ou igual a 0
 	 */
-	public void setValor(Double valor) throws ArgumentoInvalidoException {
+	public void setValor(Double valor) {
 		if (valor.compareTo(0.0) < 1) {
-			throw new ArgumentoInvalidoException("Valor deve ser maior que 0");
+			throw new IllegalArgumentException("Valor deve ser maior que 0");
 		}
 		this.valor = valor;
 	}
@@ -85,11 +81,10 @@ public abstract class AbstractConta implements IConta {
 	 * )
 	 */
 	@Override
-	public void setDataEfetivacao(Calendar dataEfetivacao)
-			throws ArgumentoInvalidoException {
+	public void setDataEfetivacao(Calendar dataEfetivacao) {
 		if ((dataEfetivacao != null)
 				&& dataEfetivacao.after(Calendar.getInstance())) {
-			throw new ArgumentoInvalidoException(
+			throw new IllegalArgumentException(
 					"Uma conta não pode ser efetivada para um dia depois de hoje.");
 		}
 		this.dataEfetivacao = dataEfetivacao;

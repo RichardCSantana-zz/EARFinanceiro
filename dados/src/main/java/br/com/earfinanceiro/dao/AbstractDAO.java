@@ -83,7 +83,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	 */
 	@Override
 	public void excluir(T valor) {
-		this.em.remove(valor);
+		this.em.remove(this.em.getReference(classe, valor));
 	}
 
 	/*
@@ -93,7 +93,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	 */
 	@Override
 	public void excluir(Long id) {
-		this.em.remove(id);
+		this.em.remove(this.em.getReference(classe, id));
 	}
 
 	/*

@@ -14,8 +14,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import br.com.earfinanceiro.exceptions.ArgumentoInvalidoException;
-
 /**
  * @author Richard
  * 
@@ -53,13 +51,10 @@ public class Saida extends AbstractConta implements IConta {
 	 * 
 	 * @param parcelamento
 	 *            - Integer que representa o número de parcelas
-	 * @throws ArgumentoInvalidoException
-	 *             - Caso o número de parcelas seja menor que 1
 	 */
-	public void setParcelamento(Integer parcelamento)
-			throws ArgumentoInvalidoException {
+	public void setParcelamento(Integer parcelamento) {
 		if (parcelamento < 1) {
-			throw new ArgumentoInvalidoException(
+			throw new IllegalArgumentException(
 					"O número de parcelas deve ser no minimo 1");
 		}
 		this.parcelamento = parcelamento;

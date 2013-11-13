@@ -57,7 +57,7 @@ public class GrupoServico {
 	@GET
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Grupo retornaGrupo(@PathParam("id") Long id) {
+	public Grupo retornaGrupo(@PathParam("id") long id) {
 		return this.negocio.retorna(id);
 	}
 

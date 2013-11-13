@@ -122,4 +122,18 @@ public class SaidaController implements Serializable {
 		return itens;
 	}
 
+	public void Soma() {
+		Integer parcelamento = this.saida.getParcelamento();
+		parcelamento++;
+		this.saida.setParcelamento(parcelamento);
+	}
+
+	public void Subtrai() {
+		Integer parcelamento = this.saida.getParcelamento();
+		if (parcelamento > 1) {
+			parcelamento--;
+		}
+		this.saida.setParcelamento(parcelamento);
+	}
+
 }
