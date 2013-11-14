@@ -13,80 +13,93 @@
 				</h1>
 			</div>
 			<rich:messages globalOnly="true" />
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="panel-title">
-						<h:outputLabel value="Tabela de grupos" />
-					</p>
-				</div>
-				<rich:dataTable id="dtbGrupos" value="#{grupoController.grupos}"
-					var="atual" noDataLabel="Nao existem grupos cadastrados"
-					styleClass="table">
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Descricao" />
-						</f:facet>
-						<h:outputText value="#{atual.descricao}" />
-					</rich:column>
-					<rich:column>
-						<f:facet name="header">
-							<h:outputText value="Tipo" />
-						</f:facet>
-						<h:outputText value="#{atual.tipo}" />
-					</rich:column>
-					<rich:column>
-						<div class="btn-group">
-							<h:commandButton action="#{grupoController.editarGrupo}"
-								value="Editar" class="btn btn-default">
-								<f:setPropertyActionListener target="#{grupoController.grupo}"
-									value="#{atual}" />
-							</h:commandButton>
-							<h:commandButton action="#{grupoController.excluiGrupo}"
-								value="Excluir" class="btn btn-default">
-								<f:setPropertyActionListener target="#{grupoController.grupo}"
-									value="#{atual}" />
-							</h:commandButton>
+			<div class="row">
+				<div class="col-lg-1"></div>
+				<div class="col-lg-10">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<p class="panel-title">
+								<h:outputLabel value="Tabela de grupos" />
+							</p>
 						</div>
-					</rich:column>
-					<f:facet name="footer">
-						<rich:column colspan="3">
-						</rich:column>
-					</f:facet>
-				</rich:dataTable>
-				<br />
+						<rich:dataTable id="dtbGrupos" value="#{grupoController.grupos}"
+							var="atual" noDataLabel="Nao existem grupos cadastrados"
+							styleClass="table">
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Descricao" />
+								</f:facet>
+								<h:outputText value="#{atual.descricao}" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Tipo" />
+								</f:facet>
+								<h:outputText value="#{atual.tipo}" />
+							</rich:column>
+							<rich:column>
+								<div class="btn-group">
+									<h:commandButton action="#{grupoController.editarGrupo}"
+										value="Editar" class="btn btn-default">
+										<f:setPropertyActionListener target="#{grupoController.grupo}"
+											value="#{atual}" />
+									</h:commandButton>
+									<h:commandButton action="#{grupoController.excluiGrupo}"
+										value="Excluir" class="btn btn-default">
+										<f:setPropertyActionListener target="#{grupoController.grupo}"
+											value="#{atual}" />
+									</h:commandButton>
+								</div>
+							</rich:column>
+							<f:facet name="footer">
+								<rich:column colspan="3">
+								</rich:column>
+							</f:facet>
+						</rich:dataTable>
+						<br />
+					</div>
+				</div>
+				<div class="col-lg-1"></div>
 			</div>
 		</h:form>
 
 		<h:form>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="panel-title">
-						<h:outputLabel value="Cadastro de grupo" />
-					</p>
-				</div>
-				<div class="panel-body">
-					<h:panelGrid columns="2">
-						<h:outputLabel id="lblDescricao" value="Descricao:" />
-						<h:panelGroup>
-							<div class="input-group">
-								<h:inputText id="txtDescricao"
-									value="#{grupoController.grupo.descricao}" class="form-control" />
+			<div class="row">
+				<div class="col-lg-1"></div>
+				<div class="col-lg-10">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<p class="panel-title">
+								<h:outputLabel value="Cadastro de grupo" />
+							</p>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-4">
+									<h:outputLabel id="lblDescricao" value="Descricao:" />
+									<h:inputText id="txtDescricao"
+										value="#{grupoController.grupo.descricao}"
+										class="form-control" />
+									<rich:message for="txtDescricao" />
+								</div>
+								<div class="col-lg-4">
+									<h:outputLabel id="lblTipo" value="Tipo:  " />
+									<h:selectOneMenu id="smTipo"
+										value="#{grupoController.grupo.tipo}" class="form-control">
+										<f:selectItems value="#{grupoController.tipos}" />
+									</h:selectOneMenu>
+									<rich:message for="smTipo" />
+								</div>
+								<div class="col-lg-1">
+									<h:outputText value="" />
+									<h:commandButton value="Salvar" class="btn btn-default"
+										action="#{grupoController.salvarGrupo}" />
+								</div>
 							</div>
-							<rich:message for="txtDescricao" />
-						</h:panelGroup>
-						<h:outputLabel id="lblTipo" value="Tipo:  " />
-						<h:panelGroup>
-							<h:selectOneMenu id="smTipo"
-								value="#{grupoController.grupo.tipo}" class="form-control">
-								<f:selectItems value="#{grupoController.tipos}" />
-							</h:selectOneMenu>
-							<rich:message for="smTipo" />
-						</h:panelGroup>
-						<h:outputText value="" />
-						<h:commandButton value="Salvar" class="btn btn-default"
-							action="#{grupoController.salvarGrupo}" />
-					</h:panelGrid>
+						</div>
+					</div>
 				</div>
+				<div class="col-lg-1"></div>
 			</div>
 		</h:form>
 	</ui:define>

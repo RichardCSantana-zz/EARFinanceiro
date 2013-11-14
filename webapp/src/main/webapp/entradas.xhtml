@@ -28,7 +28,8 @@
 						<h:outputText id="lblValor" value="Valor" />
 						<h:panelGroup>
 							<h:inputText id="txtValor" class="form-control"
-								value="#{entradaController.entrada.valor}">
+								value="#{entradaController.entrada.valor}"
+								onkeyup="mascaraMonetaria(this)">
 								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
 									type="currency" pattern="#,###,##0.00" />
 							</h:inputText>

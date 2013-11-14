@@ -135,9 +135,9 @@
 					<div class="col-lg-4">
 						<h:panelGroup>
 							<rich:calendar id="clnDataEfetivacao"
-								value="#{contaController.dataEfetivacao.time}"
-								datePattern="dd/MM/yyyy" enableManualInput="true"
-								showWeeksBar="false"></rich:calendar>
+								value="#{contaController.dataEfetivacao.time}" inputSize="10"
+								oninputblur="mascaraData(this)" datePattern="dd/MM/yyyy"
+								enableManualInput="true" showWeeksBar="false"></rich:calendar>
 							<rich:message for="clnDataEfetivacao" />
 						</h:panelGroup>
 					</div>

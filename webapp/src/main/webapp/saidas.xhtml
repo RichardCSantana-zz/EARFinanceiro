@@ -28,7 +28,7 @@
 						<h:outputText id="lblValor" value="Valor" />
 						<h:panelGroup>
 							<h:inputText id="txtValor" value="#{saidaController.saida.valor}"
-								class="form-control">
+								class="form-control" onkeyup="mascaraMonetaria(this)">
 								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
 									type="currency" pattern="#,###,##0.00" />
 							</h:inputText>
@@ -39,25 +39,23 @@
 							<div class="input-group">
 								<h:inputText id="txtParcelas"
 									value="#{saidaController.saida.parcelamento}"
-									styleClass="form-control" />
+									styleClass="form-control"
+									onkeyup="mascaraNumeroParcelas(this);" />
 								<span class="input-group-btn"> <h:commandButton value="-"
 										type="button" styleClass="btn btn-default"
-										onclick="subtrai('#{rich:clientId('txtParcelas')}')" />
-									<h:commandButton value="+" type="button"
-										styleClass="btn btn-default"
-										onclick="soma('#{rich:clientId('txtParcelas')}')" />
+										onclick="subtrai('#{rich:clientId('txtParcelas')}');" /> <h:commandButton
+										value="+" type="button" styleClass="btn btn-default"
+										onclick="soma('#{rich:clientId('txtParcelas')}');" />
 								</span>
 							</div>
 							<rich:message for="txtParcelas" />
 						</h:panelGroup>
 						<h:outputText id="lblSubgrupo" value="Subgrupo" />
 						<h:panelGroup>
-							<rich:select id="smSubgrupo" selectFirst="false"
-								defaultLabel="Selecione um subgrupo" styleClass=".dropdown"
-								value="#{saidaController.saida.subgrupo}"
-								enableManualInput="true">
+							<h:selectOneMenu id="smSubgrupo" class="form-control"
+								value="#{saidaController.saida.subgrupo}">
 								<f:selectItems value="#{saidaController.subgrupos}" />
-							</rich:select>
+							</h:selectOneMenu>
 							<rich:message for="smSubgrupo" />
 						</h:panelGroup>
 						<h:commandButton value="Salvar" action="#{saidaController.salvar}"

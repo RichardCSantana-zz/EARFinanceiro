@@ -22,14 +22,16 @@
 						<h:outputText id="lblDataInicial" value="Data inicial" />
 						<h:panelGroup>
 							<rich:calendar id="clnDataInicial" datePattern="dd/MM/yyyy"
-								value="#{balancoController.dataInicial.time}"
-								enableManualInput="true" showWeeksBar="false"></rich:calendar>
+								value="#{balancoController.dataInicial.time}" inputSize="10"
+								oninputblur="mascaraData(this)" enableManualInput="true"
+								showWeeksBar="false"></rich:calendar>
 							<rich:message for="clnDataInicial" />
 						</h:panelGroup>
-						<h:outputText id="lblDataFinal" value="Data inicial" />
+						<h:outputText id="lblDataFinal" value="Data final" />
 						<h:panelGroup>
 							<rich:calendar id="clnDataFinal" datePattern="dd/MM/yyyy"
 								value="#{balancoController.dataFinal.time}"
+								oninputblur="mascaraData(this)" inputSize="10"
 								enableManualInput="true" showWeeksBar="false"></rich:calendar>
 							<rich:message for="clnDataFinal" />
 						</h:panelGroup>
