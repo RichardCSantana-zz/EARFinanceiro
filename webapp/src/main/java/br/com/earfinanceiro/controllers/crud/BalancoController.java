@@ -61,6 +61,16 @@ public class BalancoController implements Serializable {
 
 	/**
 	 * 
+	 * Retorna se a lista possui itens
+	 * 
+	 * @return boolean que determina se a lista possui itens
+	 */
+	public boolean isListaPreenchida() {
+		return (this.balanco != null && !this.balanco.getContas().isEmpty());
+	}
+
+	/**
+	 * 
 	 * Retorna o valor do atributo data inicial
 	 * 
 	 * @return Calendar que representa a data inicial

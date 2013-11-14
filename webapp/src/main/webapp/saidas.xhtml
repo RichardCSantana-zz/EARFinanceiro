@@ -6,63 +6,140 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="conteudo">
-		<h:form>
-			<rich:messages globalOnly="true" />
-			<h1>
-				<h:outputLabel value="Saída" />
-			</h1>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="panel-title">
-						<h:outputLabel value="Cadastro de saída" />
-					</p>
-				</div>
-				<div class="panel-body">
-					<h:panelGrid columns="2">
-						<h:outputText id="lblDescricao" value="Descricao" />
-						<h:panelGroup>
-							<h:inputText id="txtDescricao" class="form-control"
-								value="#{saidaController.saida.descricao}" />
-							<rich:message for="txtDescricao" />
-						</h:panelGroup>
-						<h:outputText id="lblValor" value="Valor" />
-						<h:panelGroup>
-							<h:inputText id="txtValor" value="#{saidaController.saida.valor}"
-								class="form-control" onkeyup="mascaraMonetaria(this)">
-								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
-									type="currency" pattern="#,###,##0.00" />
-							</h:inputText>
-							<rich:message for="txtValor" />
-						</h:panelGroup>
-						<h:outputText id="lblParcelas" value="Parcelas" />
-						<h:panelGroup>
-							<div class="input-group">
-								<h:inputText id="txtParcelas"
-									value="#{saidaController.saida.parcelamento}"
-									styleClass="form-control"
-									onkeyup="mascaraNumeroParcelas(this);" />
-								<span class="input-group-btn"> <h:commandButton value="-"
-										type="button" styleClass="btn btn-default"
-										onclick="subtrai('#{rich:clientId('txtParcelas')}');" /> <h:commandButton
-										value="+" type="button" styleClass="btn btn-default"
-										onclick="soma('#{rich:clientId('txtParcelas')}');" />
-								</span>
-							</div>
-							<rich:message for="txtParcelas" />
-						</h:panelGroup>
-						<h:outputText id="lblSubgrupo" value="Subgrupo" />
-						<h:panelGroup>
-							<h:selectOneMenu id="smSubgrupo" class="form-control"
-								value="#{saidaController.saida.subgrupo}">
-								<f:selectItems value="#{saidaController.subgrupos}" />
-							</h:selectOneMenu>
-							<rich:message for="smSubgrupo" />
-						</h:panelGroup>
-						<h:commandButton value="Salvar" action="#{saidaController.salvar}"
-							class="btn btn-default" />
-					</h:panelGrid>
-				</div>
+		<div class="row">
+			<div class="col-lg-1"></div>
+			<div class="col-lg-10">
+				<h:form>
+					<rich:messages globalOnly="true" />
+					<div class="page-header">
+						<h1>
+							<h:outputLabel value="Saída" />
+						</h1>
+					</div>
+				</h:form>
 			</div>
-		</h:form>
+			<div class="col-lg-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				<h:form styleClass="form-horizontal" role="form">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<p class="panel-title">
+								<h:outputLabel value="Cadastro de saída" />
+							</p>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<h:outputLabel id="lblDescricao" value="Descricao"
+									for="txtDescricao" styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<h:inputText id="txtDescricao" class="form-control"
+										value="#{saidaController.saida.descricao}" />
+								</div>
+								<rich:message for="txtDescricao" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel id="lblValor" value="Valor" for="txtValor"
+									styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<h:inputText id="txtValor"
+										value="#{saidaController.saida.valor}" class="form-control"
+										onkeyup="mascaraMonetaria(this)">
+										<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+											type="currency" pattern="#,###,##0.00" />
+									</h:inputText>
+								</div>
+								<rich:message for="txtValor" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel id="lblParcelas" value="Parcelas"
+									for="txtParcelas" styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<div class="input-group">
+										<h:inputText id="txtParcelas"
+											value="#{saidaController.saida.parcelamento}"
+											styleClass="form-control"
+											onkeyup="mascaraNumeroParcelas(this);" />
+										<span class="input-group-btn"> <h:commandButton
+												value="-" type="button" styleClass="btn btn-default"
+												onclick="subtrai('#{rich:clientId('txtParcelas')}');" /> <h:commandButton
+												value="+" type="button" styleClass="btn btn-default"
+												onclick="soma('#{rich:clientId('txtParcelas')}');" />
+										</span>
+									</div>
+								</div>
+								<rich:message for="txtParcelas" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel id="lblVencimento" value="Data Prevista"
+									for="txtDataVencimento" styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<h:inputText id="txtDataVencimento" onblur="mascaraData(this)"
+										value="#{saidaController.saida.dataVencimento.time}"
+										styleClass="form-control data">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:inputText>
+								</div>
+								<rich:message for="txtDataVencimento" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel id="lblSubgrupo" value="Subgrupo"
+									for="smSubgrupo" styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<h:selectOneMenu id="smSubgrupo" class="form-control"
+										value="#{saidaController.saida.subgrupo}">
+										<f:selectItems value="#{saidaController.subgrupos}" />
+									</h:selectOneMenu>
+								</div>
+								<rich:message for="smSubgrupo" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel id="lblReincidencia" value="Reincidência"
+									styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<div class="well well-lg">
+										<div class="row">
+											<div class="col-sm-1">
+												<h:selectBooleanCheckbox value="" label="Reincide" />
+											</div>
+											<div class="col-sm-5">
+												<div class="input-group">
+													<h:inputText id="txtFrequencia" value=""
+														styleClass="form-control"
+														onkeyup="mascaraNumeroParcelas(this);" />
+													<span class="input-group-btn"> <h:commandButton
+															value="-" type="button" styleClass="btn btn-default"
+															onclick="subtrai('#{rich:clientId('txtFrequencia')}');" />
+														<h:commandButton value="+" type="button"
+															styleClass="btn btn-default"
+															onclick="soma('#{rich:clientId('txtFrequencia')}');" />
+													</span>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<h:selectOneRadio value="">
+													<f:selectItem itemLabel="(D)ias" />
+													<f:selectItem itemLabel="(M)eses" />
+													<f:selectItem itemLabel="(A)nos" />
+												</h:selectOneRadio>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-2">
+									<h:commandButton value="Salvar"
+										action="#{saidaController.salvar}" class="btn btn-default" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</h:form>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
 	</ui:define>
 </ui:composition>

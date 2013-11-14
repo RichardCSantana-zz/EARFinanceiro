@@ -6,48 +6,87 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="conteudo">
-		<h:form id="formEntradas">
-			<rich:messages globalOnly="true" />
-			<h1>
-				<h:outputLabel value="Entrada" />
-			</h1>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="panel-title">
-						<h:outputLabel value="Cadastro de entrada" />
-					</p>
-				</div>
-				<div class="panel-body">
-					<h:panelGrid columns="2">
-						<h:outputText id="lblDescricao" value="Descricao" />
-						<h:panelGroup>
-							<h:inputText id="txtDescricao" class="form-control"
-								value="#{entradaController.entrada.descricao}" />
-							<rich:message for="txtDescricao" />
-						</h:panelGroup>
-						<h:outputText id="lblValor" value="Valor" />
-						<h:panelGroup>
-							<h:inputText id="txtValor" class="form-control"
-								value="#{entradaController.entrada.valor}"
-								onkeyup="mascaraMonetaria(this)">
-								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
-									type="currency" pattern="#,###,##0.00" />
-							</h:inputText>
-							<rich:message for="txtValor" />
-						</h:panelGroup>
-						<h:outputText id="lblSubgrupo" value="Subgrupo" />
-						<h:panelGroup>
-							<h:selectOneMenu id="smSubgrupo" class="form-control"
-								value="#{entradaController.entrada.subgrupo}">
-								<f:selectItems value="#{entradaController.subgrupos}" />
-							</h:selectOneMenu>
-							<rich:message for="smSubgrupo" />
-						</h:panelGroup>
-						<h:commandButton value="Salvar" class="btn btn-default"
-							action="#{entradaController.salvar}" />
-					</h:panelGrid>
-				</div>
+		<div class="row">
+			<div class="col-lg-1"></div>
+			<div class="col-lg-10">
+				<h:form id="formEntradas">
+					<rich:messages globalOnly="true" />
+					<div class="page-header">
+						<h1>
+							<h:outputLabel value="Entrada" />
+						</h1>
+					</div>
+				</h:form>
 			</div>
-		</h:form>
+			<div class="col-lg-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
+				<h:form styleClass="form-horizontal" role="form">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<p class="panel-title">
+								<h:outputLabel value="Cadastro de entrada" />
+							</p>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<h:outputLabel id="lblDescricao" value="Descricao"
+									for="txtDescricao" styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<h:inputText id="txtDescricao" class="form-control"
+										value="#{entradaController.entrada.descricao}" />
+								</div>
+								<rich:message for="txtDescricao" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel id="lblValor" value="Valor" for="txtValor"
+									styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<h:inputText id="txtValor" class="form-control"
+										value="#{entradaController.entrada.valor}"
+										onkeyup="mascaraMonetaria(this)">
+										<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+											type="currency" pattern="#,###,##0.00" />
+									</h:inputText>
+								</div>
+								<rich:message for="txtValor" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel id="lblVencimento" value="Data Prevista"
+									for="txtDataVencimento" styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<h:inputText id="txtDataVencimento" onblur="mascaraData(this)"
+										value="#{entradaController.entrada.dataVencimento.time}"
+										styleClass="form-control data">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:inputText>
+								</div>
+								<rich:message for="txtDataVencimento" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel id="lblSubgrupo" value="Subgrupo"
+									for="smSubgrupo" styleClass="col-sm-2 control-label" />
+								<div class="col-sm-10">
+									<h:selectOneMenu id="smSubgrupo" styleClass="form-control"
+										value="#{entradaController.entrada.subgrupo}">
+										<f:selectItems value="#{entradaController.subgrupos}" />
+									</h:selectOneMenu>
+								</div>
+								<rich:message for="smSubgrupo" />
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-2">
+									<h:commandButton value="Salvar" class="btn btn-default"
+										action="#{entradaController.salvar}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</h:form>
+			</div>
+			<div class="col-lg-3"></div>
+		</div>
 	</ui:define>
 </ui:composition>

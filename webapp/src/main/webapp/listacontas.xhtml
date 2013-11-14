@@ -6,147 +6,159 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="conteudo">
-		<h:form>
-			<rich:messages globalOnly="true" />
-			<h1>
-				<h:outputLabel value="Lista de contas" />
-			</h1>
-			<div class="row">
-				<div class="col-lg-6">
+		<div class="row">
+			<div class="col-lg-12">
+				<h:form>
+					<rich:messages globalOnly="true" />
+					<div class="page-header">
+						<h1>
+							<h:outputLabel value="Lista de contas" />
+						</h1>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<p class="panel-title">
+										<h:outputLabel value="Tabela de contas" />
+									</p>
+								</div>
+								<rich:dataTable id="dtbContas" value="#{contaController.contas}"
+									var="atual" noDataLabel="Nao existem contas cadastradas"
+									styleClass="table">
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Descricao" />
+										</f:facet>
+										<h:outputText value="#{atual.descricao}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Valor" />
+										</f:facet>
+										<h:outputText value="#{atual.valor}">
+											<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+												type="currency" />
+										</h:outputText>
+									</rich:column>
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Tipo" />
+										</f:facet>
+										<h:outputText value="#{atual.subgrupo.grupo.tipo}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Subgrupo" />
+										</f:facet>
+										<h:outputText value="#{atual.subgrupo.descricao}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Grupo" />
+										</f:facet>
+										<h:outputText value="#{atual.subgrupo.grupo.descricao}" />
+									</rich:column>
+									<rich:column>
+										<a4j:commandButton value="Adicionar"
+											styleClass="btn btn-default"
+											action="#{contaController.adicionaConta}"
+											render="dtbContas,dtbContasSelecionadas">
+											<f:setPropertyActionListener
+												target="#{contaController.conta}" value="#{atual}" />
+										</a4j:commandButton>
+									</rich:column>
+								</rich:dataTable>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<p class="panel-title">
+										<h:outputLabel value="Tabela de contas selecionadas" />
+									</p>
+								</div>
+								<rich:dataTable id="dtbContasSelecionadas" styleClass="table"
+									value="#{contaController.selecionadas}" var="atual"
+									noDataLabel="Nao existem contas selecionadas">
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Descricao" />
+										</f:facet>
+										<h:outputText value="#{atual.descricao}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Valor" />
+										</f:facet>
+										<h:outputText value="#{atual.valor}">
+											<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+												type="currency" />
+										</h:outputText>
+									</rich:column>
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Tipo" />
+										</f:facet>
+										<h:outputText value="#{atual.subgrupo.grupo.tipo}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Subgrupo" />
+										</f:facet>
+										<h:outputText value="#{atual.subgrupo.descricao}" />
+									</rich:column>
+									<rich:column>
+										<f:facet name="header">
+											<h:outputText value="Grupo" />
+										</f:facet>
+										<h:outputText value="#{atual.subgrupo.grupo.descricao}" />
+									</rich:column>
+									<rich:column>
+										<a4j:commandButton value="Remover"
+											styleClass="btn btn-default"
+											action="#{contaController.removeConta}"
+											render="dtbContas,dtbContasSelecionadas">
+											<f:setPropertyActionListener
+												target="#{contaController.conta}" value="#{atual}" />
+										</a4j:commandButton>
+									</rich:column>
+								</rich:dataTable>
+							</div>
+						</div>
+					</div>
+				</h:form>
+				<h:form styleClass="form-horizontal" role="form">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<p class="panel-title">
-								<h:outputLabel value="Tabela de contas" />
+								<h:outputLabel value="Seleção de data" />
 							</p>
 						</div>
-						<rich:dataTable id="dtbContas" value="#{contaController.contas}"
-							var="atual" noDataLabel="Nao existem contas cadastradas"
-							styleClass="table">
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Descricao" />
-								</f:facet>
-								<h:outputText value="#{atual.descricao}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Valor" />
-								</f:facet>
-								<h:outputText value="#{atual.valor}">
-									<f:convertNumber currencyCode="BRL" currencySymbol="R$"
-										type="currency" />
-								</h:outputText>
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Tipo" />
-								</f:facet>
-								<h:outputText value="#{atual.subgrupo.grupo.tipo}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Subgrupo" />
-								</f:facet>
-								<h:outputText value="#{atual.subgrupo.descricao}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Grupo" />
-								</f:facet>
-								<h:outputText value="#{atual.subgrupo.grupo.descricao}" />
-							</rich:column>
-							<rich:column>
-								<a4j:commandButton value="Adicionar"
-									styleClass="btn btn-default"
-									action="#{contaController.adicionaConta}"
-									render="dtbContas,dtbContasSelecionadas">
-									<f:setPropertyActionListener target="#{contaController.conta}"
-										value="#{atual}" />
-								</a4j:commandButton>
-							</rich:column>
-						</rich:dataTable>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<p class="panel-title">
-								<h:outputLabel value="Tabela de contas selecionadas" />
-							</p>
+						<div class="panel-body">
+							<div class="form-group">
+								<h:outputLabel id="lblDataEfetivacao" for="txtDataEfetivacao"
+									value="Selecione a data de efetivação"
+									styleClass="col-sm-2 control-label" />
+								<div class="col-sm-4">
+									<h:inputText id="txtDataEfetivacao" onblur="mascaraData(this)"
+										value="#{contaController.dataEfetivacao.time}"
+										styleClass="form-control data">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:inputText>
+								</div>
+								<rich:message for="txtDataEfetivacao" />
+							</div>
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-1">
+									<h:commandButton action="#{contaController.efetiva}"
+										class="btn btn-default" value="Efetiva" />
+								</div>
+							</div>
 						</div>
-						<rich:dataTable id="dtbContasSelecionadas" styleClass="table"
-							value="#{contaController.selecionadas}" var="atual"
-							noDataLabel="Nao existem contas selecionadas">
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Descricao" />
-								</f:facet>
-								<h:outputText value="#{atual.descricao}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Valor" />
-								</f:facet>
-								<h:outputText value="#{atual.valor}">
-									<f:convertNumber currencyCode="BRL" currencySymbol="R$"
-										type="currency" />
-								</h:outputText>
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Tipo" />
-								</f:facet>
-								<h:outputText value="#{atual.subgrupo.grupo.tipo}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Subgrupo" />
-								</f:facet>
-								<h:outputText value="#{atual.subgrupo.descricao}" />
-							</rich:column>
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="Grupo" />
-								</f:facet>
-								<h:outputText value="#{atual.subgrupo.grupo.descricao}" />
-							</rich:column>
-							<rich:column>
-								<a4j:commandButton value="Remover" styleClass="btn btn-default"
-									action="#{contaController.removeConta}"
-									render="dtbContas,dtbContasSelecionadas">
-									<f:setPropertyActionListener target="#{contaController.conta}"
-										value="#{atual}" />
-								</a4j:commandButton>
-							</rich:column>
-						</rich:dataTable>
 					</div>
-				</div>
+				</h:form>
 			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="panel-title">
-						<h:outputLabel value="Seleção de data" />
-					</p>
-				</div>
-				<div class="row">
-					<div class="col-lg-4">
-						<h:outputText value="Selecione a data de efetivação" />
-					</div>
-					<div class="col-lg-4">
-						<h:panelGroup>
-							<rich:calendar id="clnDataEfetivacao"
-								value="#{contaController.dataEfetivacao.time}" inputSize="10"
-								oninputblur="mascaraData(this)" datePattern="dd/MM/yyyy"
-								enableManualInput="true" showWeeksBar="false"></rich:calendar>
-							<rich:message for="clnDataEfetivacao" />
-						</h:panelGroup>
-					</div>
-					<div class="col-lg-4">
-						<h:commandButton action="#{contaController.efetiva}"
-							class="btn btn-default" value="Efetiva" />
-					</div>
-				</div>
-			</div>
-		</h:form>
+		</div>
 	</ui:define>
 </ui:composition>

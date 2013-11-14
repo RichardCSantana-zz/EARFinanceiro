@@ -6,42 +6,64 @@
 	xmlns:rich="http://richfaces.org/rich"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="conteudo">
-		<h:form>
-			<rich:messages globalOnly="true" />
-			<h1>
-				<h:outputLabel value="Balanço" />
-			</h1>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<p class="panel-title">
-						<h:outputLabel value="Definição de datas" />
-					</p>
-				</div>
-				<div class="panel-body">
-					<h:panelGrid columns="2">
-						<h:outputText id="lblDataInicial" value="Data inicial" />
-						<h:panelGroup>
-							<rich:calendar id="clnDataInicial" datePattern="dd/MM/yyyy"
-								value="#{balancoController.dataInicial.time}" inputSize="10"
-								oninputblur="mascaraData(this)" enableManualInput="true"
-								showWeeksBar="false"></rich:calendar>
-							<rich:message for="clnDataInicial" />
-						</h:panelGroup>
-						<h:outputText id="lblDataFinal" value="Data final" />
-						<h:panelGroup>
-							<rich:calendar id="clnDataFinal" datePattern="dd/MM/yyyy"
-								value="#{balancoController.dataFinal.time}"
-								oninputblur="mascaraData(this)" inputSize="10"
-								enableManualInput="true" showWeeksBar="false"></rich:calendar>
-							<rich:message for="clnDataFinal" />
-						</h:panelGroup>
-						<h:commandButton value="Gerar Balanco" class="btn btn-default"
-							action="#{balancoController.geraBalanco}" />
-					</h:panelGrid>
-				</div>
+		<div class="row">
+			<div class="col-lg-1"></div>
+			<div class="col-lg-10">
+				<h:form>
+					<rich:messages globalOnly="true" />
+					<div class="page-header">
+						<h1>
+							<h:outputLabel value="Balanço" />
+						</h1>
+					</div>
+				</h:form>
 			</div>
-		</h:form>
-		<h:form>
+			<div class="col-lg-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-1"></div>
+			<div class="col-lg-10">
+				<h:form styleClass="form-horizontal" role="form">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<p class="panel-title">
+								<h:outputLabel value="Definição de datas" />
+							</p>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<h:outputLabel id="lblDataInicial" value="Data inicial"
+									for="txtDataInicial" styleClass="col-sm-2 control-label" />
+								<div class="col-sm-3">
+									<h:inputText id="txtDataInicial" onblur="mascaraData(this)"
+										value="#{balancoController.dataInicial.time}"
+										styleClass="form-control data">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:inputText>
+									<rich:message for="txtDataInicial" />
+								</div>
+								<h:outputLabel id="lblDataFinal" value="Data final"
+									for="txtDataFinal" styleClass="col-sm-2 control-label" />
+								<div class="col-sm-3">
+									<h:inputText id="txtDataFinal" onblur="mascaraData(this)"
+										value="#{balancoController.dataFinal.time}"
+										styleClass="form-control data">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:inputText>
+								</div>
+								<rich:message for="txtDataFinal" />
+								<div class="col-sm-2">
+									<h:commandButton value="Gerar Balanco" class="btn btn-default"
+										action="#{balancoController.geraBalanco}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</h:form>
+			</div>
+			<div class="col-lg-1"></div>
+		</div>
+		<h:form rendered="#{balancoController.listaPreenchida}">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<p class="panel-title">
