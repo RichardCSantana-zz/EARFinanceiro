@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.earfinanceiro.entidades.IConta;
+import br.com.earfinanceiro.entidades.Parcela;
 
 /**
  * @author richard.santana
@@ -21,17 +22,17 @@ public interface IContaNegocio {
 	 * @return {@link List} de {@link IConta} que não estão com o status de
 	 *         efetivas
 	 */
-	List<IConta> getContasNaoEfetivas();
+	List<Parcela> getParcelasNaoEfetivas();
 
 	/**
 	 * 
 	 * Efetiva uma conta
 	 * 
 	 * @param contas
-	 *            - {@link List} de {@link IConta} a serem efetivadas
+	 *            - {@link List} de {@link Parcela} a serem efetivadas
 	 * @param dataEfetivacao
 	 *            - {@link Calendar} que representa a data de efetivação
 	 */
-	void efetiva(List<IConta> contas, Calendar dataEfetivacao);
+	void efetiva(List<Parcela> parcelas, Calendar dataEfetivacao);
 
 }

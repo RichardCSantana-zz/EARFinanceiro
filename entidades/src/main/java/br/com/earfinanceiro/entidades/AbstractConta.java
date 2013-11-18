@@ -3,7 +3,9 @@
  */
 package br.com.earfinanceiro.entidades;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -45,6 +47,12 @@ public abstract class AbstractConta implements IConta {
 	 */
 	public AbstractConta() {
 		this.dataVencimento = Calendar.getInstance();
+		this.parcelas = new ArrayList<>();
+		Parcela parcela = new Parcela();
+		parcela.setConta(this);
+		parcela.setDataVencimento(dataVencimento);
+		this.parcelas.add(parcela);
+		ajustaParcelas();
 	}
 
 	/**
@@ -58,6 +66,7 @@ public abstract class AbstractConta implements IConta {
 	protected Calendar dataEfetivacao;
 	protected Subgrupo subgrupo;
 	protected double valor;
+	protected List<Parcela> parcelas;
 
 	/**
 	 * 
@@ -71,6 +80,7 @@ public abstract class AbstractConta implements IConta {
 			throw new IllegalArgumentException("Valor deve ser maior que 0");
 		}
 		this.valor = valor;
+		ajustaParcelas();
 	}
 
 	/*
@@ -129,6 +139,16 @@ public abstract class AbstractConta implements IConta {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Ajusta o valor das parcelas
+	 */
+	private void ajustaParcelas() {
+		for (Parcela parcela : parcelas) {
+			Double valorParcela = valor / this.parcelas.size();
+			parcela.setValor(valorParcela);
+		}
 	}
 
 	/*
@@ -265,4 +285,34 @@ public abstract class AbstractConta implements IConta {
 	public void setSubgrupo(Subgrupo subgrupo) {
 		this.subgrupo = subgrupo;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.IConta#isSaida()
+	 */
+	@Override
+	@Transient
+	@XmlTransient
+	public boolean isSaida() {
+		return subgrupo.getGrupo().getTipo().equals(TipoEnum.SAIDA);
+	}
+
+	/**
+	 * @return the parcelas
+	 */
+	@XmlElement(name = "parcelas", type = Parcela.class)
+	@Transient
+	public List<Parcela> getParcelas() {
+		return parcelas;
+	}
+
+	/**
+	 * @param parcelas
+	 *            the parcelas to set
+	 */
+	public void setParcelas(List<Parcela> parcelas) {
+		this.parcelas = parcelas;
+	}
+
 }

@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import br.com.earfinanceiro.entidades.AbstractConta;
 import br.com.earfinanceiro.entidades.IConta;
+import br.com.earfinanceiro.entidades.Parcela;
 
 /**
  * @author richard.santana
@@ -34,20 +35,11 @@ public class Balanco {
 	public Double getTotal() {
 		Double total = 0.0;
 		for (IConta conta : this.contas) {
-			total += conta.getContabilizaValor();
+			for (Parcela parcela : conta.getParcelas()) {
+				total += parcela.getContabilizaValor();
+			}
 		}
 		return total;
-	}
-
-	/**
-	 * 
-	 * Adiciona ao balanco uma lista de contas
-	 * 
-	 * @param contas
-	 *            - {@link List} de {@link IConta} pertencentes ao balanço
-	 */
-	public void setContas(List<IConta> contas) {
-		this.contas = contas;
 	}
 
 	/**
@@ -59,6 +51,14 @@ public class Balanco {
 	@XmlElement(type = AbstractConta.class, name = "conta")
 	public List<IConta> getContas() {
 		return Collections.unmodifiableList(this.contas);
+	}
+
+	/**
+	 * @param contas
+	 *            the contas to set
+	 */
+	public void setContas(List<IConta> contas) {
+		this.contas = contas;
 	}
 
 }

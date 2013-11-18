@@ -9,8 +9,10 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
+import br.com.earfinanceiro.dao.IParcelaDAO;
 import br.com.earfinanceiro.dao.ISaidaDAO;
 import br.com.earfinanceiro.dao.ISubgrupoDAO;
+import br.com.earfinanceiro.entidades.Parcela;
 import br.com.earfinanceiro.entidades.Saida;
 import br.com.earfinanceiro.entidades.Subgrupo;
 
@@ -28,6 +30,9 @@ public class SaidaNegocio implements ISaidaNegocio {
 	@EJB
 	private ISaidaDAO dao;
 
+	@EJB
+	private IParcelaDAO parcelaDao;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -38,7 +43,9 @@ public class SaidaNegocio implements ISaidaNegocio {
 	@Override
 	public void salva(Saida saida) {
 		if (saida.getId() == null) {
-			// TODO: rever parcelamento
+			for (Parcela parcela : saida.getParcelas()) {
+				parcelaDao.salvar(parcela);
+			}
 			this.dao.salvar(saida);
 		} else {
 			this.dao.atualizar(saida);

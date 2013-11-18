@@ -10,7 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 import br.com.earfinanceiro.cadastro.IContaNegocio;
-import br.com.earfinanceiro.entidades.IConta;
+import br.com.earfinanceiro.entidades.Parcela;
 
 /**
  * @author Richard
@@ -28,9 +28,9 @@ public class ContaController implements Serializable {
 	@EJB
 	private IContaNegocio negocio;
 
-	private IConta conta;
-	private List<IConta> contas;
-	private List<IConta> selecionadas;
+	private Parcela parcela;
+	private List<Parcela> parcelas;
+	private List<Parcela> selecionadas;
 	private Calendar dataEfetivacao;
 
 	/**
@@ -39,7 +39,7 @@ public class ContaController implements Serializable {
 	public ContaController() {
 		this.dataEfetivacao = Calendar.getInstance();
 		this.selecionadas = new ArrayList<>();
-		this.contas = new ArrayList<>();
+		this.parcelas = new ArrayList<>();
 	}
 
 	/**
@@ -56,14 +56,14 @@ public class ContaController implements Serializable {
 	 * 
 	 * Retorna lista de contas
 	 * 
-	 * @return {@link List} de {@link IConta}
+	 * @return {@link List} de {@link Parcela}
 	 */
-	public List<IConta> getContas() {
-		this.contas = this.negocio.getContasNaoEfetivas();
-		for (IConta contaAtual : this.selecionadas) {
-			this.contas.remove(contaAtual);
+	public List<Parcela> getParcelas() {
+		this.parcelas = this.negocio.getParcelasNaoEfetivas();
+		for (Parcela parcelaAtual : this.selecionadas) {
+			this.parcelas.remove(parcelaAtual);
 		}
-		return this.contas;
+		return this.parcelas;
 	}
 
 	/**
@@ -71,10 +71,10 @@ public class ContaController implements Serializable {
 	 * Adiciona conta à lista de selecionados
 	 * 
 	 */
-	public void adicionaConta() {
-		this.contas.remove(this.conta);
-		this.selecionadas.add(this.conta);
-		this.conta = null;
+	public void adiciona() {
+		this.parcelas.remove(this.parcela);
+		this.selecionadas.add(this.parcela);
+		this.parcela = null;
 	}
 
 	/**
@@ -82,10 +82,10 @@ public class ContaController implements Serializable {
 	 * Remove conta da lista de selecionados
 	 * 
 	 */
-	public void removeConta() {
-		this.selecionadas.remove(this.conta);
-		this.contas.add(this.conta);
-		this.conta = null;
+	public void remove() {
+		this.selecionadas.remove(this.parcela);
+		this.parcelas.add(this.parcela);
+		this.parcela = null;
 	}
 
 	/**
@@ -103,24 +103,18 @@ public class ContaController implements Serializable {
 	}
 
 	/**
-	 * 
-	 * Retorna o atributo conta
-	 * 
-	 * @return IConta que está no controller
+	 * @return the parcela
 	 */
-	public IConta getConta() {
-		return this.conta;
+	public Parcela getParcela() {
+		return parcela;
 	}
 
 	/**
-	 * 
-	 * Preenche o atributo conta
-	 * 
-	 * @param conta
-	 *            - {@link IConta} que representa a conta
+	 * @param parcela
+	 *            the parcela to set
 	 */
-	public void setConta(IConta conta) {
-		this.conta = conta;
+	public void setParcela(Parcela parcela) {
+		this.parcela = parcela;
 	}
 
 	/**
@@ -148,9 +142,9 @@ public class ContaController implements Serializable {
 	 * 
 	 * Retorna lista das contas selecionadas
 	 * 
-	 * @return {@link List} de {@link IConta} selecionadas
+	 * @return {@link List} de {@link Parcela} selecionadas
 	 */
-	public List<IConta> getSelecionadas() {
+	public List<Parcela> getSelecionadas() {
 		return this.selecionadas;
 	}
 
@@ -159,9 +153,9 @@ public class ContaController implements Serializable {
 	 * Preenche as contas selecionadas
 	 * 
 	 * @param selecionadas
-	 *            - {@link List} de {@link IConta} selecionadas
+	 *            - {@link List} de {@link Parcela} selecionadas
 	 */
-	public void setSelecionadas(List<IConta> selecionadas) {
+	public void setSelecionadas(List<Parcela> selecionadas) {
 		this.selecionadas = selecionadas;
 	}
 

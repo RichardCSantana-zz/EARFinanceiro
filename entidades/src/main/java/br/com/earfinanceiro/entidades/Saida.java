@@ -3,11 +3,12 @@
  */
 package br.com.earfinanceiro.entidades;
 
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -24,13 +25,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class Saida extends AbstractConta implements IConta {
 
-	protected int parcelamento;
-
 	/**
 	 * 
 	 */
 	public Saida() {
-		this.parcelamento = 1;
+
 	}
 
 	/**
@@ -42,7 +41,7 @@ public class Saida extends AbstractConta implements IConta {
 	@Transient
 	@XmlTransient
 	public boolean isParcelada() {
-		return (this.parcelamento > 1);
+		return (this.parcelas.size() > 1);
 	}
 
 	/**
@@ -57,7 +56,23 @@ public class Saida extends AbstractConta implements IConta {
 			throw new IllegalArgumentException(
 					"O número de parcelas deve ser no minimo 1");
 		}
-		this.parcelamento = parcelamento;
+		this.parcelas = new ArrayList<>();
+		Calendar vencimento = (Calendar) dataVencimento.clone();
+		for (int i = 0; i < parcelamento; i++) {
+			Parcela parcela = new Parcela();
+			parcela.setConta(this);
+			Double valorParcela = valor / parcelamento;
+			parcela.setValor(valorParcela);
+			parcela.setDataVencimento((Calendar) vencimento.clone());
+			vencimento.add(Calendar.MONTH, 1);
+			this.parcelas.add(parcela);
+		}
+	}
+
+	@Transient
+	@XmlTransient
+	public Integer getParcelamento() {
+		return this.parcelas.size();
 	}
 
 	/*
@@ -90,19 +105,6 @@ public class Saida extends AbstractConta implements IConta {
 			return false;
 		}
 		return super.equals(obj);
-	}
-
-	/**
-	 * 
-	 * Retorna o número de parcelas
-	 * 
-	 * @return Integer que representa o número de parcelas
-	 */
-	@Column(name = "parcela")
-	@NotNull(message = "O campo parcela deve ser preenchido")
-	@XmlElement(name = "parcela", required = true)
-	public Integer getParcelamento() {
-		return this.parcelamento;
 	}
 
 }

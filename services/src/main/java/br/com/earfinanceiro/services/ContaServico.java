@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 import br.com.earfinanceiro.cadastro.IContaNegocio;
 import br.com.earfinanceiro.entidades.IConta;
+import br.com.earfinanceiro.entidades.Parcela;
 import br.com.earfinanceiro.services.auxiliares.ParametrosBalanco;
 import br.com.earfinanceiro.services.auxiliares.ParametrosConta;
 
@@ -40,8 +41,8 @@ public class ContaServico {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<IConta> getContas() {
-		return this.negocio.getContasNaoEfetivas();
+	public List<Parcela> getContas() {
+		return this.negocio.getParcelasNaoEfetivas();
 	}
 
 	/**

@@ -11,8 +11,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import br.com.earfinanceiro.entidades.AbstractConta;
-import br.com.earfinanceiro.entidades.IConta;
+import br.com.earfinanceiro.entidades.Parcela;
 
 /**
  * @author Richard
@@ -23,7 +22,7 @@ import br.com.earfinanceiro.entidades.IConta;
 public class ParametrosConta {
 
 	private Calendar dataEfetivar;
-	private List<IConta> contas;
+	private List<Parcela> parcelas;
 
 	/**
 	 * 
@@ -52,22 +51,22 @@ public class ParametrosConta {
 	 * 
 	 * Retorna a lista de contas
 	 * 
-	 * @return {@link List} de {@link IConta}
+	 * @return {@link List} de {@link Parcela}
 	 */
-	@XmlElement(type = AbstractConta.class, name = "conta")
-	public List<IConta> getContas() {
-		return this.contas;
+	@XmlElement(type = Parcela.class, name = "conta")
+	public List<Parcela> getContas() {
+		return this.parcelas;
 	}
 
 	/**
 	 * 
 	 * Preenche a lista de contas
 	 * 
-	 * @param contas
-	 *            - {@link List} de {@link IConta}
+	 * @param parcelas
+	 *            - {@link List} de {@link Parcela}
 	 */
-	public void setContas(List<IConta> contas) {
-		this.contas = contas;
+	public void setContas(List<Parcela> parcelas) {
+		this.parcelas = parcelas;
 	}
 
 }

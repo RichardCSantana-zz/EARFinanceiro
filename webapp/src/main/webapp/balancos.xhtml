@@ -70,9 +70,13 @@
 						<h:outputLabel value="Tabela de contas" />
 					</p>
 				</div>
-				<rich:dataTable id="dtbGrupos"
+				<rich:dataTable id="dtbContas"
 					value="#{balancoController.balanco.contas}" var="atual"
 					noDataLabel="Nao existem contas cadastradas" styleClass="table">
+					<rich:column>
+						<rich:collapsibleSubTableToggler for="sdtbContas"
+							rendered="#{atual.saida}" />
+					</rich:column>
 					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Descricao" />
@@ -86,6 +90,14 @@
 						<h:outputText value="#{atual.contabilizaValor}">
 							<f:convertNumber currencyCode="BRL" currencySymbol="R$"
 								type="currency" />
+						</h:outputText>
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Data Vencimento" />
+						</f:facet>
+						<h:outputText value="#{atual.dataVencimento.time}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</rich:column>
 					<rich:column>
@@ -108,6 +120,35 @@
 						<h:outputText value="#{atual.subgrupo.grupo.descricao}">
 						</h:outputText>
 					</rich:column>
+					<rich:collapsibleSubTable value="#{atual.parcelas}" var="item"
+						rowKeyVar="numItem" id="sdtbContas" expandMode="client"
+						rendered="#{atual.saida}">
+						<rich:column>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Numero" />
+							</f:facet>
+							<h:outputText value="#{numItem + 1}" />
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Valor" />
+							</f:facet>
+							<h:outputText value="#{item.valor}">
+								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
+									type="currency" />
+							</h:outputText>
+						</rich:column>
+						<rich:column>
+							<f:facet name="header">
+								<h:outputText value="Data Vencimento" />
+							</f:facet>
+							<h:outputText value="#{item.dataVencimento.time}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</rich:column>
+					</rich:collapsibleSubTable>
 					<f:facet name="footer">
 						<rich:column colspan="2"></rich:column>
 						<rich:column>

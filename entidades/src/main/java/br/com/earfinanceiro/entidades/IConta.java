@@ -4,6 +4,7 @@
 package br.com.earfinanceiro.entidades;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * @author Richard
@@ -84,5 +85,20 @@ public interface IConta {
 	 *            Calendar que define a data de efetivação da conta
 	 */
 	void setDataEfetivacao(Calendar dataEfetivacao);
+
+	/**
+	 * Retorna se o tipo é saída
+	 * 
+	 * @return true se o tipo de objeto for saída
+	 */
+	boolean isSaida();
+
+	/**
+	 * @param parcelas
+	 *            the parcelas to set
+	 */
+	public void setParcelas(List<Parcela> parcelas);
+
+	List<Parcela> getParcelas();
 
 }

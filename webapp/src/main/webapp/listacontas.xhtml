@@ -23,14 +23,14 @@
 										<h:outputLabel value="Tabela de contas" />
 									</p>
 								</div>
-								<rich:dataTable id="dtbContas" value="#{contaController.contas}"
-									var="atual" noDataLabel="Nao existem contas cadastradas"
-									styleClass="table">
+								<rich:dataTable id="dtbContas"
+									value="#{contaController.parcelas}" var="atual"
+									noDataLabel="Nao existem contas cadastradas" styleClass="table">
 									<rich:column>
 										<f:facet name="header">
 											<h:outputText value="Descricao" />
 										</f:facet>
-										<h:outputText value="#{atual.descricao}" />
+										<h:outputText value="#{atual.conta.descricao}" />
 									</rich:column>
 									<rich:column>
 										<f:facet name="header">
@@ -45,27 +45,27 @@
 										<f:facet name="header">
 											<h:outputText value="Tipo" />
 										</f:facet>
-										<h:outputText value="#{atual.subgrupo.grupo.tipo}" />
+										<h:outputText value="#{atual.conta.subgrupo.grupo.tipo}" />
 									</rich:column>
 									<rich:column>
 										<f:facet name="header">
 											<h:outputText value="Subgrupo" />
 										</f:facet>
-										<h:outputText value="#{atual.subgrupo.descricao}" />
+										<h:outputText value="#{atual.conta.subgrupo.descricao}" />
 									</rich:column>
 									<rich:column>
 										<f:facet name="header">
 											<h:outputText value="Grupo" />
 										</f:facet>
-										<h:outputText value="#{atual.subgrupo.grupo.descricao}" />
+										<h:outputText value="#{atual.conta.subgrupo.grupo.descricao}" />
 									</rich:column>
 									<rich:column>
 										<a4j:commandButton value="Adicionar"
 											styleClass="btn btn-default"
-											action="#{contaController.adicionaConta}"
+											action="#{contaController.adiciona}"
 											render="dtbContas,dtbContasSelecionadas">
 											<f:setPropertyActionListener
-												target="#{contaController.conta}" value="#{atual}" />
+												target="#{contaController.parcela}" value="#{atual}" />
 										</a4j:commandButton>
 									</rich:column>
 								</rich:dataTable>
@@ -85,7 +85,7 @@
 										<f:facet name="header">
 											<h:outputText value="Descricao" />
 										</f:facet>
-										<h:outputText value="#{atual.descricao}" />
+										<h:outputText value="#{atual.conta.descricao}" />
 									</rich:column>
 									<rich:column>
 										<f:facet name="header">
@@ -100,27 +100,27 @@
 										<f:facet name="header">
 											<h:outputText value="Tipo" />
 										</f:facet>
-										<h:outputText value="#{atual.subgrupo.grupo.tipo}" />
+										<h:outputText value="#{atual.conta.subgrupo.grupo.tipo}" />
 									</rich:column>
 									<rich:column>
 										<f:facet name="header">
 											<h:outputText value="Subgrupo" />
 										</f:facet>
-										<h:outputText value="#{atual.subgrupo.descricao}" />
+										<h:outputText value="#{atual.conta.subgrupo.descricao}" />
 									</rich:column>
 									<rich:column>
 										<f:facet name="header">
 											<h:outputText value="Grupo" />
 										</f:facet>
-										<h:outputText value="#{atual.subgrupo.grupo.descricao}" />
+										<h:outputText value="#{atual.conta.subgrupo.grupo.descricao}" />
 									</rich:column>
 									<rich:column>
 										<a4j:commandButton value="Remover"
 											styleClass="btn btn-default"
-											action="#{contaController.removeConta}"
+											action="#{contaController.remove}"
 											render="dtbContas,dtbContasSelecionadas">
 											<f:setPropertyActionListener
-												target="#{contaController.conta}" value="#{atual}" />
+												target="#{contaController.parcela}" value="#{atual}" />
 										</a4j:commandButton>
 									</rich:column>
 								</rich:dataTable>

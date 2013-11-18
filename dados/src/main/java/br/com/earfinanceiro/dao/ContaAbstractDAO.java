@@ -1,9 +1,10 @@
 package br.com.earfinanceiro.dao;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.com.earfinanceiro.entidades.AbstractConta;
+import javax.persistence.criteria.Predicate;
 
 /**
  * @author Richard
@@ -11,10 +12,10 @@ import br.com.earfinanceiro.entidades.AbstractConta;
  * @param <T>
  *            - Class base para os procedimentos de persistência
  */
-public abstract class ContaAbstractDAO<T extends AbstractConta> extends
-		AbstractDAO<T> implements IAbstractContaDAO<T> {
+public abstract class ContaAbstractDAO<T> extends AbstractDAO<T> implements
+		IAbstractContaDAO<T> {
 
-	private GeradorCriteriaData<T> gcd;
+	protected GeradorCriteriaData<T> gcd;
 
 	/**
 	 * @param classe
@@ -36,6 +37,16 @@ public abstract class ContaAbstractDAO<T extends AbstractConta> extends
 	public List<T> geraListaPorDataEfetivacao(Calendar inicio, Calendar fim) {
 		this.gcd = new GeradorCriteriaData<>(this.cb, this.root);
 		return this.listaCondicoes(this.gcd.geraCriteria(inicio, fim));
+	}
+
+	public List<T> getNaoEfetivas() {
+		Predicate pred = this.cb.isNull(this.root.get("dataEfetivacao").as(
+				Calendar.class));
+		List<T> contas = new ArrayList<>();
+		for (T conta : this.listaCondicoes(pred)) {
+			contas.add(conta);
+		}
+		return contas;
 	}
 
 }

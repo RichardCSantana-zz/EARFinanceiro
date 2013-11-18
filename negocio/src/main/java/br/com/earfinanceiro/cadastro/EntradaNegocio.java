@@ -10,8 +10,10 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import br.com.earfinanceiro.dao.IEntradaDAO;
+import br.com.earfinanceiro.dao.IParcelaDAO;
 import br.com.earfinanceiro.dao.ISubgrupoDAO;
 import br.com.earfinanceiro.entidades.Entrada;
+import br.com.earfinanceiro.entidades.Parcela;
 import br.com.earfinanceiro.entidades.Subgrupo;
 
 /**
@@ -28,6 +30,9 @@ public class EntradaNegocio implements IEntradaNegocio {
 	@EJB
 	private IEntradaDAO dao;
 
+	@EJB
+	private IParcelaDAO parcelaDao;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -38,6 +43,9 @@ public class EntradaNegocio implements IEntradaNegocio {
 	@Override
 	public void salva(Entrada entrada) {
 		if (entrada.getId() == null) {
+			for (Parcela parcela : entrada.getParcelas()) {
+				parcelaDao.salvar(parcela);
+			}
 			this.dao.salvar(entrada);
 		} else {
 			this.dao.atualizar(entrada);
