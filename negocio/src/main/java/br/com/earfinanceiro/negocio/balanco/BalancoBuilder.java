@@ -11,10 +11,9 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
-import br.com.earfinanceiro.dao.IContaDAO;
 import br.com.earfinanceiro.dao.IParcelaDAO;
-import br.com.earfinanceiro.entidades.AbstractConta;
 import br.com.earfinanceiro.entidades.IConta;
+import br.com.earfinanceiro.entidades.Parcela;
 
 /**
  * @author richard.santana
@@ -25,10 +24,7 @@ import br.com.earfinanceiro.entidades.IConta;
 public class BalancoBuilder implements IBalancoBuilder {
 
 	@EJB
-	private IContaDAO dao;
-
-	@EJB
-	private IParcelaDAO parcelaDao;
+	private IParcelaDAO dao;
 
 	@Override
 	public Balanco geraBalanco(Calendar dataInicial, Calendar dataFinal)
@@ -37,17 +33,17 @@ public class BalancoBuilder implements IBalancoBuilder {
 			throw new IllegalArgumentException(
 					"A data inicial deve ser maior ou igual a data final");
 		}
-		Balanco balanco = new Balanco();
-		List<AbstractConta> lista = this.dao.geraListaPorDataEfetivacao(
+		List<Parcela> parcelas = this.dao.geraListaPorDataEfetivacao(
 				dataInicial, dataFinal);
 		List<IConta> contas = new ArrayList<>();
-		contas.addAll(lista);
-
-		for (IConta conta : contas) {
-			conta.setParcelas(this.parcelaDao.geraListaPorDataEfetivacaoEConta(
-					dataInicial, dataFinal, conta));
+		for (Parcela parcela : parcelas) {
+			IConta conta = parcela.getConta();
+			if (!contas.contains(parcela.getConta())) {
+				contas.add(conta);
+			}
+			conta.getParcelas().add(parcela);
 		}
-
+		Balanco balanco = new Balanco();
 		balanco.setContas(contas);
 		return balanco;
 	}

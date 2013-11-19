@@ -28,7 +28,7 @@ public interface IContaNegocio {
 	 * 
 	 * Efetiva uma conta
 	 * 
-	 * @param contas
+	 * @param parcelas
 	 *            - {@link List} de {@link Parcela} a serem efetivadas
 	 * @param dataEfetivacao
 	 *            - {@link Calendar} que representa a data de efetivação

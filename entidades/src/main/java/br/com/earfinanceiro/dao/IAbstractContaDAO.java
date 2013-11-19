@@ -7,6 +7,7 @@ import java.util.List;
  * @author Richard
  * 
  * @param <T>
+ *            - Classe que definirá o tipo
  */
 public interface IAbstractContaDAO<T> extends IDAO<T> {
 
