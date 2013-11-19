@@ -12,6 +12,7 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import br.com.earfinanceiro.dao.IParcelaDAO;
+import br.com.earfinanceiro.entidades.AbstractConta;
 import br.com.earfinanceiro.entidades.IConta;
 import br.com.earfinanceiro.entidades.Parcela;
 
@@ -40,6 +41,7 @@ public class BalancoBuilder implements IBalancoBuilder {
 			IConta conta = parcela.getConta();
 			if (!contas.contains(parcela.getConta())) {
 				contas.add(conta);
+				((AbstractConta) conta).setParcelas(new ArrayList<Parcela>());
 			}
 			conta.getParcelas().add(parcela);
 		}

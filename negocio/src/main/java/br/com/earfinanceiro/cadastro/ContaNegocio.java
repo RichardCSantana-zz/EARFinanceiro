@@ -10,7 +10,6 @@ import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
-import br.com.earfinanceiro.dao.IContaDAO;
 import br.com.earfinanceiro.dao.IParcelaDAO;
 import br.com.earfinanceiro.entidades.Parcela;
 
@@ -21,9 +20,6 @@ import br.com.earfinanceiro.entidades.Parcela;
 @Stateless
 @Local
 public class ContaNegocio implements IContaNegocio {
-
-	@EJB
-	private IContaDAO dao;
 
 	@EJB
 	private IParcelaDAO daoParcelas;

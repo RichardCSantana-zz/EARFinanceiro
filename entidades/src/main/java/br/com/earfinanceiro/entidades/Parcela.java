@@ -162,7 +162,7 @@ public class Parcela {
 	@Transient
 	@XmlTransient
 	public Double getContabilizaValor() {
-		return conta.getContabilizaValor();
+		return conta.getValorConvertido(this.valor);
 	}
 
 	/**

@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -75,16 +74,11 @@ public class Saida extends AbstractConta implements IConta {
 		return this.parcelas.size();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.financemanager.dados.IConta#contabilizaValor()
-	 */
 	@Override
-	@XmlElement(name = "valorReal")
+	@XmlTransient
 	@Transient
-	public Double getContabilizaValor() {
-		Double retorno = new Double(0.0) - this.valor;
+	public Double getValorConvertido(Double valorAtual) {
+		Double retorno = new Double(0.0) - valorAtual;
 		return retorno;
 	}
 

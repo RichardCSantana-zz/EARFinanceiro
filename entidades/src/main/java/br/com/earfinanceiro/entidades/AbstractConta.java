@@ -103,6 +103,18 @@ public abstract class AbstractConta implements IConta {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see br.com.financemanager.dados.IConta#contabilizaValor()
+	 */
+	@Override
+	@XmlElement(name = "valorReal")
+	@Transient
+	public Double getContabilizaValor() {
+		return getValorConvertido(this.valor);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override

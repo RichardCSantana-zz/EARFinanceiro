@@ -129,13 +129,13 @@
 							<f:facet name="header">
 								<h:outputText value="Numero" />
 							</f:facet>
-							<h:outputText value="#{numItem + 1}" />
+							<h:outputText value="#{numItem + 1} / #{atual.parcelamento}" />
 						</rich:column>
 						<rich:column>
 							<f:facet name="header">
 								<h:outputText value="Valor" />
 							</f:facet>
-							<h:outputText value="#{item.valor}">
+							<h:outputText value="#{item.contabilizaValor}">
 								<f:convertNumber currencyCode="BRL" currencySymbol="R$"
 									type="currency" />
 							</h:outputText>

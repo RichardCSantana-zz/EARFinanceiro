@@ -5,10 +5,8 @@ package br.com.earfinanceiro.entidades;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,16 +26,9 @@ public class Entrada extends AbstractConta implements IConta {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.financemanager.dados.IConta#contabilizaValor()
-	 */
 	@Override
-	@XmlElement(name = "valorReal")
-	@Transient
-	public Double getContabilizaValor() {
-		return this.valor;
+	public Double getValorConvertido(Double valor) {
+		return valor;
 	}
 
 	/*

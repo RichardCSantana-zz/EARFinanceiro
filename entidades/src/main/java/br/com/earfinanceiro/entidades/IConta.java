@@ -13,6 +13,17 @@ import java.util.List;
 public interface IConta {
 
 	/**
+	 * Converte valor para número significativo
+	 * 
+	 * @param valorAtual
+	 *            - Double com o valor a ser convertido
+	 * 
+	 * @return Double significativo da conta
+	 * 
+	 */
+	Double getValorConvertido(Double valor);
+
+	/**
 	 * 
 	 * Retorna valor significativo(caso saida número negativo) da conta
 	 * 
