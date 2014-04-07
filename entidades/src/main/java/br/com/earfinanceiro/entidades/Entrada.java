@@ -22,6 +22,11 @@ public class Entrada extends AbstractConta implements IConta {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 4618781426921152951L;
+
+	/**
+	 * 
+	 */
 	public Entrada() {
 
 	}

@@ -10,7 +10,7 @@ import java.util.List;
  * @author Richard
  * 
  */
-public interface IConta {
+public interface IConta extends Persistivel {
 
 	/**
 	 * Converte valor para número significativo
@@ -111,5 +111,7 @@ public interface IConta {
 	public void setParcelas(List<Parcela> parcelas);
 
 	List<Parcela> getParcelas();
+
+	Integer getNumeroParcelas();
 
 }

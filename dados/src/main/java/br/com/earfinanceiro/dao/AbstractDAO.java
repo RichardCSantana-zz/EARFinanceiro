@@ -14,13 +14,15 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import br.com.earfinanceiro.entidades.Persistivel;
+
 /**
  * @author richard.santana
  * @param <T>
  *            Class base para os procedimentos de persistência
  * 
  */
-public abstract class AbstractDAO<T> implements IDAO<T> {
+public abstract class AbstractDAO<T extends Persistivel> implements IDAO<T> {
 
 	@PersistenceContext(unitName = "primary")
 	protected EntityManager em;
@@ -83,7 +85,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 	 */
 	@Override
 	public void excluir(T valor) {
-		this.em.remove(this.em.getReference(classe, valor));
+		this.em.remove(this.em.getReference(classe, valor.getId()));
 	}
 
 	/*
@@ -109,6 +111,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 		} catch (NoResultException e) {
 			throw new NoResultException("Não foram encontrados resultados.");
 		}
+		init();
 		return resultados;
 	}
 
@@ -121,6 +124,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 		} catch (NoResultException e) {
 			throw new NoResultException("Não foram encontrados resultados.");
 		}
+		init();
 		return resultados;
 	}
 
@@ -133,6 +137,7 @@ public abstract class AbstractDAO<T> implements IDAO<T> {
 		} catch (NoResultException e) {
 			throw new NoResultException("Não foram encontrados resultados.");
 		}
+		init();
 		return resultado;
 	}
 

@@ -6,14 +6,16 @@ import java.util.List;
 
 import javax.persistence.criteria.Predicate;
 
+import br.com.earfinanceiro.entidades.Persistivel;
+
 /**
  * @author Richard
  * 
  * @param <T>
  *            - Class base para os procedimentos de persistência
  */
-public abstract class ContaAbstractDAO<T> extends AbstractDAO<T> implements
-		IAbstractContaDAO<T> {
+public abstract class ContaAbstractDAO<T extends Persistivel> extends
+		AbstractDAO<T> implements IAbstractContaDAO<T> {
 
 	protected GeradorCriteriaData<T> gcd;
 

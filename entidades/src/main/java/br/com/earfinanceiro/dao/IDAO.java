@@ -2,13 +2,15 @@ package br.com.earfinanceiro.dao;
 
 import java.util.List;
 
+import br.com.earfinanceiro.entidades.Persistivel;
+
 /**
  * @author Richard
  * 
  * @param <T>
  *            - entidade a ser manipulada pelo DAO
  */
-public interface IDAO<T> {
+public interface IDAO<T extends Persistivel> {
 
 	/**
 	 * 

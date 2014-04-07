@@ -28,8 +28,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @SequenceGenerator(name = Grupo.GRUPO_SEQUENCE, sequenceName = Grupo.GRUPO_SEQUENCE, initialValue = 1, allocationSize = 10)
 @XmlRootElement(name = "grupo")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class Grupo {
+public class Grupo implements Persistivel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1282540110891372966L;
 	static final String GRUPO_SEQUENCE = "grupo_sequence";
 	private Long id;
 	private String descricao;

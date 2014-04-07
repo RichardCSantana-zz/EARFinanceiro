@@ -32,7 +32,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @SequenceGenerator(name = Parcela.PARCELA_SEQUENCE, sequenceName = Parcela.PARCELA_SEQUENCE, initialValue = 1, allocationSize = 50)
 @XmlRootElement(name = "parcela")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class Parcela {
+public class Parcela implements Persistivel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3126839882238711929L;
 
 	/**
 	 * String que define a sequencia dessa entidade

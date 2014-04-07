@@ -3,13 +3,15 @@ package br.com.earfinanceiro.dao;
 import java.util.Calendar;
 import java.util.List;
 
+import br.com.earfinanceiro.entidades.Persistivel;
+
 /**
  * @author Richard
  * 
  * @param <T>
  *            - Classe que definirá o tipo
  */
-public interface IAbstractContaDAO<T> extends IDAO<T> {
+public interface IAbstractContaDAO<T extends Persistivel> extends IDAO<T> {
 
 	/**
 	 * @param inicio

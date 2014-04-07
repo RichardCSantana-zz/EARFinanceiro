@@ -27,6 +27,11 @@ public class Saida extends AbstractConta implements IConta {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 6691731860715529257L;
+
+	/**
+	 * 
+	 */
 	public Saida() {
 
 	}
@@ -57,6 +62,7 @@ public class Saida extends AbstractConta implements IConta {
 		}
 		this.parcelas = new ArrayList<>();
 		Calendar vencimento = (Calendar) dataVencimento.clone();
+		this.numeroParcelas = parcelamento;
 		for (int i = 0; i < parcelamento; i++) {
 			Parcela parcela = new Parcela();
 			parcela.setConta(this);
@@ -71,7 +77,7 @@ public class Saida extends AbstractConta implements IConta {
 	@Transient
 	@XmlTransient
 	public Integer getParcelamento() {
-		return this.parcelas.size();
+		return this.numeroParcelas;
 	}
 
 	@Override

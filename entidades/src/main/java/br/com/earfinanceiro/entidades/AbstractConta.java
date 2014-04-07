@@ -45,9 +45,15 @@ public abstract class AbstractConta implements IConta {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = -7020427025873791202L;
+
+	/**
+	 * 
+	 */
 	public AbstractConta() {
 		this.dataVencimento = Calendar.getInstance();
 		this.parcelas = new ArrayList<>();
+		this.numeroParcelas = 0;
 		Parcela parcela = new Parcela();
 		parcela.setConta(this);
 		parcela.setDataVencimento(dataVencimento);
@@ -67,6 +73,7 @@ public abstract class AbstractConta implements IConta {
 	protected Subgrupo subgrupo;
 	protected double valor;
 	protected List<Parcela> parcelas;
+	protected Integer numeroParcelas;
 
 	/**
 	 * 
@@ -109,7 +116,11 @@ public abstract class AbstractConta implements IConta {
 	@XmlElement(name = "valorReal")
 	@Transient
 	public Double getContabilizaValor() {
-		return getValorConvertido(this.valor);
+		Double valorReal = 0.0;
+		for (Parcela parcela : this.parcelas) {
+			valorReal += parcela.getValor();
+		}
+		return getValorConvertido(valorReal);
 	}
 
 	/*
@@ -325,6 +336,24 @@ public abstract class AbstractConta implements IConta {
 	 */
 	public void setParcelas(List<Parcela> parcelas) {
 		this.parcelas = parcelas;
+	}
+
+	/**
+	 * @return the numeroParcelas
+	 */
+	@Override
+	@Column(name = "parcelas")
+	@XmlElement(name = "parcelas", required = true)
+	public Integer getNumeroParcelas() {
+		return numeroParcelas;
+	}
+
+	/**
+	 * @param numeroParcelas
+	 *            the numeroParcelas to set
+	 */
+	protected void setNumeroParcelas(Integer numeroParcelas) {
+		this.numeroParcelas = numeroParcelas;
 	}
 
 }
