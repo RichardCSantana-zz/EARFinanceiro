@@ -3,8 +3,6 @@
  */
 package br.com.earfinanceiro.entidades;
 
-import java.beans.Transient;
-
 import javax.ejb.EJB;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -115,10 +114,6 @@ public class Usuario implements Persistivel {
 	@XmlTransient
 	public String getSenhaInternal() {
 		return senha;
-	}
-
-	public void setSenhaInternal(String senha) {
-		setSenha(senha);
 	}
 
 	@Column(name = "senha")
