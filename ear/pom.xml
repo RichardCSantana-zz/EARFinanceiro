@@ -54,6 +54,13 @@
 		</dependency>
 
 		<dependency>
+			<artifactId>resource</artifactId>
+			<groupId>br.com.earfinanceiro</groupId>
+			<version>1.0</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
 			<artifactId>webapp</artifactId>
 			<groupId>br.com.earfinanceiro</groupId>
 			<version>1.0</version>
@@ -171,12 +178,6 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
 			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.9</version>
 		</dependency>
 
 	</dependencies>

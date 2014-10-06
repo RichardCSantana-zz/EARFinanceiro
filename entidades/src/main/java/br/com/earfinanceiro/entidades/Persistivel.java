@@ -13,4 +13,7 @@ public interface Persistivel extends Serializable {
 
 	Long getId();
 
+	// Método criado devido ao toString ter problemas com o jpa
+	String verbalizar();
+
 }

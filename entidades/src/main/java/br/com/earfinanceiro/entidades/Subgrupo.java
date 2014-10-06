@@ -71,6 +71,11 @@ public class Subgrupo implements Persistivel {
 		return true;
 	}
 
+	public String verbalizar() {
+		return "Subgrupo [id=" + id + ", descricao=" + descricao + ", grupo="
+				+ grupo.getDescricao() + "]";
+	}
+
 	@Override
 	public String toString() {
 		return "" + this.id;

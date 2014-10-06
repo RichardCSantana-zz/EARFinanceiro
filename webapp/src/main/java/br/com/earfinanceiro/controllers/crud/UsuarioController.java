@@ -44,14 +44,16 @@ public class UsuarioController implements Serializable {
 		return "usuarios";
 	}
 
-	public void salvarUsuario() {
+	public String salvarUsuario() {
 		this.negocio.salva(this.usuario);
 		this.usuario = null;
 		this.init();
+		return "usuarios";
 	}
 
-	public void excluiUsuario() {
+	public String excluiUsuario() {
 		this.negocio.exclui(this.usuario);
+		return "usuarios";
 	}
 
 	public String editarUsuario() {

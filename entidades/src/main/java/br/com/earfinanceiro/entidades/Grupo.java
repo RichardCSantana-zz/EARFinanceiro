@@ -71,6 +71,12 @@ public class Grupo implements Persistivel {
 	}
 
 	@Override
+	public String verbalizar() {
+		return "Grupo [id=" + id + ", descricao=" + descricao + ", tipo="
+				+ tipo + "]";
+	}
+
+	@Override
 	public String toString() {
 		return "" + this.id;
 	}

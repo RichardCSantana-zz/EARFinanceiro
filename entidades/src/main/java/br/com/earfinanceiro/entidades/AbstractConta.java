@@ -3,6 +3,7 @@
  */
 package br.com.earfinanceiro.entidades;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -172,6 +173,29 @@ public abstract class AbstractConta implements IConta {
 			Double valorParcela = valor / this.parcelas.size();
 			parcela.setValor(valorParcela);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "" + this.id;
+	}
+
+	@Override
+	public String verbalizar() {
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getClass().getName());
+		sb.append("[id=").append(id);
+		sb.append(",descricao=").append(descricao);
+		sb.append(",dataVencimento=").append(df.format(dataVencimento));
+		sb.append(",dataEfetivacao=").append(df.format(dataEfetivacao));
+		sb.append(",subgrupo=").append(df.format(subgrupo.getDescricao()));
+		sb.append(",valor=").append(df.format(valor));
+		if (this.getClass() == Saida.class) {
+			sb.append(",numeroParcelas=").append(numeroParcelas);
+		}
+		sb.append("]");
+		return sb.toString();
 	}
 
 	/*

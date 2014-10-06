@@ -16,6 +16,7 @@
 	<modules>
 		<module>ear</module>
 		<module>negocio</module>
+		<module>resource</module>
 		<module>dados</module>
 		<module>entidades</module>
 		<module>webapp</module>

@@ -3,7 +3,6 @@
  */
 package br.com.earfinanceiro.entidades;
 
-import javax.ejb.EJB;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,9 +17,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
-import br.com.earfinanceiro.cripto.ICripto;
 
 /**
  * @author richard
@@ -41,8 +37,6 @@ public class Usuario implements Persistivel {
 	private Long id;
 	private String nome;
 	private String senha;
-	@EJB
-	private ICripto cripto;
 
 	@Override
 	public int hashCode() {
@@ -86,6 +80,17 @@ public class Usuario implements Persistivel {
 		return "" + this.id;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see br.com.earfinanceiro.entidades.Persistivel#verbalizar()
+	 */
+	@Override
+	public String verbalizar() {
+		return "Usuario [id=" + id + ", nome=" + nome + "]";
+	}
+
+	@Override
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = USUARIO_SEQUENCE)
@@ -110,22 +115,24 @@ public class Usuario implements Persistivel {
 		this.nome = nome;
 	}
 
-	@Transient
-	@XmlTransient
-	public String getSenhaInternal() {
+	@Column(name = "senha")
+	@NotNull(message = "O campo senha deve ser preenchido")
+	@XmlAttribute(name = "senha")
+	public String getSenha() {
 		return senha;
 	}
 
-	@Column(name = "senha")
-	@NotNull(message = "O campo senha deve ser preenchido")
-	@Size(min = 3, max = 12, message = "O Campo senha deve possuir entre 3 e 12 caracteres")
-	@XmlAttribute(name = "senha")
-	public String getSenha() {
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	@Transient
+	public String getSenhaExterna() {
 		return " ";
 	}
 
-	public void setSenha(String senha) {
-		this.senha = cripto.criptografa(senha);
+	public void setSenhaExterna(String senha) {
+		setSenha(senha);
 	}
 
 }

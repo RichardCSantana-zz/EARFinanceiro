@@ -3,6 +3,7 @@
  */
 package br.com.earfinanceiro.entidades;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -106,6 +107,20 @@ public class Parcela implements Persistivel {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String verbalizar() {
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		return "Parcela [id=" + id + ", dataVencimento="
+				+ df.format(dataVencimento) + ", dataEfetivacao="
+				+ df.format(dataEfetivacao) + ", valor=" + valor + ", conta="
+				+ conta + "]";
+	}
+
+	@Override
+	public String toString() {
+		return "" + this.id;
 	}
 
 	/**

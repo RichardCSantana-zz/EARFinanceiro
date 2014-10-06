@@ -37,6 +37,8 @@ public class UsuarioNegocio implements IUsuarioNegocio {
 	@Override
 	public void salva(Usuario usuario) {
 		if (usuario.getId() == null) {
+			String senhaCriptografada = cripto.criptografa(usuario.getSenha());
+			usuario.setSenha(senhaCriptografada);
 			this.dao.salvar(usuario);
 		} else {
 			this.dao.atualizar(usuario);
